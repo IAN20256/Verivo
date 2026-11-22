@@ -14173,7 +14173,7 @@ function syncNavHeight(){
 }
 window.addEventListener('resize', () => setTimeout(() => { syncNavHeight(); placeNavIndicator(); placeTabPills(); }, 50));
 setInterval(() => { syncNavHeight(); placeNavIndicator(); placeTabPills(); }, 1500);
-(function init(){
+function verivoInit(){
   buildItemKeys();
   migrateLegacyKeys();
   buildBottomNav();
@@ -14195,7 +14195,7 @@ setInterval(() => { syncNavHeight(); placeNavIndicator(); placeTabPills(); }, 15
       }
     }catch(e){}
   }
-})();
+}
 
 /* ============================================================
    MOMENTUM PASS — live score chip, "up next" teaser, swipe depth.
@@ -16400,6 +16400,8 @@ function clipFxFpsProbe(){
   requestAnimationFrame(step);
 }
 
+/* everything is defined now: start */
+try{ verivoInit(); }catch(e){ setTimeout(() => { throw e; }); }
 </script>
 </body>
 </html>
