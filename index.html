@@ -4448,6 +4448,83 @@ body.has-nav .vx-next{ bottom:calc(33px + var(--nav-h, calc(64px + env(safe-area
   @keyframes fxPulse{ 0%{ transform:scale(1); opacity:.8; } 100%{ transform:scale(38); opacity:0; } }
   @media (prefers-reduced-motion: reduce){ .clip-fx *{ animation:none !important; } }
 
+
+  /* ============================================================
+     v10 — clip formats
+     ============================================================ */
+  .clip.fmt-chat .clip-stage, .clip.fmt-top3 .clip-stage, .clip.fmt-timeline .clip-stage{ top:calc(150px + env(safe-area-inset-top)); }
+  .clip.fmt-chat .clip-motif, .clip.fmt-top3 .clip-motif, .clip.fmt-timeline .clip-motif{ opacity:.16; }
+  .clip.fmt-myth .clip-stage, .clip.fmt-guess .clip-stage{ top:38%; }
+  .fmt-kick{ margin-bottom:-2px; }
+  .clip-scene.on .fmt-kick{ animation:cwIn .4s ease both; }
+
+  /* myth vs reality */
+  .fmt-tag{ display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:999px; font:900 13px/1 'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+  .fmt-tag.myth{ background:#e8352b; color:#fff; }
+  .fmt-tag.real{ background:#22c55e; color:#06240f; }
+  .clip-scene.on .fmt-tag{ animation:clipPop .55s cubic-bezier(.3,1.7,.5,1) both; }
+  .fmt-myth{ position:relative; }
+  .fmt-strike{ position:absolute; left:-4px; right:-4px; top:52%; height:5px; border-radius:3px; background:#e8352b; box-shadow:0 0 14px #e8352b;
+    transform:scaleX(0); transform-origin:left center; }
+  .fmt-strike{ display:none; }
+  .clip .fmt-myth .cw{ text-decoration-line:line-through; text-decoration-thickness:.12em; text-decoration-color:transparent; text-decoration-skip-ink:none; }
+  .clip-scene.on .fmt-myth .cw{ animation:cwIn .36s cubic-bezier(.2,.9,.3,1.3) var(--d) both, fmtLine .25s ease calc(1.9s + var(--i) * 40ms) forwards !important; }
+  .clip-scene.on .fmt-myth{ animation:fmtDim .4s ease 2.4s forwards; }
+  @keyframes fmtLine{ to{ text-decoration-color:#e8352b; } }
+  @keyframes fmtStrike{ to{ transform:scaleX(1); } }
+  @keyframes fmtDim{ to{ opacity:.55; } }
+
+  /* guess: 3 · 2 · 1 */
+  .clip-cd{ position:relative; width:120px; height:120px; }
+  .clip-cd b{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:50%;
+    font:900 72px/1 'Fraunces',serif; color:var(--tx, #fff); border:4px solid color-mix(in srgb, var(--accent, var(--red)) 80%, #fff); opacity:0; }
+  .clip-scene.on .clip-cd b{ animation:fmtCd 1s cubic-bezier(.2,1.2,.4,1) both; }
+  .clip-scene.on .clip-cd b:nth-child(1){ animation-delay:.05s; } .clip-scene.on .clip-cd b:nth-child(2){ animation-delay:1.05s; } .clip-scene.on .clip-cd b:nth-child(3){ animation-delay:2.05s; }
+  @keyframes fmtCd{ 0%{ opacity:0; transform:scale(1.6); } 18%{ opacity:1; transform:scale(1); } 80%{ opacity:1; } 100%{ opacity:0; transform:scale(.7); } }
+
+  /* top 3 */
+  .fmt-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; width:100%; }
+  .fmt-list li{ display:flex; gap:12px; align-items:flex-start; }
+  .fmt-list li b{ flex:none; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font:900 17px/1 'Inter',sans-serif; background:var(--accent, var(--red)); color:#fff; }
+  .fmt-list li.old{ opacity:.55; }
+  .fmt-list li.old span{ font:600 14.5px/1.35 'Inter',sans-serif; color:var(--tx, #fff); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .fmt-list li.old b{ width:26px; height:26px; font-size:13px; opacity:.8; }
+  .clip-scene.on .fmt-list li.now b{ animation:clipPop .5s cubic-bezier(.3,1.7,.5,1) both; }
+
+  /* timeline */
+  .fmt-rail{ position:relative; width:100%; height:34px; display:flex; justify-content:space-between; margin-bottom:6px; }
+  .fmt-rail::before{ content:''; position:absolute; left:6px; right:6px; top:7px; height:2px; background:color-mix(in srgb, var(--tx, #fff) 30%, transparent); }
+  .fmt-rail i{ position:relative; width:14px; height:14px; border-radius:50%; background:color-mix(in srgb, var(--tx, #fff) 35%, #222); }
+  .fmt-rail i.past{ background:color-mix(in srgb, var(--accent, var(--red)) 70%, #fff); }
+  .fmt-rail i.now{ background:var(--accent, var(--red)); box-shadow:0 0 0 5px color-mix(in srgb, var(--accent, var(--red)) 30%, transparent); }
+  .fmt-rail em{ position:absolute; top:18px; left:50%; transform:translateX(-50%); font:700 11px/1 'Inter',sans-serif; font-style:normal; color:color-mix(in srgb, var(--tx, #fff) 70%, transparent); }
+  .fmt-rail i:first-child em{ left:0; transform:none; } .fmt-rail i:last-child em{ left:auto; right:0; transform:none; }
+  .clip .fmt-year{ font-size:clamp(58px, 18vw, 92px); }
+
+  /* chat */
+  .clip.fmt-chat .clip-scene{ justify-content:flex-end; }
+  .fmt-chathead{ position:absolute; top:0; left:0; right:0; display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:14px;
+    background:rgba(0,0,0,.28); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:#fff; font:700 14px/1.1 'Inter',sans-serif; }
+  .fmt-chathead .av{ width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; background:var(--accent, var(--red)); }
+  .fmt-chathead small{ font-weight:600; font-size:11.5px; color:#7dffb2; }
+  .clip-scene:not(:first-child) .fmt-chathead{ transition:none; }
+  .fmt-chat{ width:100%; display:flex; flex-direction:column; gap:8px; }
+  .cb{ max-width:84%; padding:9px 13px; border-radius:18px; font:600 15.5px/1.35 'Inter',sans-serif; }
+  .cb.a{ align-self:flex-start; background:rgba(255,255,255,.94); color:#16110d; border-bottom-left-radius:6px; }
+  .cb.b{ align-self:flex-end; background:var(--accent, var(--red)); color:#fff; border-bottom-right-radius:6px; }
+  .cb.old{ opacity:.7; }
+  .cb.old > span{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .clip-scene.on .cb.now{ animation:fmtBubble .4s cubic-bezier(.2,1.3,.4,1) both; transform-origin:bottom left; }
+  .clip-scene.on .cb.b.now{ transform-origin:bottom right; }
+  @keyframes fmtBubble{ from{ opacity:0; transform:scale(.6) translateY(10px); } to{ opacity:1; transform:none; } }
+  .clip .cb .clip-cap{ font:inherit; color:inherit; text-shadow:none; text-transform:none; letter-spacing:0; }
+  .clip-scene.on .cb .clip-cap .cw{ animation:cwIn .26s ease var(--d) both; }
+  .clip .cb .cw.said{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
+  .cb.fin{ font-size:19px; }
+  .clip .cb .clip-title.cb-title{ font:900 21px/1.15 'Fraunces',serif; color:inherit; text-shadow:none; letter-spacing:-.01em; }
+  .clip-scene.on .cb .clip-title{ animation:none; }
+
 </style>
 </head>
 <body>
@@ -4887,7 +4964,7 @@ let LANG = detectLang();
 document.documentElement.lang = LANG;
 function langLocale(){ return LANG === 'en' ? 'en-US' : 'es-MX'; }
 function plural(n, one, many){ return n === 1 ? one : many; }
-const EN_STRINGS = {"reúne ideas de libros, frases y conceptos importantes en cápsulas cortas e interactivas. Un poco de cultura general cada día, de forma entretenida.":"brings together ideas from books, quotes and key concepts in short, interactive capsules. A little general knowledge every day, in an entertaining way.","Frases":"Quotes","Conceptos":"Concepts","Micro-juegos":"Micro-games","Entrar a Verivo":"Enter Verivo","Elige tu usuario":"Choose your username","Ej. carla_92":"e.g. carla_92","No guardamos tu información en la nube — vive solo en este dispositivo. Recuerda bien tu usuario; puedes hacer un respaldo desde tu perfil para no perder tu progreso.":"We don't store your information in the cloud — it lives only on this device. Remember your username; you can back up your data from your profile so you don't lose your progress.","Volver":"Back","Política de privacidad":"Privacy policy","racha":"streak","Ver perfil":"View profile","Cerrar sesión":"Sign out","Siguiendo":"Following","Para ti":"For you","Explorar":"Explore","¡Hola!":"Hello!","Elige un tema, o deja que el azar decida":"Pick a topic, or let chance decide","Empezar":"Start","Temas para hoy":"Topics for today","Sorpréndeme":"Surprise me","Tema":"Topic","Temas":"Topics","Compartir perfil":"Share profile","Ajustes":"Settings","guardados":"saved","siguiendo":"following","días racha":"day streak","día racha":"day streak","Editar perfil":"Edit profile","¿Qué te gusta aprender?":"What do you like to learn?","Listo":"Done","Guardados":"Saved","Progreso":"Progress","Notas":"Notes","⭐ Favoritos":"⭐ Favorites","Sigue aprendiendo, vas muy bien.":"Keep learning, you're doing great.","días de racha":"day streak","día de racha":"day streak","comodines":"freezes","comodín":"freeze","Aciertos":"Correct","Mejor combo":"Best combo","Raras":"Rare","Logros":"Achievements","✨ Colección de hallazgos raros":"✨ Rare finds collection","📝 Mis notas":"📝 My notes","🎨 Temas visuales":"🎨 Visual themes","🖼️ Estilo al compartir":"🖼️ Share style","💾 Respaldo de tus datos":"💾 Back up your data","Verivo no usa la nube — tu progreso vive solo en este dispositivo. Descarga un respaldo para no perderlo, o para pasarlo a otro dispositivo.":"Verivo doesn't use the cloud — your progress lives only on this device. Download a backup so you don't lose it, or to move it to another device.","Exportar datos":"Export data","Importar datos":"Import data","🗑️ Borrar mis datos":"🗑️ Delete my data","Borra tu progreso, favoritos, carpetas y notas de este dispositivo. Tu Premium no se pierde: está ligado a tu cuenta de Google Play.":"Deletes your progress, favorites, folders and notes from this device. Your Premium isn't lost: it's tied to your Google Play account.","Novato":"Newbie","Curioso":"Curious","Aprendiz":"Apprentice","Lector":"Reader","Explorador":"Explorer","Pensador":"Thinker","Erudito":"Scholar","Sabio":"Sage","Maestro":"Master","Leyenda":"Legend","Anual":"Yearly","Mensual":"Monthly","/año":"/year","/mes":"/month","≈ $8.25 al mes":"≈ $8.25 per month","Ahorra 17%":"Save 17%","Cancela cuando quieras":"Cancel anytime","No se pudo confirmar la compra. Intenta de nuevo.":"We couldn't confirm the purchase. Please try again.","La suscripción está disponible en la app de Google Play.":"The subscription is available in the Google Play app.","Tu Premium ya está activo.":"Your Premium is already active.","Restaurar compras funciona desde la app de Google Play.":"Restoring purchases works from the Google Play app.","👑 Premium restaurado":"👑 Premium restored","No encontramos una suscripción activa.":"We couldn't find an active subscription.","Premium desactivado (modo prueba)":"Premium turned off (test mode)","👑 Premium activado (modo prueba)":"👑 Premium turned on (test mode)","👑 ¡Bienvenido a Verivo Premium!":"👑 Welcome to Verivo Premium!","Biblioteca con buscador":"Library with search","Modo escuchar":"Listen mode","Tus cápsulas en voz alta, una tras otra, con velocidad de 0.75x a 1.5x.":"Your capsules read aloud, one after another, at speeds from 0.75x to 1.5x.","Notas personales":"Personal notes","Escribe tus propias ideas en cualquier cápsula y encuéntralas en tu perfil.":"Write your own ideas on any capsule and find them in your profile.","Comodines extra":"Extra streak freezes","Guarda hasta 5 (en vez de 2) y gana uno cada 3 días de racha (en vez de 7).":"Hold up to 5 (instead of 2) and earn one every 3 streak days (instead of 7).","Carpetas de favoritos":"Favorite folders","Organiza tus favoritos en colecciones con nombre, como “Para mi examen”.":"Organize your favorites into named collections, like “For my exam”.","Temas visuales":"Visual themes","6 paletas de color para personalizar toda la app.":"6 color palettes to customize the whole app.","Diseños para compartir":"Share designs","3 estilos extra para tus imágenes: Papel, Neón y Color.":"3 extra styles for your images: Paper, Neon and Color.","Insignia y marco dorado":"Badge and golden frame","Distintivo Premium en tu perfil y un marco dorado en tu avatar.":"A Premium badge on your profile and a golden frame on your avatar.","🧪 Modo prueba: el botón activa Premium sin cobrar. Desactívalo antes de publicar.":"🧪 Test mode: the button turns Premium on without charging. Turn it off before publishing.","Gracias por apoyar Verivo. Esto es lo que tienes:":"Thanks for supporting Verivo. Here's what you have:","Todo lo gratis sigue siendo gratis. Premium solo suma.":"Everything free stays free. Premium only adds.","Premium activo":"Premium active","👑 Premium activo":"👑 Premium active","✨ Ver todo lo que incluye":"✨ See everything it includes","Puedes administrar o cancelar tu suscripción desde Google Play → Pagos y suscripciones.":"You can manage or cancel your subscription from Google Play → Payments & subscriptions.","Desactivar Premium (prueba)":"Turn off Premium (test)","Restaurar compras":"Restore purchases","Ver Premium":"See Premium","Historia, Filosofía, biblioteca y más":"History, Philosophy, library and more","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","📚 Biblioteca":"📚 Library","Biblioteca":"Library","Busca un tema, persona o palabra…":"Search a topic, person or word…","🧩 Mito o realidad":"🧩 Myth or fact","🎮 Juego":"🎮 Game","Todos":"All","1 cápsula":"1 capsule","✏️ Agregar nota":"✏️ Add note","📝 Tu nota":"📝 Your note","Borrar nota":"Delete note","📝 Nota guardada":"📝 Note saved","Toca “✏️ Agregar nota” en cualquier cápsula para escribir lo que piensas.":"Tap “✏️ Add note” on any capsule to write down what you think.","📝 Escribe tus propias notas en cualquier cápsula con Verivo Premium.":"📝 Write your own notes on any capsule with Verivo Premium.","Clásico":"Classic","Papel":"Paper","Neón":"Neon","Océano":"Ocean","Esmeralda":"Emerald","Violeta":"Violet","Ámbar":"Amber","Rosa":"Rose","Dato sorprendente":"Surprising fact","Cleopatra vivió más cerca de la Luna que de las pirámides.":"Cleopatra lived closer in time to the Moon landing than to the building of the pyramids.","Historia":"History","Finanzas":"Finance","Psicología":"Psychology","Programación":"Programming","Productividad":"Productivity","Ciencia":"Science","Filosofía":"Philosophy","Dinero, inversión y buenas decisiones":"Money, investing and smart decisions","Mente, sesgos y emociones":"Mind, biases and emotions","Código, lógica y buenas prácticas":"Code, logic and best practices","Tiempo, foco y hábitos":"Time, focus and habits","Universo, vida y materia":"Universe, life and matter","Imperios, mitos y momentos clave":"Empires, myths and key moments","Grandes preguntas y pensadores":"Big questions and thinkers","Dinero, inversión y decisiones inteligentes. Un dato al día para que tu dinero trabaje para ti.":"Money, investing and smart decisions. One fact a day to make your money work for you.","Sesgos, emociones y por qué hacemos lo que hacemos.":"Biases, emotions and why we do what we do.","Código, lógica e historia de la computación, sin tecnicismos innecesarios.":"Code, logic and the history of computing, without unnecessary jargon.","Hábitos, foco y técnicas para hacer más con menos estrés.":"Habits, focus and techniques to do more with less stress.","Universo, vida y materia: lo increíble de cómo funciona todo.":"Universe, life and matter: the incredible way everything works.","Imperios, mitos y momentos que cambiaron el mundo. 👑 Exclusivo Premium.":"Empires, myths and moments that changed the world. 👑 Premium exclusive.","Grandes preguntas, paradojas y pensadores para pensar mejor. 👑 Exclusivo Premium.":"Big questions, paradoxes and thinkers to help you think better. 👑 Premium exclusive.","Cuenta oficial":"Official account","✦ Tema del día":"✦ Topic of the day","Seguir":"Follow","Ver historia":"View story","Abrir tema":"Open topic","👑 Desbloquear":"👑 Unlock","bienvenida":"welcome","Abrir →":"Open →","Sigue al menos un tema":"Follow at least one topic","Tu semana":"Your week","Tu semana pasada":"Your last week","Tu semana hasta hoy":"Your week so far","en Verivo":"on Verivo","Toca para ver tus números →":"Tap to see your numbers →","Esta semana viste":"This week you viewed","cápsula":"capsule","cápsulas":"capsules","Tu tema de la semana":"Your topic of the week","En los retos acertaste":"In the challenges you got right","Así se vio tu semana":"Here's how your week looked","Racha actual:":"Current streak:","Compártela y reta a alguien a superarla.":"Share it and challenge someone to beat it.","Compartir mi semana":"Share my week","Ve algunas cápsulas y aquí aparecerá tu resumen semanal 📊":"View a few capsules and your weekly recap will show up here 📊","No se pudo generar la imagen":"Couldn't generate the image","Imagen guardada 📸":"Image saved 📸","Todavía no hay nada aquí":"Nothing here yet","Toca “Editar perfil” para escribir tu bio.":"Tap “Edit profile” to write your bio.","TU SEMANA EN VERIVO":"YOUR WEEK ON VERIVO","cápsula vista":"capsule viewed","cápsulas vistas":"capsules viewed","de aciertos en retos":"correct in challenges","¿Puedes superar mi semana?":"Can you beat my week?","Mi semana en Verivo 📊":"My week on Verivo 📊","Aprendo algo nuevo cada día en Verivo":"I learn something new every day on Verivo","Sígueme el paso en Verivo 🔥":"Keep up with me on Verivo 🔥","Aprendí algo nuevo en Verivo 🔥":"I learned something new on Verivo 🔥","✅ Lo acerté en Verivo":"✅ I got it right on Verivo","Y además":"And there's more","🔊 Escuchando…":"🔊 Listening…","🔊 Escuchar otra vez":"🔊 Listen again","Tu dispositivo no tiene voz disponible":"Your device has no voice available","Tu dispositivo no tiene voz disponible para leer en voz alta.":"Your device has no voice available to read aloud.","Hola, este es el modo escuchar de Verivo.":"Hi, this is Verivo's listen mode.","En pausa":"Paused","Comodín de racha ganado":"Streak freeze earned","¡se pierde!":"about to be lost!","en riesgo":"at risk","¡Una semana completa! 🎉":"A whole week! 🎉","¡Un mes entero seguido! Impresionante.":"A whole month in a row! Impressive.","¡100 días! Eres imparable.":"100 days! You're unstoppable.","¡Sigue así!":"Keep it up!","¡Subiste de nivel!":"Level up!","Solo una pequeña parte de los usuarios encuentra esto.":"Only a small fraction of users find this.","Pocos llegan tan lejos en el feed de hoy.":"Few get this far in today's feed.","Un hallazgo que la mayoría se pierde por completo.":"A find that most people miss completely.","No aparece todos los días — tuviste suerte.":"It doesn't show up every day — you got lucky.","Casi nadie desliza lo suficiente para ver esto.":"Almost nobody scrolls far enough to see this.","Los ✨ hallazgos raros que encuentres en el feed aparecerán aquí.":"The ✨ rare finds you discover in the feed will appear here.","Hallazgo raro":"Rare find","Primeros pasos":"First steps","Acierta tu primera cápsula":"Get your first capsule right","Racha de 3 días":"3-day streak","Aprende 3 días seguidos":"Learn 3 days in a row","Racha de 7 días":"7-day streak","Aprende 7 días seguidos":"Learn 7 days in a row","Meta del día":"Daily goal","Completa las 5 cápsulas diarias":"Complete the 5 daily capsules","Termina un tema completo":"Finish a whole topic","Coleccionista":"Collector","Termina todos los temas":"Finish all the topics","Tu primera cápsula te está esperando.":"Your first capsule is waiting for you.","Vas encendiendo una gran racha.":"You're building a great streak.","Terminaste todos los temas. Eres leyenda.":"You finished all the topics. You're a legend.","Respaldo descargado ✓":"Backup downloaded ✓","¿Seguro? Toca otra vez para borrar todo":"Sure? Tap again to delete everything","Tus datos se borraron de este dispositivo":"Your data was deleted from this device","No se pudo importar — el archivo no es un respaldo válido de Verivo.":"Couldn't import — the file isn't a valid Verivo backup.","¡Meta diaria completa! 🎉":"Daily goal complete! 🎉","Presiona atrás otra vez para salir":"Press back again to exit","5 minutos al día, cero esfuerzo":"5 minutes a day, zero effort","Tu dosis diaria de curiosidad te espera":"Your daily dose of curiosity awaits","¿Listo para saber algo que no sabías?":"Ready to learn something you didn't know?","Un dato interesante está a un toque de distancia":"An interesting fact is one tap away","Para mi examen":"For my exam","Datos para impresionar":"Facts to impress","Para releer":"To reread","Frases favoritas":"Favorite quotes","＋ Nueva carpeta":"＋ New folder","👑 Carpetas":"👑 Folders","Guardar en carpeta":"Save to folder","Tus carpetas":"Your folders","Elige una o varias carpetas para esta cápsula.":"Choose one or more folders for this capsule.","Organiza tus favoritos por tema, examen o lo que quieras.":"Organize your favorites by topic, exam or whatever you like.","Ya tienes una carpeta con ese nombre":"You already have a folder with that name","Toca la ⭐ en una frase o concepto para guardarlo aquí.":"Tap the ⭐ on a quote or concept to save it here.","Esta carpeta está vacía. Toca 📁 en cualquier favorito para agregarlo.":"This folder is empty. Tap 📁 on any favorite to add it.","Bienvenida a Verivo":"Welcome to Verivo","¿Ya lo sabías?":"Did you already know that?","Ir a mi feed":"Go to my feed","Elige al menos 1":"Pick at least 1","Continuar":"Continue","Listo, ya tienes 3":"Done, you've got 3","Puedes elegir más si quieres":"You can pick more if you like","Máximo 3 · quita uno para cambiarlo":"Max 3 · remove one to change it","vuelve mañana para mantenerla":"come back tomorrow to keep it going","Usar inicial":"Use initial","Estudio académico":"Academic study","Libro":"Book","Técnica documentada":"Documented technique","Registro histórico":"Historical record","Fuente citada":"Cited source","No especificado":"Not specified","Sobre esta fuente":"About this source","Fuente":"Source","Autor / estudio":"Author / study","Año":"Year","Enlace / referencia":"Link / reference","Buscar esta fuente":"Search for this source","Cerrar":"Close","Ver menos":"Show less","Saber más":"Learn more","🔗 Cierra la cadena":"🔗 Close the chain","Compartir":"Share","Favorito":"Favorite","Escuchar":"Listen","FALSO":"FALSE","VERDADERO":"TRUE","Desliza la tarjeta o toca un botón":"Swipe the card or tap a button","✕ Falso":"✕ False","✓ Verdadero":"✓ True","Confirmar":"Confirm","¡Correcto!":"Correct!","No exactamente":"Not exactly","Tú":"You","¡Exacto! 🎯":"Exactly! 🎯","¡Muy cerca!":"Very close!","Cerca — no está mal":"Close — not bad","Frase":"Quote","Pregunta":"Question","Mito o realidad":"Myth or fact","Juego":"Game","Mini historia":"Mini story","Concepto":"Concept","Curiosidad":"Curiosity","Comparación":"Comparison","Regla práctica":"Rule of thumb","Verdadero o falso":"True or false","¿Verdadero o falso?":"True or false?","Regla mental":"Mental rule","Micro-juego":"Micro-game","Ordena":"Put in order","Insight de libro":"Book insight","Adivina el número":"Guess the number","Sesgo cognitivo":"Cognitive bias","Marco práctico":"Practical framework","Técnica":"Technique","Ley":"Law","Mito común":"Common myth","Estudio":"Study","Neurociencia":"Neuroscience","Atajo":"Shortcut","Práctica":"Practice","Principio":"Principle","Método":"Method","Física":"Physics","Astronomía":"Astronomy","Biología":"Biology","Ley física":"Physical law","Física cuántica":"Quantum physics","Química":"Chemistry","Geología":"Geology","Anécdota":"Anecdote","Paradoja":"Paradox","Experimento mental":"Thought experiment","Idea clave":"Key idea","Saltar":"Skip","🤯 No lo sabía":"🤯 I didn't know","😎 Ya lo sabía":"😎 I already knew","¡Primer paso dado!":"First step done!","Tu primera cápsula":"Your first capsule","Tu feed empieza con":"Your feed starts with","¿Qué te da curiosidad?":"What are you curious about?","Elige hasta 3 temas y armamos tu feed. Lo puedes cambiar cuando quieras.":"Pick up to 3 topics and we'll build your feed. You can change it whenever you like.","Empieza 7 días gratis":"Start 7 days free","Después de la prueba se cobra el plan elegido y se renueva automáticamente. Cancela cuando quieras desde Google Play.":"After the trial, the plan you chose is charged and renews automatically. Cancel anytime from Google Play.","Toca a la derecha para seguir · mantén presionado para pausar":"Tap right to continue · hold to pause","Sigue los temas que más te interesan y aquí verás solo sus cápsulas.":"Follow the topics you care about most and you'll see only their capsules here.","Los canales que sigues aparecen más en “Para ti” y tienen su propio feed en “Siguiendo”.":"The channels you follow show up more in “For you” and have their own feed in “Following”.","DÍAS SEGUIDOS":"DAYS IN A ROW","Gracias por apoyar Verivo. En 30 segundos te enseño todo lo que acabas de desbloquear.":"Thanks for supporting Verivo. In 30 seconds I'll show you everything you just unlocked.","Toca para empezar →":"Tap to start →","Historia y Filosofía":"History and Philosophy","Tus cápsulas en voz alta":"Your capsules, out loud","Una tras otra, a la velocidad que quieras: 0.75x a 1.5x. Perfecto para el camino o el gimnasio.":"One after another, at the speed you want: 0.75x to 1.5x. Perfect for the commute or the gym.","🔊 Escuchar un ejemplo":"🔊 Listen to an example","Búscalo con los audífonos 🎧 en cada cápsula.":"Look for the 🎧 headphones on every capsule.","Elige tu color":"Pick your color","Toca uno y mira cómo cambia toda la app.":"Tap one and watch the whole app change.","Biblioteca y notas":"Library and notes","Encuentra cualquier tema, persona o palabra. Y escribe tus propias notas 📝 en cada cápsula.":"Find any topic, person or word. And write your own notes 📝 on every capsule.","Abrir Biblioteca":"Open Library","✨ Insignia y":"✨ Badge and","marco dorado":"golden frame","en tu perfil":"on your profile","❄️ Hasta":"❄️ Up to","de racha, uno cada 3 días":"— one every 3 days","Carpetas":"Folders","para organizar tus favoritos":"to organize your favorites","3 diseños extra":"3 extra designs","al compartir":"when sharing","Todo listo":"All set","Puedes volver a ver este recorrido cuando quieras desde Ajustes → Premium.":"You can watch this tour again anytime from Settings → Premium.","Empezar con Historia":"Start with History","Ver mi perfil dorado":"See my golden profile","Inicio":"Home","Buscar":"Search","Historias":"Stories","Perfil":"Profile","Desliza":"Swipe","Pero esto apenas empieza...":"But this is just the beginning...","Seguir descubriendo":"Keep discovering","Favoritos":"Favorites","Nuevo":"New","hoy":"today","Guardar":"Save","datos":"facts","frases":"quotes","juegos":"games","Todo":"All","Datos":"Facts","Juegos":"Games","Arma tu feed “Siguiendo”":"Build your “Following” feed","tu semana":"your week","Nombre de la nueva carpeta":"New folder name","Crear":"Create","¿Qué te recuerda esto? ¿Cómo lo usarías?":"What does this remind you of? How would you use it?","Raros":"Rare","Guardado":"Saved","Pausar o continuar":"Pause or resume","Velocidad":"Speed","Siguiente":"Next","Detener":"Stop","🔔 Recordatorios":"🔔 Reminders","Recordatorio diario":"Daily reminder","Un aviso al día con un dato nuevo. Si no entras en 3 días, dejamos de avisarte.":"One nudge a day with a new fact. If you don't open the app for 3 days, we stop.","Disponible en la app de Android.":"Available in the Android app.","Hora del aviso":"Reminder time","Los recordatorios funcionan en la app de Android":"Reminders work in the Android app","Activa las notificaciones de Verivo en los ajustes de tu teléfono":"Turn on Verivo notifications in your phone's settings","🔔 Listo: te aviso a las {t}":"🔔 Done: I'll remind you at {t}","🔥 Tu racha de {n} días sigue viva":"🔥 Your {n}-day streak is still alive","Tu dosis de curiosidad de hoy está lista.":"Today's dose of curiosity is ready.","Hoy en {topic}":"Today in {topic}","Nuevo en {topic}":"New in {topic}","Hay cápsulas nuevas esperándote.":"New capsules are waiting for you.","¡Meta cumplida! ¿Te aviso mañana?":"Goal done! Want a reminder tomorrow?","¿Te aviso para no perder tu racha?":"Want a reminder so you keep your streak?","Un solo aviso al día, con el dato que te espera. Lo apagas cuando quieras en Ajustes.":"Just one nudge a day, with the fact waiting for you. Turn it off anytime in Settings.","Sí, a las 20:00":"Yes, at 8:00 pm","Ahora no":"Not now","Descubriste {x} de {y}":"You've discovered {x} of {y}","La idea":"The idea","Clip":"Clip","Mantén presionado para pausar · toca para adelantar":"Hold to pause · tap to skip ahead","Leer":"Read","Ver como clip":"Watch as a clip","8 extras, desde MX$10/mes":"8 extras, from MX$10/month","Voz":"Voice","🔊 Voz de los clips activada":"🔊 Clip voice on","🔇 Clips en silencio":"🔇 Clips muted","Toca la pantalla para activar la voz":"Tap the screen to turn on the voice","Verivo Studio":"Verivo Studio","Convierte cualquier texto en clips con voz":"Turn any text into clips with a voice","Pega cualquier texto y conviértelo en clips con voz, karaoke y 7 estilos. Guárdalos y compártelos.":"Paste any text and turn it into clips with a voice, karaoke and 7 styles. Save and share them.","Pega un texto y Verivo lo vuelve clips con voz y karaoke. Todo pasa en tu teléfono: sin IA, sin cuentas y sin límites.":"Paste a text and Verivo turns it into clips with a voice and karaoke. It all happens on your phone: no AI, no accounts, no limits.","Crear un clip":"Create a clip","👑 Guarda y comparte con Premium":"👑 Save and share with Premium","Puedes probar Studio y ver tus clips gratis. Con Premium se guardan aquí y los compartes como imagen.":"You can try Studio and watch your clips for free. With Premium they are saved here and you can share them as an image.","Mis clips":"My clips","Aún no tienes clips guardados. Crea el primero con cualquier texto.":"You have no saved clips yet. Create the first one from any text.","Aquí aparecerán los clips que guardes.":"The clips you save will show up here.","Nuevo clip":"New clip","Pega aquí un texto: un artículo, tus apuntes, un capítulo, una idea…":"Paste a text here: an article, your notes, a chapter, an idea…","Probar con un ejemplo":"Try an example","Título":"Title","(opcional)":"(optional)","Se elige solo":"Picked automatically","Se elige sola":"Picked automatically","Tema":"Topic","Estilo":"Style","Color":"Color","▸ Más opciones":"▸ More options","▾ Más opciones":"▾ More options","Gancho":"Hook","(la primera frase del clip)":"(the clip's first line)","Frase final":"Closing line","(la que cierra el clip)":"(the line that ends the clip)","Con textos largos se hacen varios clips y estas dos se eligen solas en cada uno.":"Long texts become several clips, and these two are picked automatically in each one.","▶ Ver clip":"▶ Watch clip","✨ Auto":"✨ Auto","Karaoke":"Karaoke","Titular":"Headline","Papel":"Paper","Póster":"Poster","Cine":"Cinema","Neón":"Neon","Pizarra":"Chalkboard","Editar":"Edit","Guardar":"Save","Guardado":"Saved","Repetir":"Replay","Compartir":"Share","↻ Ver otra vez":"↻ Watch again","Borrar":"Delete","¿Borrar?":"Delete?","Pega o escribe un texto para empezar":"Paste or type a text to start","{w} palabras · {n} {c} · ~{s} s":"{w} words · {n} {c} · ~{s} s","clip":"clip","clips":"clips","Escribe o pega un texto primero":"Write or paste a text first","Texto muy largo: uso las primeras {n} partes":"Very long text: using the first {n} parts","Clip {a} de {b}":"Clip {a} of {b}","Guardar {n} clips":"Save {n} clips","Guardar y compartir clips es Premium 👑":"Saving and sharing clips is Premium 👑","No se pudo guardar: sin espacio en el teléfono":"Couldn't save: the phone is out of space","Guardados {n} clips ✅":"{n} clips saved ✅","Clip guardado ✅":"Clip saved ✅","No se pudo generar la imagen":"Couldn't create the image","Imagen guardada 📸":"Image saved 📸","Hecho con Verivo Studio 🎬":"Made with Verivo Studio 🎬","▶ Ver todos":"▶ Watch all","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","Sonido":"Sound","🎵 Música y sonidos":"🎵 Music and sounds","🔔 Solo sonidos, sin música":"🔔 Sounds only, no music","🔇 Sin música ni sonidos":"🔇 No music or sounds","Mantén para pausar · toca los lados":"Hold to pause · tap the sides","Música":"Music","Ambiental":"Ambient","Lo-fi":"Lo-fi","Tensión":"Tension","Alegre":"Upbeat","Épico":"Epic","🔇 Sin música":"🔇 No music"};
+const EN_STRINGS = {"reúne ideas de libros, frases y conceptos importantes en cápsulas cortas e interactivas. Un poco de cultura general cada día, de forma entretenida.":"brings together ideas from books, quotes and key concepts in short, interactive capsules. A little general knowledge every day, in an entertaining way.","Frases":"Quotes","Conceptos":"Concepts","Micro-juegos":"Micro-games","Entrar a Verivo":"Enter Verivo","Elige tu usuario":"Choose your username","Ej. carla_92":"e.g. carla_92","No guardamos tu información en la nube — vive solo en este dispositivo. Recuerda bien tu usuario; puedes hacer un respaldo desde tu perfil para no perder tu progreso.":"We don't store your information in the cloud — it lives only on this device. Remember your username; you can back up your data from your profile so you don't lose your progress.","Volver":"Back","Política de privacidad":"Privacy policy","racha":"streak","Ver perfil":"View profile","Cerrar sesión":"Sign out","Siguiendo":"Following","Para ti":"For you","Explorar":"Explore","¡Hola!":"Hello!","Elige un tema, o deja que el azar decida":"Pick a topic, or let chance decide","Empezar":"Start","Temas para hoy":"Topics for today","Sorpréndeme":"Surprise me","Tema":"Topic","Temas":"Topics","Compartir perfil":"Share profile","Ajustes":"Settings","guardados":"saved","siguiendo":"following","días racha":"day streak","día racha":"day streak","Editar perfil":"Edit profile","¿Qué te gusta aprender?":"What do you like to learn?","Listo":"Done","Guardados":"Saved","Progreso":"Progress","Notas":"Notes","⭐ Favoritos":"⭐ Favorites","Sigue aprendiendo, vas muy bien.":"Keep learning, you're doing great.","días de racha":"day streak","día de racha":"day streak","comodines":"freezes","comodín":"freeze","Aciertos":"Correct","Mejor combo":"Best combo","Raras":"Rare","Logros":"Achievements","✨ Colección de hallazgos raros":"✨ Rare finds collection","📝 Mis notas":"📝 My notes","🎨 Temas visuales":"🎨 Visual themes","🖼️ Estilo al compartir":"🖼️ Share style","💾 Respaldo de tus datos":"💾 Back up your data","Verivo no usa la nube — tu progreso vive solo en este dispositivo. Descarga un respaldo para no perderlo, o para pasarlo a otro dispositivo.":"Verivo doesn't use the cloud — your progress lives only on this device. Download a backup so you don't lose it, or to move it to another device.","Exportar datos":"Export data","Importar datos":"Import data","🗑️ Borrar mis datos":"🗑️ Delete my data","Borra tu progreso, favoritos, carpetas y notas de este dispositivo. Tu Premium no se pierde: está ligado a tu cuenta de Google Play.":"Deletes your progress, favorites, folders and notes from this device. Your Premium isn't lost: it's tied to your Google Play account.","Novato":"Newbie","Curioso":"Curious","Aprendiz":"Apprentice","Lector":"Reader","Explorador":"Explorer","Pensador":"Thinker","Erudito":"Scholar","Sabio":"Sage","Maestro":"Master","Leyenda":"Legend","Anual":"Yearly","Mensual":"Monthly","/año":"/year","/mes":"/month","≈ $8.25 al mes":"≈ $8.25 per month","Ahorra 17%":"Save 17%","Cancela cuando quieras":"Cancel anytime","No se pudo confirmar la compra. Intenta de nuevo.":"We couldn't confirm the purchase. Please try again.","La suscripción está disponible en la app de Google Play.":"The subscription is available in the Google Play app.","Tu Premium ya está activo.":"Your Premium is already active.","Restaurar compras funciona desde la app de Google Play.":"Restoring purchases works from the Google Play app.","👑 Premium restaurado":"👑 Premium restored","No encontramos una suscripción activa.":"We couldn't find an active subscription.","Premium desactivado (modo prueba)":"Premium turned off (test mode)","👑 Premium activado (modo prueba)":"👑 Premium turned on (test mode)","👑 ¡Bienvenido a Verivo Premium!":"👑 Welcome to Verivo Premium!","Biblioteca con buscador":"Library with search","Modo escuchar":"Listen mode","Tus cápsulas en voz alta, una tras otra, con velocidad de 0.75x a 1.5x.":"Your capsules read aloud, one after another, at speeds from 0.75x to 1.5x.","Notas personales":"Personal notes","Escribe tus propias ideas en cualquier cápsula y encuéntralas en tu perfil.":"Write your own ideas on any capsule and find them in your profile.","Comodines extra":"Extra streak freezes","Guarda hasta 5 (en vez de 2) y gana uno cada 3 días de racha (en vez de 7).":"Hold up to 5 (instead of 2) and earn one every 3 streak days (instead of 7).","Carpetas de favoritos":"Favorite folders","Organiza tus favoritos en colecciones con nombre, como “Para mi examen”.":"Organize your favorites into named collections, like “For my exam”.","Temas visuales":"Visual themes","6 paletas de color para personalizar toda la app.":"6 color palettes to customize the whole app.","Diseños para compartir":"Share designs","3 estilos extra para tus imágenes: Papel, Neón y Color.":"3 extra styles for your images: Paper, Neon and Color.","Insignia y marco dorado":"Badge and golden frame","Distintivo Premium en tu perfil y un marco dorado en tu avatar.":"A Premium badge on your profile and a golden frame on your avatar.","🧪 Modo prueba: el botón activa Premium sin cobrar. Desactívalo antes de publicar.":"🧪 Test mode: the button turns Premium on without charging. Turn it off before publishing.","Gracias por apoyar Verivo. Esto es lo que tienes:":"Thanks for supporting Verivo. Here's what you have:","Todo lo gratis sigue siendo gratis. Premium solo suma.":"Everything free stays free. Premium only adds.","Premium activo":"Premium active","👑 Premium activo":"👑 Premium active","✨ Ver todo lo que incluye":"✨ See everything it includes","Puedes administrar o cancelar tu suscripción desde Google Play → Pagos y suscripciones.":"You can manage or cancel your subscription from Google Play → Payments & subscriptions.","Desactivar Premium (prueba)":"Turn off Premium (test)","Restaurar compras":"Restore purchases","Ver Premium":"See Premium","Historia, Filosofía, biblioteca y más":"History, Philosophy, library and more","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","📚 Biblioteca":"📚 Library","Biblioteca":"Library","Busca un tema, persona o palabra…":"Search a topic, person or word…","🧩 Mito o realidad":"🧩 Myth or fact","🎮 Juego":"🎮 Game","Todos":"All","1 cápsula":"1 capsule","✏️ Agregar nota":"✏️ Add note","📝 Tu nota":"📝 Your note","Borrar nota":"Delete note","📝 Nota guardada":"📝 Note saved","Toca “✏️ Agregar nota” en cualquier cápsula para escribir lo que piensas.":"Tap “✏️ Add note” on any capsule to write down what you think.","📝 Escribe tus propias notas en cualquier cápsula con Verivo Premium.":"📝 Write your own notes on any capsule with Verivo Premium.","Clásico":"Classic","Papel":"Paper","Neón":"Neon","Océano":"Ocean","Esmeralda":"Emerald","Violeta":"Violet","Ámbar":"Amber","Rosa":"Rose","Dato sorprendente":"Surprising fact","Cleopatra vivió más cerca de la Luna que de las pirámides.":"Cleopatra lived closer in time to the Moon landing than to the building of the pyramids.","Historia":"History","Finanzas":"Finance","Psicología":"Psychology","Programación":"Programming","Productividad":"Productivity","Ciencia":"Science","Filosofía":"Philosophy","Dinero, inversión y buenas decisiones":"Money, investing and smart decisions","Mente, sesgos y emociones":"Mind, biases and emotions","Código, lógica y buenas prácticas":"Code, logic and best practices","Tiempo, foco y hábitos":"Time, focus and habits","Universo, vida y materia":"Universe, life and matter","Imperios, mitos y momentos clave":"Empires, myths and key moments","Grandes preguntas y pensadores":"Big questions and thinkers","Dinero, inversión y decisiones inteligentes. Un dato al día para que tu dinero trabaje para ti.":"Money, investing and smart decisions. One fact a day to make your money work for you.","Sesgos, emociones y por qué hacemos lo que hacemos.":"Biases, emotions and why we do what we do.","Código, lógica e historia de la computación, sin tecnicismos innecesarios.":"Code, logic and the history of computing, without unnecessary jargon.","Hábitos, foco y técnicas para hacer más con menos estrés.":"Habits, focus and techniques to do more with less stress.","Universo, vida y materia: lo increíble de cómo funciona todo.":"Universe, life and matter: the incredible way everything works.","Imperios, mitos y momentos que cambiaron el mundo. 👑 Exclusivo Premium.":"Empires, myths and moments that changed the world. 👑 Premium exclusive.","Grandes preguntas, paradojas y pensadores para pensar mejor. 👑 Exclusivo Premium.":"Big questions, paradoxes and thinkers to help you think better. 👑 Premium exclusive.","Cuenta oficial":"Official account","✦ Tema del día":"✦ Topic of the day","Seguir":"Follow","Ver historia":"View story","Abrir tema":"Open topic","👑 Desbloquear":"👑 Unlock","bienvenida":"welcome","Abrir →":"Open →","Sigue al menos un tema":"Follow at least one topic","Tu semana":"Your week","Tu semana pasada":"Your last week","Tu semana hasta hoy":"Your week so far","en Verivo":"on Verivo","Toca para ver tus números →":"Tap to see your numbers →","Esta semana viste":"This week you viewed","cápsula":"capsule","cápsulas":"capsules","Tu tema de la semana":"Your topic of the week","En los retos acertaste":"In the challenges you got right","Así se vio tu semana":"Here's how your week looked","Racha actual:":"Current streak:","Compártela y reta a alguien a superarla.":"Share it and challenge someone to beat it.","Compartir mi semana":"Share my week","Ve algunas cápsulas y aquí aparecerá tu resumen semanal 📊":"View a few capsules and your weekly recap will show up here 📊","No se pudo generar la imagen":"Couldn't generate the image","Imagen guardada 📸":"Image saved 📸","Todavía no hay nada aquí":"Nothing here yet","Toca “Editar perfil” para escribir tu bio.":"Tap “Edit profile” to write your bio.","TU SEMANA EN VERIVO":"YOUR WEEK ON VERIVO","cápsula vista":"capsule viewed","cápsulas vistas":"capsules viewed","de aciertos en retos":"correct in challenges","¿Puedes superar mi semana?":"Can you beat my week?","Mi semana en Verivo 📊":"My week on Verivo 📊","Aprendo algo nuevo cada día en Verivo":"I learn something new every day on Verivo","Sígueme el paso en Verivo 🔥":"Keep up with me on Verivo 🔥","Aprendí algo nuevo en Verivo 🔥":"I learned something new on Verivo 🔥","✅ Lo acerté en Verivo":"✅ I got it right on Verivo","Y además":"And there's more","🔊 Escuchando…":"🔊 Listening…","🔊 Escuchar otra vez":"🔊 Listen again","Tu dispositivo no tiene voz disponible":"Your device has no voice available","Tu dispositivo no tiene voz disponible para leer en voz alta.":"Your device has no voice available to read aloud.","Hola, este es el modo escuchar de Verivo.":"Hi, this is Verivo's listen mode.","En pausa":"Paused","Comodín de racha ganado":"Streak freeze earned","¡se pierde!":"about to be lost!","en riesgo":"at risk","¡Una semana completa! 🎉":"A whole week! 🎉","¡Un mes entero seguido! Impresionante.":"A whole month in a row! Impressive.","¡100 días! Eres imparable.":"100 days! You're unstoppable.","¡Sigue así!":"Keep it up!","¡Subiste de nivel!":"Level up!","Solo una pequeña parte de los usuarios encuentra esto.":"Only a small fraction of users find this.","Pocos llegan tan lejos en el feed de hoy.":"Few get this far in today's feed.","Un hallazgo que la mayoría se pierde por completo.":"A find that most people miss completely.","No aparece todos los días — tuviste suerte.":"It doesn't show up every day — you got lucky.","Casi nadie desliza lo suficiente para ver esto.":"Almost nobody scrolls far enough to see this.","Los ✨ hallazgos raros que encuentres en el feed aparecerán aquí.":"The ✨ rare finds you discover in the feed will appear here.","Hallazgo raro":"Rare find","Primeros pasos":"First steps","Acierta tu primera cápsula":"Get your first capsule right","Racha de 3 días":"3-day streak","Aprende 3 días seguidos":"Learn 3 days in a row","Racha de 7 días":"7-day streak","Aprende 7 días seguidos":"Learn 7 days in a row","Meta del día":"Daily goal","Completa las 5 cápsulas diarias":"Complete the 5 daily capsules","Termina un tema completo":"Finish a whole topic","Coleccionista":"Collector","Termina todos los temas":"Finish all the topics","Tu primera cápsula te está esperando.":"Your first capsule is waiting for you.","Vas encendiendo una gran racha.":"You're building a great streak.","Terminaste todos los temas. Eres leyenda.":"You finished all the topics. You're a legend.","Respaldo descargado ✓":"Backup downloaded ✓","¿Seguro? Toca otra vez para borrar todo":"Sure? Tap again to delete everything","Tus datos se borraron de este dispositivo":"Your data was deleted from this device","No se pudo importar — el archivo no es un respaldo válido de Verivo.":"Couldn't import — the file isn't a valid Verivo backup.","¡Meta diaria completa! 🎉":"Daily goal complete! 🎉","Presiona atrás otra vez para salir":"Press back again to exit","5 minutos al día, cero esfuerzo":"5 minutes a day, zero effort","Tu dosis diaria de curiosidad te espera":"Your daily dose of curiosity awaits","¿Listo para saber algo que no sabías?":"Ready to learn something you didn't know?","Un dato interesante está a un toque de distancia":"An interesting fact is one tap away","Para mi examen":"For my exam","Datos para impresionar":"Facts to impress","Para releer":"To reread","Frases favoritas":"Favorite quotes","＋ Nueva carpeta":"＋ New folder","👑 Carpetas":"👑 Folders","Guardar en carpeta":"Save to folder","Tus carpetas":"Your folders","Elige una o varias carpetas para esta cápsula.":"Choose one or more folders for this capsule.","Organiza tus favoritos por tema, examen o lo que quieras.":"Organize your favorites by topic, exam or whatever you like.","Ya tienes una carpeta con ese nombre":"You already have a folder with that name","Toca la ⭐ en una frase o concepto para guardarlo aquí.":"Tap the ⭐ on a quote or concept to save it here.","Esta carpeta está vacía. Toca 📁 en cualquier favorito para agregarlo.":"This folder is empty. Tap 📁 on any favorite to add it.","Bienvenida a Verivo":"Welcome to Verivo","¿Ya lo sabías?":"Did you already know that?","Ir a mi feed":"Go to my feed","Elige al menos 1":"Pick at least 1","Continuar":"Continue","Listo, ya tienes 3":"Done, you've got 3","Puedes elegir más si quieres":"You can pick more if you like","Máximo 3 · quita uno para cambiarlo":"Max 3 · remove one to change it","vuelve mañana para mantenerla":"come back tomorrow to keep it going","Usar inicial":"Use initial","Estudio académico":"Academic study","Libro":"Book","Técnica documentada":"Documented technique","Registro histórico":"Historical record","Fuente citada":"Cited source","No especificado":"Not specified","Sobre esta fuente":"About this source","Fuente":"Source","Autor / estudio":"Author / study","Año":"Year","Enlace / referencia":"Link / reference","Buscar esta fuente":"Search for this source","Cerrar":"Close","Ver menos":"Show less","Saber más":"Learn more","🔗 Cierra la cadena":"🔗 Close the chain","Compartir":"Share","Favorito":"Favorite","Escuchar":"Listen","FALSO":"FALSE","VERDADERO":"TRUE","Desliza la tarjeta o toca un botón":"Swipe the card or tap a button","✕ Falso":"✕ False","✓ Verdadero":"✓ True","Confirmar":"Confirm","¡Correcto!":"Correct!","No exactamente":"Not exactly","Tú":"You","¡Exacto! 🎯":"Exactly! 🎯","¡Muy cerca!":"Very close!","Cerca — no está mal":"Close — not bad","Frase":"Quote","Pregunta":"Question","Mito o realidad":"Myth or fact","Juego":"Game","Mini historia":"Mini story","Concepto":"Concept","Curiosidad":"Curiosity","Comparación":"Comparison","Regla práctica":"Rule of thumb","Verdadero o falso":"True or false","¿Verdadero o falso?":"True or false?","Regla mental":"Mental rule","Micro-juego":"Micro-game","Ordena":"Put in order","Insight de libro":"Book insight","Adivina el número":"Guess the number","Sesgo cognitivo":"Cognitive bias","Marco práctico":"Practical framework","Técnica":"Technique","Ley":"Law","Mito común":"Common myth","Estudio":"Study","Neurociencia":"Neuroscience","Atajo":"Shortcut","Práctica":"Practice","Principio":"Principle","Método":"Method","Física":"Physics","Astronomía":"Astronomy","Biología":"Biology","Ley física":"Physical law","Física cuántica":"Quantum physics","Química":"Chemistry","Geología":"Geology","Anécdota":"Anecdote","Paradoja":"Paradox","Experimento mental":"Thought experiment","Idea clave":"Key idea","Saltar":"Skip","🤯 No lo sabía":"🤯 I didn't know","😎 Ya lo sabía":"😎 I already knew","¡Primer paso dado!":"First step done!","Tu primera cápsula":"Your first capsule","Tu feed empieza con":"Your feed starts with","¿Qué te da curiosidad?":"What are you curious about?","Elige hasta 3 temas y armamos tu feed. Lo puedes cambiar cuando quieras.":"Pick up to 3 topics and we'll build your feed. You can change it whenever you like.","Empieza 7 días gratis":"Start 7 days free","Después de la prueba se cobra el plan elegido y se renueva automáticamente. Cancela cuando quieras desde Google Play.":"After the trial, the plan you chose is charged and renews automatically. Cancel anytime from Google Play.","Toca a la derecha para seguir · mantén presionado para pausar":"Tap right to continue · hold to pause","Sigue los temas que más te interesan y aquí verás solo sus cápsulas.":"Follow the topics you care about most and you'll see only their capsules here.","Los canales que sigues aparecen más en “Para ti” y tienen su propio feed en “Siguiendo”.":"The channels you follow show up more in “For you” and have their own feed in “Following”.","DÍAS SEGUIDOS":"DAYS IN A ROW","Gracias por apoyar Verivo. En 30 segundos te enseño todo lo que acabas de desbloquear.":"Thanks for supporting Verivo. In 30 seconds I'll show you everything you just unlocked.","Toca para empezar →":"Tap to start →","Historia y Filosofía":"History and Philosophy","Tus cápsulas en voz alta":"Your capsules, out loud","Una tras otra, a la velocidad que quieras: 0.75x a 1.5x. Perfecto para el camino o el gimnasio.":"One after another, at the speed you want: 0.75x to 1.5x. Perfect for the commute or the gym.","🔊 Escuchar un ejemplo":"🔊 Listen to an example","Búscalo con los audífonos 🎧 en cada cápsula.":"Look for the 🎧 headphones on every capsule.","Elige tu color":"Pick your color","Toca uno y mira cómo cambia toda la app.":"Tap one and watch the whole app change.","Biblioteca y notas":"Library and notes","Encuentra cualquier tema, persona o palabra. Y escribe tus propias notas 📝 en cada cápsula.":"Find any topic, person or word. And write your own notes 📝 on every capsule.","Abrir Biblioteca":"Open Library","✨ Insignia y":"✨ Badge and","marco dorado":"golden frame","en tu perfil":"on your profile","❄️ Hasta":"❄️ Up to","de racha, uno cada 3 días":"— one every 3 days","Carpetas":"Folders","para organizar tus favoritos":"to organize your favorites","3 diseños extra":"3 extra designs","al compartir":"when sharing","Todo listo":"All set","Puedes volver a ver este recorrido cuando quieras desde Ajustes → Premium.":"You can watch this tour again anytime from Settings → Premium.","Empezar con Historia":"Start with History","Ver mi perfil dorado":"See my golden profile","Inicio":"Home","Buscar":"Search","Historias":"Stories","Perfil":"Profile","Desliza":"Swipe","Pero esto apenas empieza...":"But this is just the beginning...","Seguir descubriendo":"Keep discovering","Favoritos":"Favorites","Nuevo":"New","hoy":"today","Guardar":"Save","datos":"facts","frases":"quotes","juegos":"games","Todo":"All","Datos":"Facts","Juegos":"Games","Arma tu feed “Siguiendo”":"Build your “Following” feed","tu semana":"your week","Nombre de la nueva carpeta":"New folder name","Crear":"Create","¿Qué te recuerda esto? ¿Cómo lo usarías?":"What does this remind you of? How would you use it?","Raros":"Rare","Guardado":"Saved","Pausar o continuar":"Pause or resume","Velocidad":"Speed","Siguiente":"Next","Detener":"Stop","🔔 Recordatorios":"🔔 Reminders","Recordatorio diario":"Daily reminder","Un aviso al día con un dato nuevo. Si no entras en 3 días, dejamos de avisarte.":"One nudge a day with a new fact. If you don't open the app for 3 days, we stop.","Disponible en la app de Android.":"Available in the Android app.","Hora del aviso":"Reminder time","Los recordatorios funcionan en la app de Android":"Reminders work in the Android app","Activa las notificaciones de Verivo en los ajustes de tu teléfono":"Turn on Verivo notifications in your phone's settings","🔔 Listo: te aviso a las {t}":"🔔 Done: I'll remind you at {t}","🔥 Tu racha de {n} días sigue viva":"🔥 Your {n}-day streak is still alive","Tu dosis de curiosidad de hoy está lista.":"Today's dose of curiosity is ready.","Hoy en {topic}":"Today in {topic}","Nuevo en {topic}":"New in {topic}","Hay cápsulas nuevas esperándote.":"New capsules are waiting for you.","¡Meta cumplida! ¿Te aviso mañana?":"Goal done! Want a reminder tomorrow?","¿Te aviso para no perder tu racha?":"Want a reminder so you keep your streak?","Un solo aviso al día, con el dato que te espera. Lo apagas cuando quieras en Ajustes.":"Just one nudge a day, with the fact waiting for you. Turn it off anytime in Settings.","Sí, a las 20:00":"Yes, at 8:00 pm","Ahora no":"Not now","Descubriste {x} de {y}":"You've discovered {x} of {y}","La idea":"The idea","Clip":"Clip","Mantén presionado para pausar · toca para adelantar":"Hold to pause · tap to skip ahead","Leer":"Read","Ver como clip":"Watch as a clip","8 extras, desde MX$10/mes":"8 extras, from MX$10/month","Voz":"Voice","🔊 Voz de los clips activada":"🔊 Clip voice on","🔇 Clips en silencio":"🔇 Clips muted","Toca la pantalla para activar la voz":"Tap the screen to turn on the voice","Verivo Studio":"Verivo Studio","Convierte cualquier texto en clips con voz":"Turn any text into clips with a voice","Pega cualquier texto y conviértelo en clips con voz, karaoke y 7 estilos. Guárdalos y compártelos.":"Paste any text and turn it into clips with a voice, karaoke and 7 styles. Save and share them.","Pega un texto y Verivo lo vuelve clips con voz y karaoke. Todo pasa en tu teléfono: sin IA, sin cuentas y sin límites.":"Paste a text and Verivo turns it into clips with a voice and karaoke. It all happens on your phone: no AI, no accounts, no limits.","Crear un clip":"Create a clip","👑 Guarda y comparte con Premium":"👑 Save and share with Premium","Puedes probar Studio y ver tus clips gratis. Con Premium se guardan aquí y los compartes como imagen.":"You can try Studio and watch your clips for free. With Premium they are saved here and you can share them as an image.","Mis clips":"My clips","Aún no tienes clips guardados. Crea el primero con cualquier texto.":"You have no saved clips yet. Create the first one from any text.","Aquí aparecerán los clips que guardes.":"The clips you save will show up here.","Nuevo clip":"New clip","Pega aquí un texto: un artículo, tus apuntes, un capítulo, una idea…":"Paste a text here: an article, your notes, a chapter, an idea…","Probar con un ejemplo":"Try an example","Título":"Title","(opcional)":"(optional)","Se elige solo":"Picked automatically","Se elige sola":"Picked automatically","Tema":"Topic","Estilo":"Style","Color":"Color","▸ Más opciones":"▸ More options","▾ Más opciones":"▾ More options","Gancho":"Hook","(la primera frase del clip)":"(the clip's first line)","Frase final":"Closing line","(la que cierra el clip)":"(the line that ends the clip)","Con textos largos se hacen varios clips y estas dos se eligen solas en cada uno.":"Long texts become several clips, and these two are picked automatically in each one.","▶ Ver clip":"▶ Watch clip","✨ Auto":"✨ Auto","Karaoke":"Karaoke","Titular":"Headline","Papel":"Paper","Póster":"Poster","Cine":"Cinema","Neón":"Neon","Pizarra":"Chalkboard","Editar":"Edit","Guardar":"Save","Guardado":"Saved","Repetir":"Replay","Compartir":"Share","↻ Ver otra vez":"↻ Watch again","Borrar":"Delete","¿Borrar?":"Delete?","Pega o escribe un texto para empezar":"Paste or type a text to start","{w} palabras · {n} {c} · ~{s} s":"{w} words · {n} {c} · ~{s} s","clip":"clip","clips":"clips","Escribe o pega un texto primero":"Write or paste a text first","Texto muy largo: uso las primeras {n} partes":"Very long text: using the first {n} parts","Clip {a} de {b}":"Clip {a} of {b}","Guardar {n} clips":"Save {n} clips","Guardar y compartir clips es Premium 👑":"Saving and sharing clips is Premium 👑","No se pudo guardar: sin espacio en el teléfono":"Couldn't save: the phone is out of space","Guardados {n} clips ✅":"{n} clips saved ✅","Clip guardado ✅":"Clip saved ✅","No se pudo generar la imagen":"Couldn't create the image","Imagen guardada 📸":"Image saved 📸","Hecho con Verivo Studio 🎬":"Made with Verivo Studio 🎬","▶ Ver todos":"▶ Watch all","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","Sonido":"Sound","🎵 Música y sonidos":"🎵 Music and sounds","🔔 Solo sonidos, sin música":"🔔 Sounds only, no music","🔇 Sin música ni sonidos":"🔇 No music or sounds","Mantén para pausar · toca los lados":"Hold to pause · tap the sides","Música":"Music","Ambiental":"Ambient","Lo-fi":"Lo-fi","Tensión":"Tension","Alegre":"Upbeat","Épico":"Epic","🔇 Sin música":"🔇 No music","⚡ Dato rápido":"⚡ Quick fact","Mito":"Myth","Realidad":"Reality","Adivina el concepto":"Guess the concept","🤔 Adivina el concepto":"🤔 Guess the concept","Pista {n}":"Clue {n}","¿Ya sabes cuál es?":"Do you know it yet?","3 cosas que debes saber":"3 things to know","en línea":"online"};
 const _pl = (n, a, b) => (+n === 1 ? a : b);
 const _ds = (n, w) => (+n === 1 ? 'day' : 'days');
 const EN_RULES = [
@@ -10264,7 +10341,7 @@ function vozSpeak(text, o){
     vozWireRange();
     const t0 = performance.now();
     setTimeout(() => { if(!h.done && o.onStart) o.onStart(); }, 0);
-    Promise.resolve(vozNative().speak({ text, lang, rate, pitch: 1, volume: 1, queueStrategy: 0 }))
+    Promise.resolve(vozNative().speak({ text, lang, rate, pitch: o.pitch || 1, volume: 1, queueStrategy: 0 }))
       .then(() => {
         const took = performance.now() - t0;
         // some builds resolve when speech starts instead of when it ends: then wait out the estimate
@@ -10278,6 +10355,7 @@ function vozSpeak(text, o){
   const vv = vozVoiceFor(lang);
   if(vv){ u.voice = vv; u.lang = vv.lang; } else u.lang = lang;
   u.rate = rate;
+  u.pitch = o.pitch || 1;
   let started = false;
   u.onstart = () => { started = true; VOZ.okOnce = true; if(!h.done && o.onStart) o.onStart(); };
   u.onboundary = e => { if(h.done || (e.name && e.name !== 'word')) return; if(h.onWord) h.onWord(e.charIndex || 0); };
@@ -14905,7 +14983,8 @@ function clipBaseLook(item, topic, p1, p2){
   let rev = pick(o.rev);
   if(p1 && p1.rev === rev && o.rev.length > 1) rev = o.rev[(o.rev.indexOf(rev) + 1) % o.rev.length];
   const fx = clipPickFx(tpl, topic.id, r, p1 && p1.fx);
-  return { tpl, motif, c2, trans: pick(o.trans), num: pick(o.num), rev, fx };
+  const ex = clipPickExtras(item, r, p1);
+  return { tpl, motif, c2, trans: pick(o.trans), num: pick(o.num), rev, fx, fmt: ex.fmt, narr: ex.narr, silent: ex.silent };
 }
 /* looks are worked out in feed order, so each clip knows the two before it */
 let _clipLooks = [];
@@ -15182,7 +15261,7 @@ function clipDecoHtml(tpl){
 
 /* ---------- voice ---------- */
 function clipVoicePref(){ try{ return localStorage.getItem('verivo_clipvoice_' + currentUser) !== '0'; }catch(e){ return true; } }
-function clipVoiceWanted(idx){ return speechSupported() && (clipVoicePref() || (LISTEN.active && LISTEN.idx === idx)); }
+function clipVoiceWanted(idx){ return speechSupported() && ((clipVoicePref() && !clipIsSilent(idx)) || (LISTEN.active && LISTEN.idx === idx)); }
 const CLIP_VOICE_ICON = '<svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
   + '<svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="m16 9 6 6M22 9l-6 6"/></svg>';
 function clipToggleVoice(idx){
@@ -15199,8 +15278,8 @@ function clipToggleVoice(idx){
 function clipHtml(idx, item, topic, lookOverride){
   const look = lookOverride || clipLookAt(idx) || { tpl:'karaoke', motif:'atom', c2:'#8fd3ff', trans:'up', num:'big', rev:'kicker' };
   const fx = look.fx || clipPickFx(look.tpl, topic && topic.id, v6Rand(v6Seed('fx' + idx + itemStableId(item))));
-  const voice = clipVoiceWanted(idx);
-  const rate = getListenRate();
+  const voice = clipVoiceWanted(idx) && !look.silent;
+  const rate = getListenRate() * (CLIP_NARR[look.narr | 0] || CLIP_NARR[0]).r;
   const sentences = clipSentences(item.body);
   const scenes = [];
   // 1 · the hook, word by word, with its emoji popping in
@@ -15222,7 +15301,10 @@ function clipHtml(idx, item, topic, lookOverride){
   // 4 · the reveal: the concept's real name (+ its highlight line)
   const hl = item.highlight ? clipPlain(item.highlight) : '';
   scenes.push({ dur: 3000, say: cleanForSpeech(item.title) + '.' + (hl ? ' ' + cleanForSpeech(hl) : ''), html: clipRevealHtml(look.rev, escapeHtml(clipPlain(item.title)), hl) });
-  const total = scenes.reduce((a, s) => a + (voice ? Math.max(1400, vozEstimate(s.say, rate) + 260) : s.dur), 0);
+  let fmt = look.fmt || 'classic';
+  const fs = clipFormatScenes(fmt, idx, item, look, scenes);
+  if(fs && fs.length >= 2) scenes.splice(0, scenes.length, ...fs); else fmt = 'classic';
+  const total = scenes.reduce((a, s) => a + (voice ? Math.max(1400, s.min || 0, vozEstimate(s.say, rate) + 260) : Math.max(s.dur, s.min || 0)), 0);
   const secs = Math.round(total / 1000);
   // big uppercase looks fit fewer letters per line: they step down sooner, and so does a very long word
   const upper = look.tpl === 'titular' || look.tpl === 'poster';
@@ -15230,7 +15312,7 @@ function clipHtml(idx, item, topic, lookOverride){
   const hookLen = (hookWords > (upper ? 12 : 17) || longest > (upper ? 11 : 15)) ? ' hook-xl'
     : (hookWords > (upper ? 8 : 12) || longest > (upper ? 9 : 12)) ? ' hook-l' : '';
   return `
-      <div class="clip tpl-${look.tpl} trans-${look.trans} num-${look.num} rev-${look.rev}${hookLen}" id="clip-${idx}" data-total="${total}" data-look="${look.tpl}/${look.motif}" data-fx="${fx}" data-music="${escapeHtml(look.music || '')}" data-topic="${escapeHtml(topic && topic.id || '')}" style="--c2:${look.c2}" aria-label="${escapeHtml(clipPlain(item.hook))}">
+      <div class="clip fmt-${fmt} tpl-${look.tpl} trans-${look.trans} num-${look.num} rev-${look.rev}${hookLen}" id="clip-${idx}" data-total="${total}" data-look="${look.tpl}/${look.motif}" data-fmt="${fmt}" data-narr="${look.narr | 0}" data-silent="${look.silent ? 1 : 0}" data-fx="${fx}" data-music="${escapeHtml(look.music || '')}" data-topic="${escapeHtml(topic && topic.id || '')}" style="--c2:${look.c2}" aria-label="${escapeHtml(clipPlain(item.hook))}">
         <div class="clip-bg"><span></span><span></span></div>
         ${clipFxHtmlSafe(fx, v6Rand(v6Seed('fxh' + idx + itemStableId(item))))}
         ${clipDecoHtml(look.tpl)}
@@ -15238,10 +15320,10 @@ function clipHtml(idx, item, topic, lookOverride){
         <div class="clip-shade"></div>
         <div class="clip-top">${scenes.map(() => '<span class="clip-seg"><i></i></span>').join('')}</div>
         <div class="clip-badge"><span class="clip-live"></span>${escapeHtml(T('Clip'))} · ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</div>
-        <div class="clip-stage">${scenes.map((s, i) => `<div class="clip-scene" data-dur="${s.dur}" data-say="${escapeHtml(s.say)}" data-i="${i}">${s.html}</div>`).join('')}</div>
+        <div class="clip-stage">${scenes.map((s, i) => `<div class="clip-scene" data-dur="${Math.max(s.dur, s.min || 0)}" data-say="${escapeHtml(s.say)}" data-i="${i}"${s.spk ? ` data-spk="${s.spk}"` : ''}${s.min ? ` data-min="${s.min}"` : ''}>${s.html}</div>`).join('')}</div>
         <div class="clip-paused" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></div>
         <div class="clip-hint">${escapeHtml(T('Mantén para pausar · toca los lados'))}</div>
-        ${speechSupported() ? `<button class="clip-voice${clipVoicePref() ? '' : ' off'}" onclick="event.stopPropagation(); clipToggleVoice(${idx})" aria-label="${escapeHtml(T('Voz'))}">${CLIP_VOICE_ICON}</button>` : ''}
+        ${speechSupported() && !look.silent ? `<button class="clip-voice${clipVoicePref() ? '' : ' off'}" onclick="event.stopPropagation(); clipToggleVoice(${idx})" aria-label="${escapeHtml(T('Voz'))}">${CLIP_VOICE_ICON}</button>` : ''}
         <button class="clip-snd snd-${clipSndPref()}" onclick="event.stopPropagation(); clipSndCycle()" aria-label="${escapeHtml(T('Sonido'))}">${clipSndIconSafe()}</button>
         <button class="clip-skip" onclick="event.stopPropagation(); clipFinish(${idx}, true)">${escapeHtml(T('Leer'))} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
       </div>`;
@@ -15333,11 +15415,11 @@ function clipSpeak(from){
   const part = words.slice(from);
   const starts = []; let p = 0;
   part.forEach(w => { starts.push(p); p += w.length + 1; });
-  const rate = getListenRate();
+  const rate = getListenRate() * clipRateMul();
   CLIPP.vFrom = from; CLIPP.vStart = performance.now(); CLIPP.vEst = vozEstimate(part.join(' '), rate);
   const live = () => CLIPP.idx === idx && CLIPP.si === si && CLIPP.mode === 'voice';
   vozSpeak(part.join(' '), {
-    rate, lang: clipLangNow(),
+    rate, pitch: clipPitchNow(), lang: clipLangNow(),
     onStart: () => { if(live()) CLIPP.vStart = performance.now(); },
     onWord: ci => {
       if(!live()) return;
@@ -15388,7 +15470,7 @@ function clipTick(now){
         prog = k / total;
       }
       if(seg) seg.style.width = (Math.min(1, prog) * 100).toFixed(1) + '%';
-      if(CLIPP.spoken && now - CLIPP.spokenAt > 260){ clipGo(CLIPP.si + 1); if(CLIPP.idx < 0) return; }
+      if(CLIPP.spoken && now - CLIPP.spokenAt > 260 && CLIPP.elapsed + now - CLIPP.sceneStart >= (parseInt(sc.dataset.min, 10) || 0)){ clipGo(CLIPP.si + 1); if(CLIPP.idx < 0) return; }
     }else{
       const dur = parseInt(sc.dataset.dur, 10) || 3000;
       const t = CLIPP.elapsed + (now - CLIPP.sceneStart);
@@ -15733,6 +15815,9 @@ function studioMakeLooks(drafts, f){
       look = { tpl: want, motif: look.motif, c2: look.c2, trans: pick(o.trans), num: pick(o.num), rev: pick(o.rev), fx: look.fx };
     }
     look.c2 = forceC2 || (i > 0 ? looks[0].c2 : look.c2);
+    const narr = look.narr | 0;
+    look.fmt = 'classic'; look.silent = false;                    // Studio shows every word of the text, always with a voice
+    look.narr = i > 0 ? looks[0].narr : narr;
     if(i > 0) look.fx = looks[0].fx;                                  // a series keeps one background too
     const forceMus = f && f.music && f.music !== 'auto' ? f.music : null;
     look.music = forceMus || (i > 0 ? looks[0].music : clipMusicAuto(look.tpl, d.topic, d.id));
@@ -16310,6 +16395,7 @@ function clipFxScene(i, back){
   const el = CLIPP.el, sc = CLIPP.scenes[i];
   if(!el || !sc) return;
   if(i === 0){ if(sc.querySelector('.clip-emoji')) fxPop(.32); else fxWhoosh(false); return; }
+  if(sc.querySelector('.clip-cd')){ fxCountdown(); return; }
   if(sc.querySelector('.clip-title')){ fxReveal(el.classList.contains('rev-stamp')); return; }
   fxWhoosh(!!back);
   if(sc.querySelector('.clip-num')) fxTicks(9, 1.0);
@@ -16398,6 +16484,233 @@ function clipFxFpsProbe(){
     }
   };
   requestAnimationFrame(step);
+}
+
+
+/* ============================================================
+   v10 — CLIP FORMATS (classic, quick, chat, top 3, guess, myth, timeline),
+   a narrator per clip (pitch + pace), and some clips with music only
+   ============================================================ */
+var CLIP_FMTS = ['classic','quick','chat','top3','guess','myth','timeline'];
+var CLIP_FMT_W = { classic:18, quick:12, chat:16, top3:15, guess:16, myth:30, timeline:34 };
+/* narrators: the same engine voice, made to sound like different people */
+var CLIP_NARR = [{ p:1, r:1 }, { p:.88, r:.95 }, { p:1.12, r:1.04 }, { p:.8, r:.92 }, { p:1.2, r:1.07 }, { p:1, r:1.1 }, { p:.94, r:.9 }];
+var CLIP_SILENT_PCT = .16;
+
+function clipFmtLangEn(){ return typeof LANG !== 'undefined' && LANG === 'en'; }
+function clipWc(s){ return String(s || '').trim().split(/\s+/).filter(Boolean).length; }
+function clipHookParts(item){
+  const em = /^(\p{Extended_Pictographic}️?(?:‍\p{Extended_Pictographic}️?)*)\s*(.*)$/u.exec(clipPlain(item.hook));
+  return { emoji: em ? em[1] : '', text: em ? em[2] : clipPlain(item.hook) };
+}
+function clipAllSentences(item){ return clipSentences(item.body).concat(item.extra ? clipSentences(item.extra) : []); }
+
+/* ---- myth: a hook that denies something ("No toda deuda te hunde") → the belief it denies ---- */
+function clipMythOf(item){
+  const h = clipHookParts(item).text;
+  if(/\?|¿|["“”'‘’«»…]|\.\.\./.test(h)) return null;
+  if(/(^|\s)(por qué|qué|cómo|cuándo|dónde|lo que|aunque|si|sino|ni|nada|nadie|ning[uú]n[ao]?|nunca|jam[aá]s|tampoco|ya no|why|what|how|when|if|nothing|nobody|never|no one|none|neither|nor)(?=\s|$|[,.])/i.test(h)) return null;
+  if(/^(un|una|el|la) (experimento|forma|truco|estudio|caso|historia|técnica|método|way|trick|study|story)\b/i.test(h)) return null;
+  if(/^(espera|imagina|prueba|haz|deja|wait|imagine|try|stop|let)\b/i.test(h)) return null;
+  let clause = h.split(/\s[—–-]\s|;|\.\s|:\s|,\s(?:pero|but)\s/)[0].replace(/[.!…]+$/, '').trim();
+  if(clipWc(clause) < 4 || clipWc(clause) > 16) return null;
+  let myth = null;
+  if(clipFmtLangEn()){
+    const rules = [[/^Not (all|every|everything|always)\b/i, (m, w) => w[0].toUpperCase() + w.slice(1)], [/\b(is|are|was|were|can|should|could|would|does|do) not\b/i, (m, v) => v],
+      [/\bisn't\b/i, 'is'], [/\baren't\b/i, 'are'], [/\bwasn't\b/i, 'was'], [/\bweren't\b/i, 'were'], [/\bcan't\b/i, 'can'], [/\bwon't\b/i, 'will'], [/\bdon't\b ?/i, '']];
+    if(/\b(doesn't|didn't|hasn't|haven't|not only|that|which|who|to not|, not|until|and could|and would)\b/i.test(clause)) return null;
+    const hits = rules.filter(([re]) => re.test(clause));
+    if(hits.length !== 1) return null;
+    myth = clause.replace(hits[0][0], hits[0][1]);
+  }else{
+    const n = (clause.match(/(^|\s)no(?=\s)/gi) || []).length;
+    if(n !== 1 || /(^|\s)no (solo|sólo|es que|siempre|menos|peor|mejor|más)\b/i.test(clause) || /\shasta\s/i.test(clause) || /^(no )?es solo/i.test(clause)) return null;
+    // the "no" must belong to the main verb, not to a "que…", "de…", "por…" clause or a ", no X" contrast
+    const before = clause.slice(0, clause.search(/(^|\s)no\s/i) + 1);
+    if(/,/.test(clause.slice(before.length))) return null;
+    if(/(^|\s)(que|de|por|para|con|sin|a)\s*$|,\s*$/i.test(before) || /\s(que|cual|quien|donde|cuando|mientras|todavía)\s/i.test(' ' + before + ' ')) return null;
+    myth = /^no\s/i.test(clause) ? clause.replace(/^no\s+/i, '') : clause.replace(/\s+no\s+/i, ' ');
+  }
+  myth = myth.replace(/\s+/g, ' ').trim();
+  if(!myth || myth === clause) return null;
+  return { myth: myth[0].toUpperCase() + myth.slice(1) + '.', truth: h };
+}
+/* ---- guess: the concept's name, hidden in the clues ---- */
+var CLIP_GUESS_GENERIC = /^(efecto|ley|principio|regla|teor[ií]a|paradoja|sesgo|m[eé]todo|t[eé]cnica|concepto|s[ií]ndrome|fen[oó]meno|modelo|regla|effect|law|principle|rule|theory|paradox|bias|method|technique|concept|syndrome|phenomenon|model)$/i;
+var CLIP_STOP = /^(el|la|los|las|un|una|unos|unas|de|del|al|y|o|en|por|para|con|sin|que|tu|su|sus|tus|the|a|an|of|and|or|in|on|for|to|with|your|its|is|it)$/i;
+function clipMaskRe(title){
+  const t = clipPlain(title).replace(/\(([^)]*)\)/g, ' $1 ');
+  const words = t.split(/[^\p{L}\p{N}]+/u).filter(w => w.length >= 4 && !CLIP_STOP.test(w) && !CLIP_GUESS_GENERIC.test(w));
+  if(!words.length) return null;
+  const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pats = words.map(w => {
+    const base = w.normalize('NFC');
+    if(base.length >= 7) return '[\\p{L}]*' + esc(base.slice(0, Math.max(5, base.length - 4))) + '[\\p{L}]*';
+    return '(?<![\\p{L}])' + esc(base) + '[\\p{L}]*';
+  });
+  return new RegExp('(?:' + pats.join('|') + ')', 'giu');
+}
+function clipGuessOf(item){
+  const title = clipPlain(item.title);
+  const qm = /^¿?\s*(?:qué es|qué son|what is|what are)\s+(.+?)\??$/i.exec(title);
+  const name = qm ? qm[1] : title;
+  if(clipWc(name) > 5 || name.length > 40 || /[,:;!]/.test(name)) return null;
+  if(!qm && !/^(el|la|los|las|un|una|the|an?)\s/i.test(name) && !/\(/.test(name)) return null;
+  if(/\b(cómo|por qué|cuando|tu|tus|te|you|your|how|why)\b/i.test(name)) return null;
+  const re = clipMaskRe(name);
+  if(!re) return null;
+  const mask = s => s.replace(re, '▢▢▢');
+  const hook = clipHookParts(item);
+  const clues = clipSentences(item.body).map(mask).filter(s => clipWc(s) >= 5);
+  if(!clues.length) return null;
+  return { hook: mask(hook.text), emoji: hook.emoji, clues };
+}
+/* ---- timeline: sentences that carry a year ---- */
+function clipYearOf(s){ const m = /\b(1[0-9]{3}|20[0-2][0-9])\b/.exec(s); return m ? m[1] : null; }
+function clipTimelineOf(item){
+  const pts = []; const seen = {};
+  clipAllSentences(item).forEach(s => { const y = clipYearOf(s); if(y && !seen[y] && clipWc(s) <= 34){ seen[y] = 1; pts.push({ y, s }); } });
+  if(pts.length < 2) return null;
+  pts.sort((a, b) => +a.y - +b.y);
+  return pts.slice(0, 4);
+}
+function clipTop3Of(item){
+  const pts = clipAllSentences(item).filter(s => clipWc(s) >= 5 && clipWc(s) <= 28);
+  return pts.length >= 3 ? pts.slice(0, 3) : null;
+}
+function clipFormatsFor(item){
+  const out = ['classic', 'quick', 'chat'];
+  if(clipTop3Of(item)) out.push('top3');
+  if(clipGuessOf(item)) out.push('guess');
+  if(clipMythOf(item)) out.push('myth');
+  if(clipTimelineOf(item)) out.push('timeline');
+  return out;
+}
+/* the rest of a look, picked after everything else so earlier picks never change */
+function clipPickExtras(item, r, p1){
+  const ok = clipFormatsFor(item);
+  const w = {}; ok.forEach(f => { w[f] = CLIP_FMT_W[f]; });
+  const fmt = clipPickWeighted(r, w, p1 && p1.fmt && p1.fmt !== 'classic' ? [p1.fmt] : []);
+  const narr = Math.floor(r() * CLIP_NARR.length);
+  const silent = r() < CLIP_SILENT_PCT && !(p1 && p1.silent) && fmt !== 'chat' && fmt !== 'guess';
+  return { fmt, narr, silent };
+}
+
+/* ---- canned chat lines (no AI: picked by the clip's own seed) ---- */
+function clipChatLines(){
+  return clipFmtLangEn() ? {
+    ask: ['Wait, really? 😮', 'How so?', 'Hold on, what? 🤨', 'Didn’t know that 👀 tell me more'],
+    react: ['Wow 🤯', 'That makes sense', 'Ok… and then?', 'Interesting 👀', 'No way 😳'],
+    name: ['Does it have a name?', 'So what’s it called?'],
+    me: 'You', them: 'Verivo'
+  } : {
+    ask: ['¿En serio? 😮', '¿Cómo así?', 'Espera, ¿qué? 🤨', 'No sabía 👀 cuéntame'],
+    react: ['Wow 🤯', 'Tiene sentido', 'Ok… ¿y luego?', 'Interesante 👀', 'No manches 😳'],
+    name: ['¿Y eso tiene nombre?', '¿Y cómo se llama eso?'],
+    me: 'Tú', them: 'Verivo'
+  };
+}
+function clipKick(t){ return `<div class="clip-kicker fmt-kick">${escapeHtml(t)}</div>`; }
+
+/* builds the scenes of a non-classic clip; `base` are the classic scenes (first = hook, last = reveal) */
+function clipFormatScenes(fmt, idx, item, look, base){
+  if(!fmt || fmt === 'classic') return null;
+  const r = v6Rand(v6Seed('fmt' + fmt + itemStableId(item)));
+  const pick = a => a[Math.floor(r() * a.length)];
+  const hook = clipHookParts(item);
+  const reveal = base[base.length - 1];
+  const cap = (s, cls) => { const n = clipWc(s); return { dur: Math.min(7600, 1300 + n * 230), say: cleanForSpeech(s), html: `<div class="clip-cap${clipCapSize(n)}${cls ? ' ' + cls : ''}">${clipWords(s, 150, 150)}</div>` }; };
+  const em = hook.emoji ? `<div class="clip-emoji">${hook.emoji}</div>` : '';
+  if(fmt === 'quick'){
+    const h = Object.assign({}, base[0]);
+    h.html = clipKick(T('⚡ Dato rápido')) + h.html;
+    return [h, Object.assign({}, reveal, { dur: 2800 })];
+  }
+  if(fmt === 'myth'){
+    const m = clipMythOf(item);
+    if(!m) return null;
+    const out = [
+      { dur: Math.max(3200, 1500 + clipWc(m.myth) * 240), min: 2600, say: cleanForSpeech(T('Mito') + '. ' + m.myth), html: `<div class="fmt-tag myth">❌ ${escapeHtml(T('Mito'))}</div><div class="clip-hook fmt-myth">${clipWords(m.myth, 250, 110)}<i class="fmt-strike"></i></div>` },
+      { dur: Math.max(3000, 1300 + clipWc(m.truth) * 230), say: cleanForSpeech(T('Realidad') + '. ' + m.truth), html: `<div class="fmt-tag real">✅ ${escapeHtml(T('Realidad'))}</div><div class="clip-cap fmt-truth">${clipWords(m.truth, 200, 140)}</div>` }
+    ];
+    clipCaptionChunks(clipSentences(item.body)).slice(0, 2).forEach(c => out.push(cap(c)));
+    out.push(reveal);
+    return out;
+  }
+  if(fmt === 'guess'){
+    const g = clipGuessOf(item);
+    if(!g) return null;
+    const say = s => cleanForSpeech(s.replace(/▢▢▢/g, clipFmtLangEn() ? 'this' : 'esto'));
+    const out = [{ dur: Math.min(4800, 1400 + clipWc(g.hook) * 220), say: say(T('Adivina el concepto') + '. ' + g.hook),
+      html: `${clipKick(T('🤔 Adivina el concepto'))}${g.emoji ? `<div class="clip-emoji">${g.emoji}</div>` : ''}<div class="clip-hook">${clipWords(g.hook, 200, 110)}</div>` }];
+    clipCaptionChunks(g.clues).slice(0, 2).forEach((c, k) => { const s = cap(c); s.say = say(c); s.html = clipKick(T('Pista {n}', { n: k + 1 })) + s.html; out.push(s); });
+    out.push({ dur: 3600, min: 3400, say: cleanForSpeech(T('¿Ya sabes cuál es?')), html: `<div class="clip-cap fmt-ask">${escapeHtml(T('¿Ya sabes cuál es?'))}</div><div class="clip-cd"><b>3</b><b>2</b><b>1</b></div>` });
+    out.push(reveal);
+    return out;
+  }
+  if(fmt === 'top3'){
+    const pts = clipTop3Of(item);
+    if(!pts) return null;
+    const out = [Object.assign({}, base[0], { html: clipKick(T('3 cosas que debes saber')) + base[0].html })];
+    pts.forEach((p, k) => {
+      const prev = pts.slice(0, k).map((q, j) => `<li class="old"><b>${j + 1}</b><span>${escapeHtml(q)}</span></li>`).join('');
+      const n = clipWc(p);
+      out.push({ dur: Math.min(7600, 1500 + n * 230), say: cleanForSpeech((k + 1) + '. ' + p),
+        html: `${clipKick(T('3 cosas que debes saber'))}<ol class="fmt-list">${prev}<li class="now"><b>${k + 1}</b><span class="clip-cap">${clipWords(p, 220, 140)}</span></li></ol>` });
+    });
+    out.push(reveal);
+    return out;
+  }
+  if(fmt === 'timeline'){
+    const pts = clipTimelineOf(item);
+    if(!pts) return null;
+    const out = [base[0]];
+    pts.forEach((p, k) => {
+      const n = clipWc(p.s);
+      const rail = pts.map((q, j) => `<i class="${j < k ? 'past' : j === k ? 'now' : ''}"><em>${q.y}</em></i>`).join('');
+      out.push({ dur: Math.min(7600, 1800 + n * 220), say: cleanForSpeech(p.s),
+        html: `<div class="fmt-rail" style="--n:${pts.length}">${rail}</div><div class="clip-num fmt-year" data-count="${p.y}">${p.y}</div><div class="clip-cap${clipCapSize(n + 6)}">${clipWords(p.s, 600, 140)}</div>` });
+    });
+    out.push(reveal);
+    return out;
+  }
+  if(fmt === 'chat'){
+    const L = clipChatLines();
+    const msgs = [{ who:'a', t: hook.text }, { who:'b', t: pick(L.ask) }];
+    const chunks = clipCaptionChunks(clipSentences(item.body)).slice(0, 3);
+    chunks.forEach((c, k) => { msgs.push({ who:'a', t: c }); if(k < chunks.length - 1) msgs.push({ who:'b', t: pick(L.react) }); });
+    msgs.push({ who:'b', t: pick(L.name) });
+    msgs.push({ who:'a', t: clipPlain(item.title), last: true });
+    const head = `<div class="fmt-chathead"><span class="av">${hook.emoji || '💬'}</span><b>${escapeHtml(L.them)}</b><small>${escapeHtml(T('en línea'))}</small></div>`;
+    return msgs.map((m, i) => {
+      const prev = msgs.slice(Math.max(0, i - 3), i).map(q => `<div class="cb ${q.who} old${q.last ? ' fin' : ''}"><span>${escapeHtml(q.t)}</span></div>`).join('');
+      const n = clipWc(m.t);
+      const body = m.last ? `<span class="clip-title cb-title">${clipWords(m.t, 120, 90)}</span>` : `<span class="clip-cap">${clipWords(m.t, 120, 120)}</span>`;
+      return { dur: m.who === 'b' ? 1500 : Math.min(7200, 1300 + n * 230), spk: m.who === 'b' ? 'b' : '', say: cleanForSpeech(m.t),
+        html: `${head}<div class="fmt-chat">${prev}<div class="cb ${m.who} now${m.last ? ' fin' : ''}">${body}</div></div>` };
+    });
+  }
+  return null;
+}
+
+/* ---- the narrator of the playing clip ---- */
+function clipNarr(){
+  const el = CLIPP.el;
+  const k = el ? parseInt(el.dataset.narr, 10) : 0;
+  return CLIP_NARR[(k >= 0 && k < CLIP_NARR.length) ? k : 0];
+}
+function clipPitchNow(){
+  const n = clipNarr(), sc = CLIPP.scenes && CLIPP.scenes[CLIPP.si];
+  if(sc && sc.dataset.spk === 'b') return Math.max(.7, Math.min(1.35, n.p >= 1 ? n.p - .32 : n.p + .32));
+  return n.p;
+}
+function clipRateMul(){ return clipNarr().r; }
+function clipIsSilent(idx){ const el = document.getElementById('clip-' + idx); return !!(el && el.dataset.silent === '1'); }
+
+/* countdown beeps */
+function fxCountdown(){
+  const c = fxCtx(); if(!c) return; const t = c.currentTime + .05;
+  [0, 1, 2].forEach(k => mTone(c, MUS.fx, t + k, 660, .06, { type:'triangle', v: .09, a: .004, r: .15 }));
 }
 
 /* everything is defined now: start */
