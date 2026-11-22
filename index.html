@@ -3759,7 +3759,7 @@ body.has-nav .vx-next{ bottom:calc(33px + var(--nav-h, calc(64px + env(safe-area
   .clip-scene.on .clip-emoji{ animation:clipPop .75s cubic-bezier(.3,1.7,.5,1) both; }
   @keyframes clipPop{ from{ transform:scale(.2) rotate(-18deg); opacity:0; } to{ transform:none; opacity:1; } }
   .clip-hook{ font-family:'Fraunces',serif; font-weight:900; font-size:clamp(25px, 7.2vw, 34px); line-height:1.14; letter-spacing:-.01em; color:#fff; text-shadow:0 3px 22px rgba(0,0,0,.5); }
-  .clip-cap{ font-weight:800; font-size:clamp(18px, 5.2vw, 23px); line-height:1.36; color:#fff; text-shadow:0 2px 0 rgba(0,0,0,.4), 0 0 24px rgba(0,0,0,.45); }
+  .clip-cap{ font-weight:800; font-size:calc(clamp(18px, 5.2vw, 23px) * var(--capk, 1)); line-height:1.36; color:#fff; text-shadow:0 2px 0 rgba(0,0,0,.4), 0 0 24px rgba(0,0,0,.45); }
   .cw{ display:inline-block; opacity:0; transform:translateY(.45em); border-radius:7px; padding:0 .06em; }
   .clip-scene.on .cw{ animation:cwIn .36s cubic-bezier(.2,.9,.3,1.3) var(--d) both; }
   .clip-scene.on .clip-cap .cw{ animation:cwIn .3s ease var(--d) both, cwHi .55s ease var(--d) both; }
@@ -3924,6 +3924,326 @@ body.has-nav .vx-next{ bottom:calc(33px + var(--nav-h, calc(64px + env(safe-area
     .fact-card.has-clip .clip{ display:none; }
     .fact-card.has-clip > .card-art, .fact-card.has-clip > .card-mid{ visibility:visible !important; }
   }
+
+
+  /* ============================================================
+     v7 — CLIP LOOKS (7 templates) + voice
+     ============================================================ */
+  .clip{ --tx:#fff; --hl-bg:color-mix(in srgb, var(--accent, var(--red)) 92%, #fff); --hl-fg:#130b08;
+    --tx-shadow:0 2px 0 rgba(0,0,0,.4), 0 0 24px rgba(0,0,0,.45); }
+  .clip .clip-hook, .clip .clip-title, .clip .clip-num{ color:var(--tx); }
+  .clip .clip-cap{ color:var(--tx); text-shadow:var(--tx-shadow); }
+  .clip .clip-hl{ color:color-mix(in srgb, var(--tx) 86%, transparent); }
+  @keyframes cwHi{ 0%,30%{ background:var(--hl-bg); color:var(--hl-fg); text-shadow:none; } 100%{ background:transparent; color:var(--tx); } }
+  @keyframes cwHiNum{ 0%,100%{ background:var(--hl-bg); color:var(--hl-fg); text-shadow:none; } }
+  .clip .cw{ transition:background-color .12s ease, color .12s ease, opacity .18s ease; }
+
+  /* voice toggle, next to "Leer" */
+  .clip-voice{ position:absolute; z-index:6; right:96px; top:calc(106px + env(safe-area-inset-top)); width:30px; height:30px; padding:0;
+    display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(255,255,255,.18);
+    background:rgba(0,0,0,.3); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); color:#fff; cursor:pointer; }
+  .clip-voice svg{ width:16px; height:16px; }
+  .clip-voice .ic-off, .clip-voice.off .ic-on{ display:none; }
+  .clip-voice.off .ic-off{ display:block; }
+  .clip-voice:active{ transform:scale(.9); }
+  /* channel name readable on any background while the clip plays */
+  .fact-card.has-clip:not(.clip-done) .post-author{ right:auto; max-width:calc(100% - 100px); padding:5px 12px 5px 5px; border-radius:999px;
+    background:rgba(0,0,0,.34); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+
+  .clip-deco{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .clip-deco i{ position:absolute; display:block; }
+  .clip-sheet{ position:absolute; left:12px; right:12px; top:calc(140px + env(safe-area-inset-top));
+    bottom:calc(78px + var(--nav-h, calc(64px + env(safe-area-inset-bottom)))); border-radius:12px; overflow:hidden; pointer-events:none; }
+  .clip-sheet i{ position:absolute; display:block; }
+
+  /* ---- titular: big punchy headline words, centered ---- */
+  .clip.tpl-titular{ --hl-bg:transparent; --hl-fg:var(--accent, var(--red));
+    background:linear-gradient(160deg, color-mix(in srgb, var(--accent, var(--red)) 72%, #0b0908) 0%, #0b0908 58%, color-mix(in srgb, var(--c2) 32%, #0b0908) 100%); }
+  .clip.tpl-titular .clip-bg{ display:none; }
+  .clip-deco .stripes{ inset:-60%; background:repeating-linear-gradient(115deg, transparent 0 40px, rgba(255,255,255,.05) 40px 80px); animation:clipStripes 12s linear infinite; }
+  @keyframes clipStripes{ to{ transform:translateX(178px); } }
+  .clip.tpl-titular .clip-motif{ left:auto; right:-6%; width:60%; height:24%; top:calc(150px + env(safe-area-inset-top)); opacity:.7; }
+  .clip.tpl-titular .clip-stage{ left:20px; right:76px; top:37%; }
+  .clip.tpl-titular .clip-scene{ align-items:center; text-align:center; }
+  .clip.tpl-titular .clip-hook{ font-family:'Inter',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-.02em; line-height:1.04; font-size:clamp(24px, 7.6vw, 38px); }
+  .clip.tpl-titular .clip-cap{ font-weight:900; text-transform:uppercase; letter-spacing:-.01em; line-height:1.24; font-size:calc(clamp(18px, 5.4vw, 24px) * var(--capk, 1)); }
+  .clip.tpl-titular .clip-scene.on .clip-hook .cw{ animation-name:cwPunch; }
+  .clip.tpl-titular .clip-scene.on .clip-cap .cw{ animation-name:cwPunch, cwHi; }
+  @keyframes cwPunch{ from{ opacity:0; transform:scale(1.9); filter:blur(3px); } to{ opacity:1; transform:none; filter:none; } }
+  .clip.tpl-titular .clip-emoji{ font-size:62px; }
+  .clip.tpl-titular .clip-num{ font-family:'Inter',sans-serif; font-weight:900; letter-spacing:-.05em; }
+
+  /* ---- papel: notebook page, ink and highlighter ---- */
+  .clip.tpl-papel{ --tx:#2a211a; --tx-shadow:none; --hl-bg:color-mix(in srgb, var(--accent, var(--red)) 40%, #ffe27a); --hl-fg:#1b140f;
+    background:radial-gradient(120% 80% at 50% 0%, #2c221a, #100b08 72%); }
+  .clip.tpl-papel .clip-bg, .clip.tpl-papel .clip-shade{ display:none; }
+  .clip-sheet.paper{ transform:rotate(-.5deg); box-shadow:0 24px 50px -18px rgba(0,0,0,.85);
+    background:repeating-linear-gradient(180deg, transparent 0 31px, rgba(70,110,170,.2) 31px 32px), linear-gradient(180deg, #fbf6ea, #efe6d1); }
+  .clip-sheet.paper .margin{ top:0; bottom:0; left:30px; width:2px; background:rgba(220,70,70,.45); }
+  .clip.tpl-papel .clip-motif{ top:calc(152px + env(safe-area-inset-top)); height:25%; filter:invert(1) hue-rotate(180deg) saturate(1.4); mix-blend-mode:multiply; }
+  .clip.tpl-papel .clip-motif.mo-wrap-scroll{ filter:none; mix-blend-mode:normal; }
+  .clip.tpl-papel .clip-stage{ left:48px; right:76px; top:44%; }
+  .clip.tpl-papel .clip-hook{ font-family:'Fraunces',serif; font-weight:700; }
+  .clip.tpl-papel .clip-cap{ font-family:'Fraunces',serif; font-weight:600; font-size:calc(clamp(18px, 5vw, 22px) * var(--capk, 1)); }
+  .clip.tpl-papel .clip-emoji{ filter:none; }
+  .clip.tpl-papel .clip-num{ text-shadow:none; }
+  .clip.tpl-papel .clip-unit, .clip.tpl-papel .clip-kicker{ color:color-mix(in srgb, var(--accent, var(--red)) 75%, #2a211a); }
+  .clip.tpl-papel .clip-scene.on .clip-hook .cw{ animation-name:cwWrite; }
+  .clip.tpl-papel .clip-scene.on .clip-cap .cw{ animation-name:cwWrite, cwHi; }
+  @keyframes cwWrite{ from{ opacity:0; clip-path:inset(0 100% 0 0); } to{ opacity:1; clip-path:inset(0 0 0 0); } }
+
+  /* ---- poster: solid color print with dark type ---- */
+  .clip.tpl-poster{ --tx:#140d0a; --tx-shadow:none; --hl-bg:#140d0a; --hl-fg:color-mix(in srgb, var(--accent, var(--red)) 30%, #fff); background:#0b0908; }
+  .clip.tpl-poster .clip-bg, .clip.tpl-poster .clip-shade{ display:none; }
+  .clip-sheet.poster{ border-radius:24px; box-shadow:0 26px 60px -22px color-mix(in srgb, var(--accent, var(--red)) 70%, transparent);
+    background:radial-gradient(circle at 1px 1px, rgba(0,0,0,.13) 1.2px, transparent 1.7px) 0 0/9px 9px,
+      linear-gradient(160deg, color-mix(in srgb, var(--accent, var(--red)) 88%, #fff), color-mix(in srgb, var(--accent, var(--red)) 66%, var(--c2))); }
+  .clip.tpl-poster .clip-motif{ top:calc(152px + env(safe-area-inset-top)); height:26%; filter:brightness(0); opacity:.72; }
+  .clip.tpl-poster .clip-stage{ left:34px; right:76px; top:44%; }
+  .clip.tpl-poster .clip-hook{ font-family:'Inter',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-.025em; line-height:1; font-size:clamp(25px, 7.8vw, 38px); }
+  .clip.tpl-poster .clip-cap{ font-weight:800; }
+  .clip.tpl-poster .clip-num{ color:transparent; -webkit-text-stroke:3px #140d0a; text-shadow:none; }
+  .clip.tpl-poster .clip-unit, .clip.tpl-poster .clip-kicker{ color:#140d0a; opacity:.78; }
+  .clip.tpl-poster .clip-emoji{ filter:none; }
+  .clip.tpl-poster .clip-scene.on .clip-hook .cw{ animation-name:cwSlide; }
+  .clip.tpl-poster .clip-scene.on .clip-cap .cw{ animation-name:cwSlide, cwHi; }
+  @keyframes cwSlide{ from{ opacity:0; transform:translateX(-26px); } to{ opacity:1; transform:none; } }
+
+  /* ---- cine: letterbox, grain and subtitles ---- */
+  .clip.tpl-cine{ --hl-bg:transparent; --hl-fg:#ffd75e; --tx-shadow:0 0 3px #000, 0 2px 6px #000; background:#050403; }
+  .clip.tpl-cine .clip-bg span{ opacity:.34; filter:blur(64px); }
+  .clip.tpl-cine .clip-shade{ display:none; }
+  .clip-deco .bar{ left:0; right:0; background:#000; z-index:1; }
+  .clip-deco .bar.t{ top:0; height:calc(138px + env(safe-area-inset-top)); }
+  .clip-deco .bar.b{ bottom:0; height:calc(86px + var(--nav-h, calc(64px + env(safe-area-inset-bottom)))); }
+  .clip-deco .grain{ inset:-20%; opacity:.1; background-image:radial-gradient(rgba(255,255,255,.9) .6px, transparent .9px); background-size:3px 3px; animation:clipGrain .5s steps(4) infinite; }
+  @keyframes clipGrain{ 0%{ transform:translate(0,0); } 25%{ transform:translate(-6px,4px); } 50%{ transform:translate(5px,-3px); } 75%{ transform:translate(-3px,-5px); } 100%{ transform:translate(0,0); } }
+  .clip-deco .vig{ inset:0; background:radial-gradient(120% 70% at 50% 50%, transparent 45%, rgba(0,0,0,.72)); }
+  .clip.tpl-cine .clip-motif{ top:calc(150px + env(safe-area-inset-top)); height:36%; animation:clipKen 16s ease-in-out infinite alternate; }
+  @keyframes clipKen{ from{ transform:scale(1); } to{ transform:scale(1.18) translateY(-8px); } }
+  .clip.tpl-cine .clip-stage{ left:24px; right:76px; top:37%; bottom:calc(98px + var(--nav-h, calc(64px + env(safe-area-inset-bottom)))); }
+  .clip.tpl-cine .clip-scene{ align-items:center; text-align:center; justify-content:flex-end; }
+  .clip.tpl-cine .clip-hook{ font-family:'Fraunces',serif; font-style:italic; font-weight:600; font-size:clamp(23px, 6.6vw, 30px); text-shadow:var(--tx-shadow); }
+  .clip.tpl-cine .clip-cap{ font-weight:600; font-size:calc(clamp(17px, 4.8vw, 20px) * var(--capk, 1)); line-height:1.42; }
+  .clip.tpl-cine .clip-emoji{ font-size:38px; }
+  .clip.tpl-cine .clip-scene.on .clip-hook .cw{ animation-name:cwFade; }
+  .clip.tpl-cine .clip-scene.on .clip-cap .cw{ animation-name:cwFade, cwHi; }
+  @keyframes cwFade{ from{ opacity:0; } to{ opacity:1; } }
+
+  /* ---- neón: synthwave grid and glowing type ---- */
+  .clip.tpl-neon{ --hl-bg:transparent; --hl-fg:var(--c2);
+    --tx-shadow:0 0 6px color-mix(in srgb, var(--accent, var(--red)) 90%, transparent), 0 0 18px color-mix(in srgb, var(--accent, var(--red)) 70%, transparent);
+    background:linear-gradient(180deg, #07040d 0%, #0d0618 55%, color-mix(in srgb, var(--accent, var(--red)) 24%, #07040d) 100%); }
+  .clip.tpl-neon .clip-bg{ display:none; }
+  .clip-deco .grid{ left:-50%; right:-50%; height:40%; bottom:calc(56px + var(--nav-h, calc(64px + env(safe-area-inset-bottom)))); opacity:.55;
+    background:linear-gradient(transparent 0 calc(100% - 1.5px), color-mix(in srgb, var(--accent, var(--red)) 75%, transparent) 0) 0 0/100% 38px,
+      linear-gradient(90deg, transparent 0 calc(100% - 1.5px), color-mix(in srgb, var(--accent, var(--red)) 75%, transparent) 0) 0 0/38px 100%;
+    transform:perspective(320px) rotateX(64deg); transform-origin:50% 100%; animation:clipGrid 2.4s linear infinite;
+    -webkit-mask-image:linear-gradient(transparent, #000 55%); mask-image:linear-gradient(transparent, #000 55%); }
+  @keyframes clipGrid{ to{ background-position:0 38px, 0 0; } }
+  .clip-deco .horizon{ left:0; right:0; height:2px; bottom:calc(56px + 40% + var(--nav-h, calc(64px + env(safe-area-inset-bottom))));
+    background:var(--accent, var(--red)); box-shadow:0 0 18px 4px var(--accent, var(--red)); opacity:.8; }
+  .clip.tpl-neon .clip-motif{ filter:drop-shadow(0 0 6px var(--accent, var(--red))) drop-shadow(0 0 16px var(--accent, var(--red))); }
+  .clip.tpl-neon .clip-hook{ font-family:'Inter',sans-serif; font-weight:800; text-shadow:var(--tx-shadow); }
+  .clip.tpl-neon .clip-cap{ font-weight:700; }
+  .clip.tpl-neon .clip-num{ color:transparent; -webkit-text-stroke:2px #fff; text-shadow:0 0 10px var(--accent, var(--red)), 0 0 30px var(--accent, var(--red)); }
+  .clip.tpl-neon .clip-scene.on .clip-hook{ animation:clipFlicker 1.1s steps(1) both; }
+  @keyframes clipFlicker{ 0%{ opacity:0; } 8%{ opacity:1; } 12%{ opacity:.2; } 18%{ opacity:1; } 26%{ opacity:.35; } 32%,100%{ opacity:1; } }
+
+  /* ---- pizarra: chalkboard ---- */
+  .clip.tpl-pizarra{ --tx:#f3f1e8; --tx-shadow:0 0 1px rgba(255,255,255,.55), 1px 1px 0 rgba(255,255,255,.08); --hl-bg:transparent; --hl-fg:#ffe98a; background:#120f0c; }
+  .clip.tpl-pizarra .clip-bg, .clip.tpl-pizarra .clip-shade{ display:none; }
+  .clip-sheet.board{ border:9px solid #6e4a2b; border-radius:10px; box-shadow:inset 0 0 40px rgba(0,0,0,.5), 0 20px 46px -16px rgba(0,0,0,.85);
+    background:radial-gradient(60% 40% at 30% 30%, rgba(255,255,255,.07), transparent 70%), radial-gradient(50% 30% at 75% 70%, rgba(255,255,255,.05), transparent 70%), linear-gradient(160deg, #2b3a33, #1d2823); }
+  .clip-sheet.board .smudge{ left:10%; top:58%; width:60%; height:18%; background:radial-gradient(ellipse, rgba(255,255,255,.07), transparent 70%); filter:blur(6px); }
+  .clip.tpl-pizarra .clip-motif{ top:calc(158px + env(safe-area-inset-top)); height:24%; filter:grayscale(.5) brightness(1.15); opacity:.88; }
+  .clip.tpl-pizarra .clip-stage{ left:36px; right:76px; top:44%; }
+  .clip.tpl-pizarra .clip-hook{ font-family:'Fraunces',serif; font-weight:600; letter-spacing:.01em; text-shadow:var(--tx-shadow); }
+  .clip.tpl-pizarra .clip-cap{ font-family:'Fraunces',serif; font-weight:500; }
+  .clip.tpl-pizarra .clip-num{ font-family:'Fraunces',serif; text-shadow:0 0 2px rgba(255,255,255,.6); }
+  .clip.tpl-pizarra .clip-scene.on .clip-hook .cw{ animation-name:cwWrite; }
+  .clip.tpl-pizarra .clip-scene.on .clip-cap .cw{ animation-name:cwWrite, cwHi; }
+
+  /* long hooks get a smaller size so they never spill out of the frame */
+  .clip.hook-l .clip-hook{ font-size:clamp(22px, 6.6vw, 30px); }
+  .clip.hook-xl .clip-hook{ font-size:clamp(20px, 5.8vw, 26px); }
+  .clip.tpl-titular.hook-l .clip-hook, .clip.tpl-poster.hook-l .clip-hook{ font-size:clamp(22px, 6.8vw, 31px); }
+  .clip.tpl-titular.hook-xl .clip-hook, .clip.tpl-poster.hook-xl .clip-hook{ font-size:clamp(19px, 5.8vw, 26px); }
+
+  /* ---- scene transitions ---- */
+  .clip.trans-zoom .clip-scene{ transform:scale(.86); }
+  .clip.trans-zoom .clip-scene.on{ transform:none; }
+  .clip.trans-zoom .clip-scene.past{ transform:scale(1.14); }
+  .clip.trans-blur .clip-scene{ transform:none; filter:blur(12px); transition:opacity .45s ease, filter .5s ease; }
+  .clip.trans-blur .clip-scene.on{ filter:none; }
+  .clip.trans-blur .clip-scene.past{ transform:none; filter:blur(10px); }
+  .clip.trans-wipe .clip-scene{ transform:none; opacity:1; clip-path:inset(0 100% 0 0); transition:clip-path .55s cubic-bezier(.6,0,.2,1); }
+  .clip.trans-wipe .clip-scene.on{ clip-path:inset(0 0 0 0); }
+  .clip.trans-wipe .clip-scene.past{ opacity:1; transform:none; clip-path:inset(0 0 0 100%); }
+  .fact-card:not(.active) .clip.trans-wipe .clip-scene:first-child{ clip-path:none; }
+  .fact-card:not(.active) .clip.trans-blur .clip-scene:first-child{ filter:none; }
+  .fact-card:not(.active) .clip.trans-zoom .clip-scene:first-child{ transform:none; }
+
+  /* ---- number styles ---- */
+  .clip-numwrap{ display:flex; flex-direction:column; align-items:inherit; }
+  .clip-numwrap.ring{ position:relative; width:min(46vw, 190px); aspect-ratio:1; align-items:center; justify-content:center; }
+  .clip-ring{ position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
+  .clip-ring circle{ fill:none; stroke-width:9; }
+  .clip-ring .bg{ stroke:rgba(255,255,255,.14); }
+  .clip-ring .fg{ stroke:var(--accent, var(--red)); stroke-linecap:round; stroke-dasharray:var(--p) 100; stroke-dashoffset:var(--p);
+    filter:drop-shadow(0 0 8px color-mix(in srgb, var(--accent, var(--red)) 70%, transparent)); }
+  .clip-scene.on .clip-ring .fg{ animation:clipRing 1.4s cubic-bezier(.3,.9,.3,1) .2s forwards; }
+  @keyframes clipRing{ to{ stroke-dashoffset:0; } }
+  .clip-ring-in{ position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .clip-numwrap.ring .clip-num{ font-size:clamp(38px, 12.5vw, 60px); }
+  .clip-numwrap.bar{ width:100%; max-width:340px; }
+  .clip-numbar{ margin-top:12px; width:100%; height:10px; border-radius:10px; background:rgba(255,255,255,.14); overflow:hidden; }
+  .clip-numbar i{ display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg, var(--accent, var(--red)), var(--c2)); }
+  .clip-scene.on .clip-numbar i{ animation:clipBarFill 1.3s cubic-bezier(.3,.9,.3,1) .25s forwards; }
+  @keyframes clipBarFill{ to{ width:var(--p); } }
+  .clip.tpl-papel .clip-ring .bg, .clip.tpl-poster .clip-ring .bg{ stroke:rgba(0,0,0,.14); }
+  .clip.tpl-papel .clip-numbar, .clip.tpl-poster .clip-numbar{ background:rgba(0,0,0,.12); }
+  .clip.tpl-poster .clip-ring .fg{ stroke:#140d0a; filter:none; }
+  .clip.tpl-poster .clip-numbar i{ background:#140d0a; }
+
+  /* ---- reveal styles ---- */
+  .clip-title.stamp{ display:inline-block; padding:6px 14px 8px; border:3px solid currentColor; border-radius:10px; transform:rotate(-3deg); }
+  .clip-scene.on .clip-title.stamp{ animation:clipStamp .55s cubic-bezier(.2,1.6,.4,1) .1s both; }
+  @keyframes clipStamp{ 0%{ opacity:0; transform:scale(2.4) rotate(-12deg); } 70%{ opacity:1; transform:scale(.94) rotate(-2deg); } 100%{ opacity:1; transform:scale(1) rotate(-3deg); } }
+  .clip-title.ul{ position:relative; display:inline-block; }
+  .clip-ul{ position:absolute; left:-2%; bottom:-12px; width:104%; height:16px; overflow:visible; }
+  .clip-ul path{ fill:none; stroke:var(--c2); stroke-width:4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
+  .clip-scene.on .clip-ul path{ animation:moDraw .8s cubic-bezier(.5,0,.3,1) .6s forwards; }
+  .clip.tpl-papel .clip-ul path{ stroke:var(--accent, var(--red)); }
+  .clip-title.glitch{ position:relative; }
+  .clip-title.glitch::before, .clip-title.glitch::after{ content:attr(data-t); position:absolute; inset:0; pointer-events:none; opacity:0; }
+  .clip-title.glitch::before{ color:var(--accent, var(--red)); }
+  .clip-title.glitch::after{ color:var(--c2); }
+  .clip-scene.on .clip-title.glitch::before{ animation:clipGlitchA .9s steps(2) .15s 2; }
+  .clip-scene.on .clip-title.glitch::after{ animation:clipGlitchB .9s steps(2) .15s 2; }
+  @keyframes clipGlitchA{ 0%{ opacity:.9; transform:translate(-4px,1px); clip-path:inset(0 0 60% 0); } 50%{ opacity:.9; transform:translate(3px,-1px); clip-path:inset(30% 0 40% 0); } 100%{ opacity:0; transform:none; } }
+  @keyframes clipGlitchB{ 0%{ opacity:.9; transform:translate(4px,-1px); clip-path:inset(55% 0 0 0); } 50%{ opacity:.9; transform:translate(-3px,1px); clip-path:inset(20% 0 55% 0); } 100%{ opacity:0; transform:none; } }
+
+  /* ---- 15 new motifs ---- */
+  .mo-bars, .mo-candles, .mo-check, .mo-bal, .mo-comp, .mo-spiral, .mo-eye, .mo-gears{ width:min(80%, 330px); height:100%; }
+  .mo-bars .mo-base{ stroke:rgba(255,255,255,.25); stroke-width:1.5; }
+  .mo-bar{ fill:rgba(255,255,255,.3); transform-box:fill-box; transform-origin:50% 100%; animation:moBar 3s cubic-bezier(.3,1.3,.5,1) var(--d) infinite both; }
+  .mo-bar.hot{ fill:var(--accent, var(--red)); filter:drop-shadow(0 0 8px var(--accent, var(--red))); }
+  @keyframes moBar{ 0%{ transform:scaleY(.05); } 35%,82%{ transform:scaleY(1); } 100%{ transform:scaleY(.05); } }
+  .mo-pie{ width:auto; height:92%; transform:rotate(-90deg); }
+  .mo-arc{ fill:none; stroke-width:20; opacity:0; animation:moArc 4.2s ease var(--d) infinite; }
+  @keyframes moArc{ 0%{ opacity:0; stroke-width:4; } 14%,84%{ opacity:1; stroke-width:20; } 100%{ opacity:0; stroke-width:20; } }
+  .mo-candle{ opacity:0; animation:moCandle 4.6s ease var(--d) infinite; }
+  .mo-candle line{ stroke:rgba(255,255,255,.55); stroke-width:1.6; }
+  .mo-candle.up rect{ fill:var(--accent, var(--red)); }
+  .mo-candle.dn rect{ fill:rgba(255,255,255,.38); }
+  @keyframes moCandle{ 0%{ opacity:0; transform:translateY(8px); } 10%,80%{ opacity:1; transform:none; } 100%{ opacity:0; } }
+  .mo-eye .mo-sclera{ fill:rgba(255,255,255,.92); }
+  .mo-eye .mo-eye-outline{ fill:none; stroke:rgba(255,255,255,.85); stroke-width:3; }
+  .mo-eye .mo-iris-c{ fill:var(--accent, var(--red)); }
+  .mo-eye .mo-pupil{ fill:#0b0908; }
+  .mo-eye .mo-glint{ fill:#fff; }
+  .mo-eye .mo-iris{ animation:moLook 5s ease-in-out infinite; }
+  @keyframes moLook{ 0%,16%{ transform:translateX(0); } 26%,44%{ transform:translateX(-34px); } 56%,72%{ transform:translateX(30px); } 84%,100%{ transform:translateX(0); } }
+  .mo-eye .mo-lid{ fill:#1a1412; animation:moBlinkLid 5s ease-in-out infinite; }
+  @keyframes moBlinkLid{ 0%,46%,54%,100%{ transform:translateY(0); } 50%{ transform:translateY(100px); } }
+  .mo-gear{ animation:moSpin var(--s) linear infinite; }
+  .mo-gear.b, .mo-gear.c{ animation-direction:reverse; }
+  .mo-g-teeth{ fill:none; stroke-width:10; stroke-dasharray:1 1; }
+  .mo-gear.a .mo-g-teeth{ stroke:var(--accent, var(--red)); } .mo-gear.a .mo-g-body{ fill:var(--accent, var(--red)); }
+  .mo-gear.b .mo-g-teeth{ stroke:var(--c2); } .mo-gear.b .mo-g-body{ fill:var(--c2); }
+  .mo-gear.c .mo-g-teeth{ stroke:rgba(255,255,255,.75); } .mo-gear.c .mo-g-body{ fill:rgba(255,255,255,.75); }
+  .mo-g-hole{ fill:#120c0a; }
+  .mo-check .mo-box{ fill:none; stroke:rgba(255,255,255,.6); stroke-width:2; }
+  .mo-check .mo-tick{ fill:none; stroke:var(--accent, var(--red)); stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; stroke-dashoffset:1; animation:moTick 5.6s ease var(--d) infinite; }
+  .mo-check .mo-line{ fill:rgba(255,255,255,.28); animation:moLineDone 5.6s ease var(--d) infinite; }
+  @keyframes moTick{ 0%{ stroke-dashoffset:1; } 8%,80%{ stroke-dashoffset:0; } 92%,100%{ stroke-dashoffset:1; } }
+  @keyframes moLineDone{ 0%,6%{ fill:rgba(255,255,255,.28); } 12%,80%{ fill:color-mix(in srgb, var(--accent, var(--red)) 60%, transparent); } 92%,100%{ fill:rgba(255,255,255,.28); } }
+  .mo-hour{ width:auto; height:92%; }
+  .mo-hour .mo-hg-frame{ fill:none; stroke:rgba(255,255,255,.8); stroke-width:3; stroke-linecap:round; }
+  .mo-hour .mo-sand-t{ fill:var(--accent, var(--red)); transform-box:fill-box; transform-origin:50% 100%; animation:moSandT 6s linear infinite; }
+  .mo-hour .mo-sand-b{ fill:var(--accent, var(--red)); transform-box:fill-box; transform-origin:50% 100%; animation:moSandB 6s linear infinite; }
+  .mo-hour .mo-stream{ stroke:var(--accent, var(--red)); stroke-width:2; stroke-dasharray:3 4; animation:moStream .5s linear infinite; }
+  @keyframes moSandT{ 0%{ transform:scaleY(1); } 92%{ transform:scaleY(.04); } 100%{ transform:scaleY(1); } }
+  @keyframes moSandB{ 0%{ transform:scaleY(.04); } 92%{ transform:scaleY(1); } 100%{ transform:scaleY(.04); } }
+  @keyframes moStream{ to{ stroke-dashoffset:-7; } }
+  .mo-binary{ position:relative; width:100%; height:100%; overflow:hidden;
+    -webkit-mask-image:linear-gradient(transparent, #000 20%, #000 75%, transparent); mask-image:linear-gradient(transparent, #000 20%, #000 75%, transparent); }
+  .mo-binary span{ position:absolute; left:var(--x); top:-130px; font:700 13px/1.15 ui-monospace, Menlo, Consolas, monospace;
+    color:color-mix(in srgb, var(--accent, var(--red)) 80%, #fff); text-shadow:0 0 8px var(--accent, var(--red)); animation:moRain var(--s) linear var(--d) infinite; }
+  @keyframes moRain{ from{ transform:translateY(0); } to{ transform:translateY(460px); } }
+  .mo-stars{ position:relative; width:100%; height:100%; }
+  .mo-stars i{ position:absolute; left:var(--x); top:var(--y); width:var(--z); height:var(--z); border-radius:50%; background:#fff; box-shadow:0 0 6px #fff; animation:moTw 2.6s ease-in-out var(--d) infinite; }
+  @keyframes moTw{ 0%,100%{ opacity:.25; transform:scale(.7); } 50%{ opacity:1; transform:scale(1.25); } }
+  .mo-shoot{ position:absolute; top:var(--t, 22%); left:-20%; width:90px; height:2px; border-radius:2px; opacity:0;
+    background:linear-gradient(90deg, transparent, #fff); transform:rotate(-18deg); animation:moShoot 5.2s ease-in var(--d, .6s) infinite; }
+  @keyframes moShoot{ 0%{ opacity:0; translate:0 0; } 6%{ opacity:1; } 22%{ opacity:0; translate:340px 110px; } 100%{ opacity:0; translate:340px 110px; } }
+  .mo-mol{ width:auto; height:92%; }
+  .mo-mol line{ stroke:rgba(255,255,255,.6); stroke-width:4; }
+  .mo-mol .k0{ fill:var(--accent, var(--red)); filter:drop-shadow(0 0 8px var(--accent, var(--red))); }
+  .mo-mol .k1{ fill:var(--c2); }
+  .mo-mol .k2{ fill:#fff; }
+  .mo-mol-g{ transform-origin:60px 60px; animation:moMol 9s ease-in-out infinite; }
+  .mo-mol-in{ transform-origin:60px 60px; animation:moMolY 3.4s ease-in-out infinite; }
+  @keyframes moMol{ 0%,100%{ transform:rotate(0); } 50%{ transform:rotate(180deg); } }
+  @keyframes moMolY{ 0%,100%{ transform:scaleX(1); } 50%{ transform:scaleX(.4); } }
+  .mo-flask{ width:auto; height:92%; }
+  .mo-flask .mo-flask-o{ fill:none; stroke:rgba(255,255,255,.85); stroke-width:3; stroke-linejoin:round; }
+  .mo-flask .mo-liq{ fill:color-mix(in srgb, var(--accent, var(--red)) 75%, transparent); animation:moLiq 3s ease-in-out infinite; }
+  .mo-flask .mo-bub{ fill:rgba(255,255,255,.78); animation:moBub 2.4s ease-in var(--d) infinite; }
+  @keyframes moLiq{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+  @keyframes moBub{ 0%{ transform:translateY(0); opacity:0; } 15%{ opacity:1; } 100%{ transform:translateY(-46px); opacity:0; } }
+  .mo-bal path, .mo-bal line{ fill:none; stroke:rgba(255,255,255,.78); stroke-width:2.6; stroke-linecap:round; }
+  .mo-bal .mo-pan.l .mo-pan-b{ fill:color-mix(in srgb, var(--accent, var(--red)) 60%, transparent); stroke:var(--accent, var(--red)); }
+  .mo-bal .mo-pan.r .mo-pan-b{ fill:color-mix(in srgb, var(--c2) 60%, transparent); stroke:var(--c2); }
+  .mo-bal .mo-bal-hub{ fill:var(--accent, var(--red)); }
+  .mo-bal .mo-beam{ transform-origin:100px 30px; animation:moTip 4.4s ease-in-out infinite; }
+  .mo-bal .mo-pan.l{ transform-origin:40px 30px; animation:moTipC 4.4s ease-in-out infinite; }
+  .mo-bal .mo-pan.r{ transform-origin:160px 30px; animation:moTipC 4.4s ease-in-out infinite; }
+  @keyframes moTip{ 0%,100%{ transform:rotate(-9deg); } 50%{ transform:rotate(9deg); } }
+  @keyframes moTipC{ 0%,100%{ transform:rotate(9deg); } 50%{ transform:rotate(-9deg); } }
+  .mo-spiral .mo-sp{ fill:none; stroke:var(--accent, var(--red)); stroke-width:2.8; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1;
+    filter:drop-shadow(0 0 6px color-mix(in srgb, var(--accent, var(--red)) 70%, transparent)); animation:moSpiral 5s ease-in-out infinite; }
+  .mo-spiral .mo-sp.b{ stroke:var(--c2); opacity:.55; animation-delay:.6s; }
+  @keyframes moSpiral{ 0%{ stroke-dashoffset:1; } 55%,85%{ stroke-dashoffset:0; opacity:1; } 100%{ stroke-dashoffset:0; opacity:0; } }
+  .mo-scroll{ position:relative; width:min(72%, 290px); height:64%; }
+  .mo-sc-paper{ position:absolute; left:6%; right:6%; top:6%; bottom:6%; border-radius:4px; padding:11% 10%; display:flex; flex-direction:column; gap:9%;
+    background:linear-gradient(180deg, #f3e6c4, #e4cf9c); box-shadow:inset 0 0 18px rgba(120,80,30,.35); animation:moUnroll 6s cubic-bezier(.4,0,.2,1) infinite; }
+  .mo-sc-paper i{ display:block; height:7%; border-radius:3px; background:rgba(80,50,20,.45); transform-origin:left; animation:moInk 6s ease infinite; }
+  .mo-sc-paper i:nth-child(2){ animation-delay:.12s; width:84%; } .mo-sc-paper i:nth-child(3){ animation-delay:.24s; }
+  .mo-sc-paper i:nth-child(4){ animation-delay:.36s; width:70%; } .mo-sc-paper i:nth-child(5){ animation-delay:.48s; width:52%; }
+  .mo-sc-rod{ position:absolute; top:0; bottom:0; width:7%; border-radius:6px; background:linear-gradient(90deg, #7a4b23, #c58b4c, #7a4b23); }
+  .mo-sc-rod.l{ left:46%; animation:moRodL 6s cubic-bezier(.4,0,.2,1) infinite; }
+  .mo-sc-rod.r{ right:46%; animation:moRodR 6s cubic-bezier(.4,0,.2,1) infinite; }
+  @keyframes moUnroll{ 0%{ clip-path:inset(0 46% 0 46%); } 25%,85%{ clip-path:inset(0 0 0 0); } 100%{ clip-path:inset(0 46% 0 46%); } }
+  @keyframes moRodL{ 0%{ left:46%; } 25%,85%{ left:0; } 100%{ left:46%; } }
+  @keyframes moRodR{ 0%{ right:46%; } 25%,85%{ right:0; } 100%{ right:46%; } }
+  @keyframes moInk{ 0%,28%{ transform:scaleX(0); } 40%,85%{ transform:scaleX(1); } 100%{ transform:scaleX(0); } }
+  .mo-comp .mo-route-bg{ fill:none; stroke:rgba(255,255,255,.3); stroke-width:2; stroke-dasharray:4 6; }
+  .mo-comp .mo-route{ fill:none; stroke:var(--accent, var(--red)); stroke-width:3; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; animation:moDraw 4s ease-in-out infinite alternate; }
+  .mo-comp .mo-pin{ fill:#fff; } .mo-comp .mo-pin.b{ fill:var(--accent, var(--red)); filter:drop-shadow(0 0 6px var(--accent, var(--red))); }
+  .mo-comp .mo-c-ring{ fill:rgba(0,0,0,.25); stroke:rgba(255,255,255,.8); stroke-width:2.4; }
+  .mo-comp .mo-needle{ animation:moNeedle 3.2s ease-in-out infinite; }
+  .mo-comp .mo-needle .n{ fill:var(--accent, var(--red)); } .mo-comp .mo-needle .s{ fill:rgba(255,255,255,.8); }
+  .mo-comp .mo-c-hub{ fill:#fff; }
+  @keyframes moNeedle{ 0%,100%{ transform:rotate(-28deg); } 50%{ transform:rotate(34deg); } }
+
+  /* ---- voiced clips: karaoke follows the voice (last, so it wins over each look's word animation) ---- */
+  .clip.voiced .clip-stage .clip-scene.on .cw{ animation:cwInDim .26s ease calc(var(--i, 0) * 26ms) both; }
+  .clip.voiced .clip-stage .clip-scene.on .cw.said{ animation:none; opacity:1; transform:none; clip-path:none; filter:none; }
+  .clip.voiced .clip-stage .clip-scene.on .cw.now{ animation:none; opacity:1; transform:none; clip-path:none; filter:none; background:var(--hl-bg); color:var(--hl-fg); text-shadow:none; }
+  .clip.voiced .clip-stage .clip-scene.on .clip-hook .cw.now{ background:none; color:var(--accent, var(--red)); }
+  .clip.tpl-pizarra.voiced .clip-stage .clip-scene.on .cw.now{ text-decoration:underline; text-decoration-color:var(--c2); text-decoration-thickness:2px; text-underline-offset:4px; }
+  .clip.tpl-neon.voiced .clip-stage .clip-scene.on .cw.now{ text-shadow:0 0 8px var(--c2), 0 0 20px var(--c2); }
+  @keyframes cwInDim{ from{ opacity:0; transform:translateY(.35em); } to{ opacity:.4; transform:none; } }
+  .fact-card:not(.active) .clip.voiced .clip-scene:first-child .cw{ opacity:1; transform:none; animation:none; }
+
+  /* captions that are still long shrink a little (the side buttons keep their column: right 76px) */
+  .clip .clip-cap.cap-l{ --capk:.92; }
+  .clip .clip-cap.cap-xl{ --capk:.84; }
+  .clip .clip-title.ttl-l{ font-size:clamp(26px, 7.6vw, 36px); }
+  .clip .clip-title.ttl-xl{ font-size:clamp(23px, 6.6vw, 31px); }
+  .clip.tpl-cine .clip-title.stamp{ margin-bottom:10px; }   /* its tilt pokes out of a bottom-aligned stage */
 
 </style>
 </head>
@@ -4330,7 +4650,7 @@ let LANG = detectLang();
 document.documentElement.lang = LANG;
 function langLocale(){ return LANG === 'en' ? 'en-US' : 'es-MX'; }
 function plural(n, one, many){ return n === 1 ? one : many; }
-const EN_STRINGS = {"reúne ideas de libros, frases y conceptos importantes en cápsulas cortas e interactivas. Un poco de cultura general cada día, de forma entretenida.":"brings together ideas from books, quotes and key concepts in short, interactive capsules. A little general knowledge every day, in an entertaining way.","Frases":"Quotes","Conceptos":"Concepts","Micro-juegos":"Micro-games","Entrar a Verivo":"Enter Verivo","Elige tu usuario":"Choose your username","Ej. carla_92":"e.g. carla_92","No guardamos tu información en la nube — vive solo en este dispositivo. Recuerda bien tu usuario; puedes hacer un respaldo desde tu perfil para no perder tu progreso.":"We don't store your information in the cloud — it lives only on this device. Remember your username; you can back up your data from your profile so you don't lose your progress.","Volver":"Back","Política de privacidad":"Privacy policy","racha":"streak","Ver perfil":"View profile","Cerrar sesión":"Sign out","Siguiendo":"Following","Para ti":"For you","Explorar":"Explore","¡Hola!":"Hello!","Elige un tema, o deja que el azar decida":"Pick a topic, or let chance decide","Empezar":"Start","Temas para hoy":"Topics for today","Sorpréndeme":"Surprise me","Tema":"Topic","Temas":"Topics","Compartir perfil":"Share profile","Ajustes":"Settings","guardados":"saved","siguiendo":"following","días racha":"day streak","día racha":"day streak","Editar perfil":"Edit profile","¿Qué te gusta aprender?":"What do you like to learn?","Listo":"Done","Guardados":"Saved","Progreso":"Progress","Notas":"Notes","⭐ Favoritos":"⭐ Favorites","Sigue aprendiendo, vas muy bien.":"Keep learning, you're doing great.","días de racha":"day streak","día de racha":"day streak","comodines":"freezes","comodín":"freeze","Aciertos":"Correct","Mejor combo":"Best combo","Raras":"Rare","Logros":"Achievements","✨ Colección de hallazgos raros":"✨ Rare finds collection","📝 Mis notas":"📝 My notes","🎨 Temas visuales":"🎨 Visual themes","🖼️ Estilo al compartir":"🖼️ Share style","💾 Respaldo de tus datos":"💾 Back up your data","Verivo no usa la nube — tu progreso vive solo en este dispositivo. Descarga un respaldo para no perderlo, o para pasarlo a otro dispositivo.":"Verivo doesn't use the cloud — your progress lives only on this device. Download a backup so you don't lose it, or to move it to another device.","Exportar datos":"Export data","Importar datos":"Import data","🗑️ Borrar mis datos":"🗑️ Delete my data","Borra tu progreso, favoritos, carpetas y notas de este dispositivo. Tu Premium no se pierde: está ligado a tu cuenta de Google Play.":"Deletes your progress, favorites, folders and notes from this device. Your Premium isn't lost: it's tied to your Google Play account.","Novato":"Newbie","Curioso":"Curious","Aprendiz":"Apprentice","Lector":"Reader","Explorador":"Explorer","Pensador":"Thinker","Erudito":"Scholar","Sabio":"Sage","Maestro":"Master","Leyenda":"Legend","Anual":"Yearly","Mensual":"Monthly","/año":"/year","/mes":"/month","≈ $8.25 al mes":"≈ $8.25 per month","Ahorra 17%":"Save 17%","Cancela cuando quieras":"Cancel anytime","No se pudo confirmar la compra. Intenta de nuevo.":"We couldn't confirm the purchase. Please try again.","La suscripción está disponible en la app de Google Play.":"The subscription is available in the Google Play app.","Tu Premium ya está activo.":"Your Premium is already active.","Restaurar compras funciona desde la app de Google Play.":"Restoring purchases works from the Google Play app.","👑 Premium restaurado":"👑 Premium restored","No encontramos una suscripción activa.":"We couldn't find an active subscription.","Premium desactivado (modo prueba)":"Premium turned off (test mode)","👑 Premium activado (modo prueba)":"👑 Premium turned on (test mode)","👑 ¡Bienvenido a Verivo Premium!":"👑 Welcome to Verivo Premium!","Biblioteca con buscador":"Library with search","Modo escuchar":"Listen mode","Tus cápsulas en voz alta, una tras otra, con velocidad de 0.75x a 1.5x.":"Your capsules read aloud, one after another, at speeds from 0.75x to 1.5x.","Notas personales":"Personal notes","Escribe tus propias ideas en cualquier cápsula y encuéntralas en tu perfil.":"Write your own ideas on any capsule and find them in your profile.","Comodines extra":"Extra streak freezes","Guarda hasta 5 (en vez de 2) y gana uno cada 3 días de racha (en vez de 7).":"Hold up to 5 (instead of 2) and earn one every 3 streak days (instead of 7).","Carpetas de favoritos":"Favorite folders","Organiza tus favoritos en colecciones con nombre, como “Para mi examen”.":"Organize your favorites into named collections, like “For my exam”.","Temas visuales":"Visual themes","6 paletas de color para personalizar toda la app.":"6 color palettes to customize the whole app.","Diseños para compartir":"Share designs","3 estilos extra para tus imágenes: Papel, Neón y Color.":"3 extra styles for your images: Paper, Neon and Color.","Insignia y marco dorado":"Badge and golden frame","Distintivo Premium en tu perfil y un marco dorado en tu avatar.":"A Premium badge on your profile and a golden frame on your avatar.","🧪 Modo prueba: el botón activa Premium sin cobrar. Desactívalo antes de publicar.":"🧪 Test mode: the button turns Premium on without charging. Turn it off before publishing.","Gracias por apoyar Verivo. Esto es lo que tienes:":"Thanks for supporting Verivo. Here's what you have:","Todo lo gratis sigue siendo gratis. Premium solo suma.":"Everything free stays free. Premium only adds.","Premium activo":"Premium active","👑 Premium activo":"👑 Premium active","✨ Ver todo lo que incluye":"✨ See everything it includes","Puedes administrar o cancelar tu suscripción desde Google Play → Pagos y suscripciones.":"You can manage or cancel your subscription from Google Play → Payments & subscriptions.","Desactivar Premium (prueba)":"Turn off Premium (test)","Restaurar compras":"Restore purchases","Ver Premium":"See Premium","Historia, Filosofía, biblioteca y más":"History, Philosophy, library and more","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","📚 Biblioteca":"📚 Library","Biblioteca":"Library","Busca un tema, persona o palabra…":"Search a topic, person or word…","🧩 Mito o realidad":"🧩 Myth or fact","🎮 Juego":"🎮 Game","Todos":"All","1 cápsula":"1 capsule","✏️ Agregar nota":"✏️ Add note","📝 Tu nota":"📝 Your note","Borrar nota":"Delete note","📝 Nota guardada":"📝 Note saved","Toca “✏️ Agregar nota” en cualquier cápsula para escribir lo que piensas.":"Tap “✏️ Add note” on any capsule to write down what you think.","📝 Escribe tus propias notas en cualquier cápsula con Verivo Premium.":"📝 Write your own notes on any capsule with Verivo Premium.","Clásico":"Classic","Papel":"Paper","Neón":"Neon","Océano":"Ocean","Esmeralda":"Emerald","Violeta":"Violet","Ámbar":"Amber","Rosa":"Rose","Dato sorprendente":"Surprising fact","Cleopatra vivió más cerca de la Luna que de las pirámides.":"Cleopatra lived closer in time to the Moon landing than to the building of the pyramids.","Historia":"History","Finanzas":"Finance","Psicología":"Psychology","Programación":"Programming","Productividad":"Productivity","Ciencia":"Science","Filosofía":"Philosophy","Dinero, inversión y buenas decisiones":"Money, investing and smart decisions","Mente, sesgos y emociones":"Mind, biases and emotions","Código, lógica y buenas prácticas":"Code, logic and best practices","Tiempo, foco y hábitos":"Time, focus and habits","Universo, vida y materia":"Universe, life and matter","Imperios, mitos y momentos clave":"Empires, myths and key moments","Grandes preguntas y pensadores":"Big questions and thinkers","Dinero, inversión y decisiones inteligentes. Un dato al día para que tu dinero trabaje para ti.":"Money, investing and smart decisions. One fact a day to make your money work for you.","Sesgos, emociones y por qué hacemos lo que hacemos.":"Biases, emotions and why we do what we do.","Código, lógica e historia de la computación, sin tecnicismos innecesarios.":"Code, logic and the history of computing, without unnecessary jargon.","Hábitos, foco y técnicas para hacer más con menos estrés.":"Habits, focus and techniques to do more with less stress.","Universo, vida y materia: lo increíble de cómo funciona todo.":"Universe, life and matter: the incredible way everything works.","Imperios, mitos y momentos que cambiaron el mundo. 👑 Exclusivo Premium.":"Empires, myths and moments that changed the world. 👑 Premium exclusive.","Grandes preguntas, paradojas y pensadores para pensar mejor. 👑 Exclusivo Premium.":"Big questions, paradoxes and thinkers to help you think better. 👑 Premium exclusive.","Cuenta oficial":"Official account","✦ Tema del día":"✦ Topic of the day","Seguir":"Follow","Ver historia":"View story","Abrir tema":"Open topic","👑 Desbloquear":"👑 Unlock","bienvenida":"welcome","Abrir →":"Open →","Sigue al menos un tema":"Follow at least one topic","Tu semana":"Your week","Tu semana pasada":"Your last week","Tu semana hasta hoy":"Your week so far","en Verivo":"on Verivo","Toca para ver tus números →":"Tap to see your numbers →","Esta semana viste":"This week you viewed","cápsula":"capsule","cápsulas":"capsules","Tu tema de la semana":"Your topic of the week","En los retos acertaste":"In the challenges you got right","Así se vio tu semana":"Here's how your week looked","Racha actual:":"Current streak:","Compártela y reta a alguien a superarla.":"Share it and challenge someone to beat it.","Compartir mi semana":"Share my week","Ve algunas cápsulas y aquí aparecerá tu resumen semanal 📊":"View a few capsules and your weekly recap will show up here 📊","No se pudo generar la imagen":"Couldn't generate the image","Imagen guardada 📸":"Image saved 📸","Todavía no hay nada aquí":"Nothing here yet","Toca “Editar perfil” para escribir tu bio.":"Tap “Edit profile” to write your bio.","TU SEMANA EN VERIVO":"YOUR WEEK ON VERIVO","cápsula vista":"capsule viewed","cápsulas vistas":"capsules viewed","de aciertos en retos":"correct in challenges","¿Puedes superar mi semana?":"Can you beat my week?","Mi semana en Verivo 📊":"My week on Verivo 📊","Aprendo algo nuevo cada día en Verivo":"I learn something new every day on Verivo","Sígueme el paso en Verivo 🔥":"Keep up with me on Verivo 🔥","Aprendí algo nuevo en Verivo 🔥":"I learned something new on Verivo 🔥","✅ Lo acerté en Verivo":"✅ I got it right on Verivo","Y además":"And there's more","🔊 Escuchando…":"🔊 Listening…","🔊 Escuchar otra vez":"🔊 Listen again","Tu dispositivo no tiene voz disponible":"Your device has no voice available","Tu dispositivo no tiene voz disponible para leer en voz alta.":"Your device has no voice available to read aloud.","Hola, este es el modo escuchar de Verivo.":"Hi, this is Verivo's listen mode.","En pausa":"Paused","Comodín de racha ganado":"Streak freeze earned","¡se pierde!":"about to be lost!","en riesgo":"at risk","¡Una semana completa! 🎉":"A whole week! 🎉","¡Un mes entero seguido! Impresionante.":"A whole month in a row! Impressive.","¡100 días! Eres imparable.":"100 days! You're unstoppable.","¡Sigue así!":"Keep it up!","¡Subiste de nivel!":"Level up!","Solo una pequeña parte de los usuarios encuentra esto.":"Only a small fraction of users find this.","Pocos llegan tan lejos en el feed de hoy.":"Few get this far in today's feed.","Un hallazgo que la mayoría se pierde por completo.":"A find that most people miss completely.","No aparece todos los días — tuviste suerte.":"It doesn't show up every day — you got lucky.","Casi nadie desliza lo suficiente para ver esto.":"Almost nobody scrolls far enough to see this.","Los ✨ hallazgos raros que encuentres en el feed aparecerán aquí.":"The ✨ rare finds you discover in the feed will appear here.","Hallazgo raro":"Rare find","Primeros pasos":"First steps","Acierta tu primera cápsula":"Get your first capsule right","Racha de 3 días":"3-day streak","Aprende 3 días seguidos":"Learn 3 days in a row","Racha de 7 días":"7-day streak","Aprende 7 días seguidos":"Learn 7 days in a row","Meta del día":"Daily goal","Completa las 5 cápsulas diarias":"Complete the 5 daily capsules","Termina un tema completo":"Finish a whole topic","Coleccionista":"Collector","Termina todos los temas":"Finish all the topics","Tu primera cápsula te está esperando.":"Your first capsule is waiting for you.","Vas encendiendo una gran racha.":"You're building a great streak.","Terminaste todos los temas. Eres leyenda.":"You finished all the topics. You're a legend.","Respaldo descargado ✓":"Backup downloaded ✓","¿Seguro? Toca otra vez para borrar todo":"Sure? Tap again to delete everything","Tus datos se borraron de este dispositivo":"Your data was deleted from this device","No se pudo importar — el archivo no es un respaldo válido de Verivo.":"Couldn't import — the file isn't a valid Verivo backup.","¡Meta diaria completa! 🎉":"Daily goal complete! 🎉","Presiona atrás otra vez para salir":"Press back again to exit","5 minutos al día, cero esfuerzo":"5 minutes a day, zero effort","Tu dosis diaria de curiosidad te espera":"Your daily dose of curiosity awaits","¿Listo para saber algo que no sabías?":"Ready to learn something you didn't know?","Un dato interesante está a un toque de distancia":"An interesting fact is one tap away","Para mi examen":"For my exam","Datos para impresionar":"Facts to impress","Para releer":"To reread","Frases favoritas":"Favorite quotes","＋ Nueva carpeta":"＋ New folder","👑 Carpetas":"👑 Folders","Guardar en carpeta":"Save to folder","Tus carpetas":"Your folders","Elige una o varias carpetas para esta cápsula.":"Choose one or more folders for this capsule.","Organiza tus favoritos por tema, examen o lo que quieras.":"Organize your favorites by topic, exam or whatever you like.","Ya tienes una carpeta con ese nombre":"You already have a folder with that name","Toca la ⭐ en una frase o concepto para guardarlo aquí.":"Tap the ⭐ on a quote or concept to save it here.","Esta carpeta está vacía. Toca 📁 en cualquier favorito para agregarlo.":"This folder is empty. Tap 📁 on any favorite to add it.","Bienvenida a Verivo":"Welcome to Verivo","¿Ya lo sabías?":"Did you already know that?","Ir a mi feed":"Go to my feed","Elige al menos 1":"Pick at least 1","Continuar":"Continue","Listo, ya tienes 3":"Done, you've got 3","Puedes elegir más si quieres":"You can pick more if you like","Máximo 3 · quita uno para cambiarlo":"Max 3 · remove one to change it","vuelve mañana para mantenerla":"come back tomorrow to keep it going","Usar inicial":"Use initial","Estudio académico":"Academic study","Libro":"Book","Técnica documentada":"Documented technique","Registro histórico":"Historical record","Fuente citada":"Cited source","No especificado":"Not specified","Sobre esta fuente":"About this source","Fuente":"Source","Autor / estudio":"Author / study","Año":"Year","Enlace / referencia":"Link / reference","Buscar esta fuente":"Search for this source","Cerrar":"Close","Ver menos":"Show less","Saber más":"Learn more","🔗 Cierra la cadena":"🔗 Close the chain","Compartir":"Share","Favorito":"Favorite","Escuchar":"Listen","FALSO":"FALSE","VERDADERO":"TRUE","Desliza la tarjeta o toca un botón":"Swipe the card or tap a button","✕ Falso":"✕ False","✓ Verdadero":"✓ True","Confirmar":"Confirm","¡Correcto!":"Correct!","No exactamente":"Not exactly","Tú":"You","¡Exacto! 🎯":"Exactly! 🎯","¡Muy cerca!":"Very close!","Cerca — no está mal":"Close — not bad","Frase":"Quote","Pregunta":"Question","Mito o realidad":"Myth or fact","Juego":"Game","Mini historia":"Mini story","Concepto":"Concept","Curiosidad":"Curiosity","Comparación":"Comparison","Regla práctica":"Rule of thumb","Verdadero o falso":"True or false","¿Verdadero o falso?":"True or false?","Regla mental":"Mental rule","Micro-juego":"Micro-game","Ordena":"Put in order","Insight de libro":"Book insight","Adivina el número":"Guess the number","Sesgo cognitivo":"Cognitive bias","Marco práctico":"Practical framework","Técnica":"Technique","Ley":"Law","Mito común":"Common myth","Estudio":"Study","Neurociencia":"Neuroscience","Atajo":"Shortcut","Práctica":"Practice","Principio":"Principle","Método":"Method","Física":"Physics","Astronomía":"Astronomy","Biología":"Biology","Ley física":"Physical law","Física cuántica":"Quantum physics","Química":"Chemistry","Geología":"Geology","Anécdota":"Anecdote","Paradoja":"Paradox","Experimento mental":"Thought experiment","Idea clave":"Key idea","Saltar":"Skip","🤯 No lo sabía":"🤯 I didn't know","😎 Ya lo sabía":"😎 I already knew","¡Primer paso dado!":"First step done!","Tu primera cápsula":"Your first capsule","Tu feed empieza con":"Your feed starts with","¿Qué te da curiosidad?":"What are you curious about?","Elige hasta 3 temas y armamos tu feed. Lo puedes cambiar cuando quieras.":"Pick up to 3 topics and we'll build your feed. You can change it whenever you like.","Empieza 7 días gratis":"Start 7 days free","Después de la prueba se cobra el plan elegido y se renueva automáticamente. Cancela cuando quieras desde Google Play.":"After the trial, the plan you chose is charged and renews automatically. Cancel anytime from Google Play.","Toca a la derecha para seguir · mantén presionado para pausar":"Tap right to continue · hold to pause","Sigue los temas que más te interesan y aquí verás solo sus cápsulas.":"Follow the topics you care about most and you'll see only their capsules here.","Los canales que sigues aparecen más en “Para ti” y tienen su propio feed en “Siguiendo”.":"The channels you follow show up more in “For you” and have their own feed in “Following”.","DÍAS SEGUIDOS":"DAYS IN A ROW","Gracias por apoyar Verivo. En 30 segundos te enseño todo lo que acabas de desbloquear.":"Thanks for supporting Verivo. In 30 seconds I'll show you everything you just unlocked.","Toca para empezar →":"Tap to start →","Historia y Filosofía":"History and Philosophy","Tus cápsulas en voz alta":"Your capsules, out loud","Una tras otra, a la velocidad que quieras: 0.75x a 1.5x. Perfecto para el camino o el gimnasio.":"One after another, at the speed you want: 0.75x to 1.5x. Perfect for the commute or the gym.","🔊 Escuchar un ejemplo":"🔊 Listen to an example","Búscalo con los audífonos 🎧 en cada cápsula.":"Look for the 🎧 headphones on every capsule.","Elige tu color":"Pick your color","Toca uno y mira cómo cambia toda la app.":"Tap one and watch the whole app change.","Biblioteca y notas":"Library and notes","Encuentra cualquier tema, persona o palabra. Y escribe tus propias notas 📝 en cada cápsula.":"Find any topic, person or word. And write your own notes 📝 on every capsule.","Abrir Biblioteca":"Open Library","✨ Insignia y":"✨ Badge and","marco dorado":"golden frame","en tu perfil":"on your profile","❄️ Hasta":"❄️ Up to","de racha, uno cada 3 días":"— one every 3 days","Carpetas":"Folders","para organizar tus favoritos":"to organize your favorites","3 diseños extra":"3 extra designs","al compartir":"when sharing","Todo listo":"All set","Puedes volver a ver este recorrido cuando quieras desde Ajustes → Premium.":"You can watch this tour again anytime from Settings → Premium.","Empezar con Historia":"Start with History","Ver mi perfil dorado":"See my golden profile","Inicio":"Home","Buscar":"Search","Historias":"Stories","Perfil":"Profile","Desliza":"Swipe","Pero esto apenas empieza...":"But this is just the beginning...","Seguir descubriendo":"Keep discovering","Favoritos":"Favorites","Nuevo":"New","hoy":"today","Guardar":"Save","datos":"facts","frases":"quotes","juegos":"games","Todo":"All","Datos":"Facts","Juegos":"Games","Arma tu feed “Siguiendo”":"Build your “Following” feed","tu semana":"your week","Nombre de la nueva carpeta":"New folder name","Crear":"Create","¿Qué te recuerda esto? ¿Cómo lo usarías?":"What does this remind you of? How would you use it?","Raros":"Rare","Guardado":"Saved","Pausar o continuar":"Pause or resume","Velocidad":"Speed","Siguiente":"Next","Detener":"Stop","🔔 Recordatorios":"🔔 Reminders","Recordatorio diario":"Daily reminder","Un aviso al día con un dato nuevo. Si no entras en 3 días, dejamos de avisarte.":"One nudge a day with a new fact. If you don't open the app for 3 days, we stop.","Disponible en la app de Android.":"Available in the Android app.","Hora del aviso":"Reminder time","Los recordatorios funcionan en la app de Android":"Reminders work in the Android app","Activa las notificaciones de Verivo en los ajustes de tu teléfono":"Turn on Verivo notifications in your phone's settings","🔔 Listo: te aviso a las {t}":"🔔 Done: I'll remind you at {t}","🔥 Tu racha de {n} días sigue viva":"🔥 Your {n}-day streak is still alive","Tu dosis de curiosidad de hoy está lista.":"Today's dose of curiosity is ready.","Hoy en {topic}":"Today in {topic}","Nuevo en {topic}":"New in {topic}","Hay cápsulas nuevas esperándote.":"New capsules are waiting for you.","¡Meta cumplida! ¿Te aviso mañana?":"Goal done! Want a reminder tomorrow?","¿Te aviso para no perder tu racha?":"Want a reminder so you keep your streak?","Un solo aviso al día, con el dato que te espera. Lo apagas cuando quieras en Ajustes.":"Just one nudge a day, with the fact waiting for you. Turn it off anytime in Settings.","Sí, a las 20:00":"Yes, at 8:00 pm","Ahora no":"Not now","Descubriste {x} de {y}":"You've discovered {x} of {y}","La idea":"The idea","Clip":"Clip","Mantén presionado para pausar · toca para adelantar":"Hold to pause · tap to skip ahead","Leer":"Read","Ver como clip":"Watch as a clip"};
+const EN_STRINGS = {"reúne ideas de libros, frases y conceptos importantes en cápsulas cortas e interactivas. Un poco de cultura general cada día, de forma entretenida.":"brings together ideas from books, quotes and key concepts in short, interactive capsules. A little general knowledge every day, in an entertaining way.","Frases":"Quotes","Conceptos":"Concepts","Micro-juegos":"Micro-games","Entrar a Verivo":"Enter Verivo","Elige tu usuario":"Choose your username","Ej. carla_92":"e.g. carla_92","No guardamos tu información en la nube — vive solo en este dispositivo. Recuerda bien tu usuario; puedes hacer un respaldo desde tu perfil para no perder tu progreso.":"We don't store your information in the cloud — it lives only on this device. Remember your username; you can back up your data from your profile so you don't lose your progress.","Volver":"Back","Política de privacidad":"Privacy policy","racha":"streak","Ver perfil":"View profile","Cerrar sesión":"Sign out","Siguiendo":"Following","Para ti":"For you","Explorar":"Explore","¡Hola!":"Hello!","Elige un tema, o deja que el azar decida":"Pick a topic, or let chance decide","Empezar":"Start","Temas para hoy":"Topics for today","Sorpréndeme":"Surprise me","Tema":"Topic","Temas":"Topics","Compartir perfil":"Share profile","Ajustes":"Settings","guardados":"saved","siguiendo":"following","días racha":"day streak","día racha":"day streak","Editar perfil":"Edit profile","¿Qué te gusta aprender?":"What do you like to learn?","Listo":"Done","Guardados":"Saved","Progreso":"Progress","Notas":"Notes","⭐ Favoritos":"⭐ Favorites","Sigue aprendiendo, vas muy bien.":"Keep learning, you're doing great.","días de racha":"day streak","día de racha":"day streak","comodines":"freezes","comodín":"freeze","Aciertos":"Correct","Mejor combo":"Best combo","Raras":"Rare","Logros":"Achievements","✨ Colección de hallazgos raros":"✨ Rare finds collection","📝 Mis notas":"📝 My notes","🎨 Temas visuales":"🎨 Visual themes","🖼️ Estilo al compartir":"🖼️ Share style","💾 Respaldo de tus datos":"💾 Back up your data","Verivo no usa la nube — tu progreso vive solo en este dispositivo. Descarga un respaldo para no perderlo, o para pasarlo a otro dispositivo.":"Verivo doesn't use the cloud — your progress lives only on this device. Download a backup so you don't lose it, or to move it to another device.","Exportar datos":"Export data","Importar datos":"Import data","🗑️ Borrar mis datos":"🗑️ Delete my data","Borra tu progreso, favoritos, carpetas y notas de este dispositivo. Tu Premium no se pierde: está ligado a tu cuenta de Google Play.":"Deletes your progress, favorites, folders and notes from this device. Your Premium isn't lost: it's tied to your Google Play account.","Novato":"Newbie","Curioso":"Curious","Aprendiz":"Apprentice","Lector":"Reader","Explorador":"Explorer","Pensador":"Thinker","Erudito":"Scholar","Sabio":"Sage","Maestro":"Master","Leyenda":"Legend","Anual":"Yearly","Mensual":"Monthly","/año":"/year","/mes":"/month","≈ $8.25 al mes":"≈ $8.25 per month","Ahorra 17%":"Save 17%","Cancela cuando quieras":"Cancel anytime","No se pudo confirmar la compra. Intenta de nuevo.":"We couldn't confirm the purchase. Please try again.","La suscripción está disponible en la app de Google Play.":"The subscription is available in the Google Play app.","Tu Premium ya está activo.":"Your Premium is already active.","Restaurar compras funciona desde la app de Google Play.":"Restoring purchases works from the Google Play app.","👑 Premium restaurado":"👑 Premium restored","No encontramos una suscripción activa.":"We couldn't find an active subscription.","Premium desactivado (modo prueba)":"Premium turned off (test mode)","👑 Premium activado (modo prueba)":"👑 Premium turned on (test mode)","👑 ¡Bienvenido a Verivo Premium!":"👑 Welcome to Verivo Premium!","Biblioteca con buscador":"Library with search","Modo escuchar":"Listen mode","Tus cápsulas en voz alta, una tras otra, con velocidad de 0.75x a 1.5x.":"Your capsules read aloud, one after another, at speeds from 0.75x to 1.5x.","Notas personales":"Personal notes","Escribe tus propias ideas en cualquier cápsula y encuéntralas en tu perfil.":"Write your own ideas on any capsule and find them in your profile.","Comodines extra":"Extra streak freezes","Guarda hasta 5 (en vez de 2) y gana uno cada 3 días de racha (en vez de 7).":"Hold up to 5 (instead of 2) and earn one every 3 streak days (instead of 7).","Carpetas de favoritos":"Favorite folders","Organiza tus favoritos en colecciones con nombre, como “Para mi examen”.":"Organize your favorites into named collections, like “For my exam”.","Temas visuales":"Visual themes","6 paletas de color para personalizar toda la app.":"6 color palettes to customize the whole app.","Diseños para compartir":"Share designs","3 estilos extra para tus imágenes: Papel, Neón y Color.":"3 extra styles for your images: Paper, Neon and Color.","Insignia y marco dorado":"Badge and golden frame","Distintivo Premium en tu perfil y un marco dorado en tu avatar.":"A Premium badge on your profile and a golden frame on your avatar.","🧪 Modo prueba: el botón activa Premium sin cobrar. Desactívalo antes de publicar.":"🧪 Test mode: the button turns Premium on without charging. Turn it off before publishing.","Gracias por apoyar Verivo. Esto es lo que tienes:":"Thanks for supporting Verivo. Here's what you have:","Todo lo gratis sigue siendo gratis. Premium solo suma.":"Everything free stays free. Premium only adds.","Premium activo":"Premium active","👑 Premium activo":"👑 Premium active","✨ Ver todo lo que incluye":"✨ See everything it includes","Puedes administrar o cancelar tu suscripción desde Google Play → Pagos y suscripciones.":"You can manage or cancel your subscription from Google Play → Payments & subscriptions.","Desactivar Premium (prueba)":"Turn off Premium (test)","Restaurar compras":"Restore purchases","Ver Premium":"See Premium","Historia, Filosofía, biblioteca y más":"History, Philosophy, library and more","9 extras, desde MX$10/mes":"9 extras, from MX$10/month","📚 Biblioteca":"📚 Library","Biblioteca":"Library","Busca un tema, persona o palabra…":"Search a topic, person or word…","🧩 Mito o realidad":"🧩 Myth or fact","🎮 Juego":"🎮 Game","Todos":"All","1 cápsula":"1 capsule","✏️ Agregar nota":"✏️ Add note","📝 Tu nota":"📝 Your note","Borrar nota":"Delete note","📝 Nota guardada":"📝 Note saved","Toca “✏️ Agregar nota” en cualquier cápsula para escribir lo que piensas.":"Tap “✏️ Add note” on any capsule to write down what you think.","📝 Escribe tus propias notas en cualquier cápsula con Verivo Premium.":"📝 Write your own notes on any capsule with Verivo Premium.","Clásico":"Classic","Papel":"Paper","Neón":"Neon","Océano":"Ocean","Esmeralda":"Emerald","Violeta":"Violet","Ámbar":"Amber","Rosa":"Rose","Dato sorprendente":"Surprising fact","Cleopatra vivió más cerca de la Luna que de las pirámides.":"Cleopatra lived closer in time to the Moon landing than to the building of the pyramids.","Historia":"History","Finanzas":"Finance","Psicología":"Psychology","Programación":"Programming","Productividad":"Productivity","Ciencia":"Science","Filosofía":"Philosophy","Dinero, inversión y buenas decisiones":"Money, investing and smart decisions","Mente, sesgos y emociones":"Mind, biases and emotions","Código, lógica y buenas prácticas":"Code, logic and best practices","Tiempo, foco y hábitos":"Time, focus and habits","Universo, vida y materia":"Universe, life and matter","Imperios, mitos y momentos clave":"Empires, myths and key moments","Grandes preguntas y pensadores":"Big questions and thinkers","Dinero, inversión y decisiones inteligentes. Un dato al día para que tu dinero trabaje para ti.":"Money, investing and smart decisions. One fact a day to make your money work for you.","Sesgos, emociones y por qué hacemos lo que hacemos.":"Biases, emotions and why we do what we do.","Código, lógica e historia de la computación, sin tecnicismos innecesarios.":"Code, logic and the history of computing, without unnecessary jargon.","Hábitos, foco y técnicas para hacer más con menos estrés.":"Habits, focus and techniques to do more with less stress.","Universo, vida y materia: lo increíble de cómo funciona todo.":"Universe, life and matter: the incredible way everything works.","Imperios, mitos y momentos que cambiaron el mundo. 👑 Exclusivo Premium.":"Empires, myths and moments that changed the world. 👑 Premium exclusive.","Grandes preguntas, paradojas y pensadores para pensar mejor. 👑 Exclusivo Premium.":"Big questions, paradoxes and thinkers to help you think better. 👑 Premium exclusive.","Cuenta oficial":"Official account","✦ Tema del día":"✦ Topic of the day","Seguir":"Follow","Ver historia":"View story","Abrir tema":"Open topic","👑 Desbloquear":"👑 Unlock","bienvenida":"welcome","Abrir →":"Open →","Sigue al menos un tema":"Follow at least one topic","Tu semana":"Your week","Tu semana pasada":"Your last week","Tu semana hasta hoy":"Your week so far","en Verivo":"on Verivo","Toca para ver tus números →":"Tap to see your numbers →","Esta semana viste":"This week you viewed","cápsula":"capsule","cápsulas":"capsules","Tu tema de la semana":"Your topic of the week","En los retos acertaste":"In the challenges you got right","Así se vio tu semana":"Here's how your week looked","Racha actual:":"Current streak:","Compártela y reta a alguien a superarla.":"Share it and challenge someone to beat it.","Compartir mi semana":"Share my week","Ve algunas cápsulas y aquí aparecerá tu resumen semanal 📊":"View a few capsules and your weekly recap will show up here 📊","No se pudo generar la imagen":"Couldn't generate the image","Imagen guardada 📸":"Image saved 📸","Todavía no hay nada aquí":"Nothing here yet","Toca “Editar perfil” para escribir tu bio.":"Tap “Edit profile” to write your bio.","TU SEMANA EN VERIVO":"YOUR WEEK ON VERIVO","cápsula vista":"capsule viewed","cápsulas vistas":"capsules viewed","de aciertos en retos":"correct in challenges","¿Puedes superar mi semana?":"Can you beat my week?","Mi semana en Verivo 📊":"My week on Verivo 📊","Aprendo algo nuevo cada día en Verivo":"I learn something new every day on Verivo","Sígueme el paso en Verivo 🔥":"Keep up with me on Verivo 🔥","Aprendí algo nuevo en Verivo 🔥":"I learned something new on Verivo 🔥","✅ Lo acerté en Verivo":"✅ I got it right on Verivo","Y además":"And there's more","🔊 Escuchando…":"🔊 Listening…","🔊 Escuchar otra vez":"🔊 Listen again","Tu dispositivo no tiene voz disponible":"Your device has no voice available","Tu dispositivo no tiene voz disponible para leer en voz alta.":"Your device has no voice available to read aloud.","Hola, este es el modo escuchar de Verivo.":"Hi, this is Verivo's listen mode.","En pausa":"Paused","Comodín de racha ganado":"Streak freeze earned","¡se pierde!":"about to be lost!","en riesgo":"at risk","¡Una semana completa! 🎉":"A whole week! 🎉","¡Un mes entero seguido! Impresionante.":"A whole month in a row! Impressive.","¡100 días! Eres imparable.":"100 days! You're unstoppable.","¡Sigue así!":"Keep it up!","¡Subiste de nivel!":"Level up!","Solo una pequeña parte de los usuarios encuentra esto.":"Only a small fraction of users find this.","Pocos llegan tan lejos en el feed de hoy.":"Few get this far in today's feed.","Un hallazgo que la mayoría se pierde por completo.":"A find that most people miss completely.","No aparece todos los días — tuviste suerte.":"It doesn't show up every day — you got lucky.","Casi nadie desliza lo suficiente para ver esto.":"Almost nobody scrolls far enough to see this.","Los ✨ hallazgos raros que encuentres en el feed aparecerán aquí.":"The ✨ rare finds you discover in the feed will appear here.","Hallazgo raro":"Rare find","Primeros pasos":"First steps","Acierta tu primera cápsula":"Get your first capsule right","Racha de 3 días":"3-day streak","Aprende 3 días seguidos":"Learn 3 days in a row","Racha de 7 días":"7-day streak","Aprende 7 días seguidos":"Learn 7 days in a row","Meta del día":"Daily goal","Completa las 5 cápsulas diarias":"Complete the 5 daily capsules","Termina un tema completo":"Finish a whole topic","Coleccionista":"Collector","Termina todos los temas":"Finish all the topics","Tu primera cápsula te está esperando.":"Your first capsule is waiting for you.","Vas encendiendo una gran racha.":"You're building a great streak.","Terminaste todos los temas. Eres leyenda.":"You finished all the topics. You're a legend.","Respaldo descargado ✓":"Backup downloaded ✓","¿Seguro? Toca otra vez para borrar todo":"Sure? Tap again to delete everything","Tus datos se borraron de este dispositivo":"Your data was deleted from this device","No se pudo importar — el archivo no es un respaldo válido de Verivo.":"Couldn't import — the file isn't a valid Verivo backup.","¡Meta diaria completa! 🎉":"Daily goal complete! 🎉","Presiona atrás otra vez para salir":"Press back again to exit","5 minutos al día, cero esfuerzo":"5 minutes a day, zero effort","Tu dosis diaria de curiosidad te espera":"Your daily dose of curiosity awaits","¿Listo para saber algo que no sabías?":"Ready to learn something you didn't know?","Un dato interesante está a un toque de distancia":"An interesting fact is one tap away","Para mi examen":"For my exam","Datos para impresionar":"Facts to impress","Para releer":"To reread","Frases favoritas":"Favorite quotes","＋ Nueva carpeta":"＋ New folder","👑 Carpetas":"👑 Folders","Guardar en carpeta":"Save to folder","Tus carpetas":"Your folders","Elige una o varias carpetas para esta cápsula.":"Choose one or more folders for this capsule.","Organiza tus favoritos por tema, examen o lo que quieras.":"Organize your favorites by topic, exam or whatever you like.","Ya tienes una carpeta con ese nombre":"You already have a folder with that name","Toca la ⭐ en una frase o concepto para guardarlo aquí.":"Tap the ⭐ on a quote or concept to save it here.","Esta carpeta está vacía. Toca 📁 en cualquier favorito para agregarlo.":"This folder is empty. Tap 📁 on any favorite to add it.","Bienvenida a Verivo":"Welcome to Verivo","¿Ya lo sabías?":"Did you already know that?","Ir a mi feed":"Go to my feed","Elige al menos 1":"Pick at least 1","Continuar":"Continue","Listo, ya tienes 3":"Done, you've got 3","Puedes elegir más si quieres":"You can pick more if you like","Máximo 3 · quita uno para cambiarlo":"Max 3 · remove one to change it","vuelve mañana para mantenerla":"come back tomorrow to keep it going","Usar inicial":"Use initial","Estudio académico":"Academic study","Libro":"Book","Técnica documentada":"Documented technique","Registro histórico":"Historical record","Fuente citada":"Cited source","No especificado":"Not specified","Sobre esta fuente":"About this source","Fuente":"Source","Autor / estudio":"Author / study","Año":"Year","Enlace / referencia":"Link / reference","Buscar esta fuente":"Search for this source","Cerrar":"Close","Ver menos":"Show less","Saber más":"Learn more","🔗 Cierra la cadena":"🔗 Close the chain","Compartir":"Share","Favorito":"Favorite","Escuchar":"Listen","FALSO":"FALSE","VERDADERO":"TRUE","Desliza la tarjeta o toca un botón":"Swipe the card or tap a button","✕ Falso":"✕ False","✓ Verdadero":"✓ True","Confirmar":"Confirm","¡Correcto!":"Correct!","No exactamente":"Not exactly","Tú":"You","¡Exacto! 🎯":"Exactly! 🎯","¡Muy cerca!":"Very close!","Cerca — no está mal":"Close — not bad","Frase":"Quote","Pregunta":"Question","Mito o realidad":"Myth or fact","Juego":"Game","Mini historia":"Mini story","Concepto":"Concept","Curiosidad":"Curiosity","Comparación":"Comparison","Regla práctica":"Rule of thumb","Verdadero o falso":"True or false","¿Verdadero o falso?":"True or false?","Regla mental":"Mental rule","Micro-juego":"Micro-game","Ordena":"Put in order","Insight de libro":"Book insight","Adivina el número":"Guess the number","Sesgo cognitivo":"Cognitive bias","Marco práctico":"Practical framework","Técnica":"Technique","Ley":"Law","Mito común":"Common myth","Estudio":"Study","Neurociencia":"Neuroscience","Atajo":"Shortcut","Práctica":"Practice","Principio":"Principle","Método":"Method","Física":"Physics","Astronomía":"Astronomy","Biología":"Biology","Ley física":"Physical law","Física cuántica":"Quantum physics","Química":"Chemistry","Geología":"Geology","Anécdota":"Anecdote","Paradoja":"Paradox","Experimento mental":"Thought experiment","Idea clave":"Key idea","Saltar":"Skip","🤯 No lo sabía":"🤯 I didn't know","😎 Ya lo sabía":"😎 I already knew","¡Primer paso dado!":"First step done!","Tu primera cápsula":"Your first capsule","Tu feed empieza con":"Your feed starts with","¿Qué te da curiosidad?":"What are you curious about?","Elige hasta 3 temas y armamos tu feed. Lo puedes cambiar cuando quieras.":"Pick up to 3 topics and we'll build your feed. You can change it whenever you like.","Empieza 7 días gratis":"Start 7 days free","Después de la prueba se cobra el plan elegido y se renueva automáticamente. Cancela cuando quieras desde Google Play.":"After the trial, the plan you chose is charged and renews automatically. Cancel anytime from Google Play.","Toca a la derecha para seguir · mantén presionado para pausar":"Tap right to continue · hold to pause","Sigue los temas que más te interesan y aquí verás solo sus cápsulas.":"Follow the topics you care about most and you'll see only their capsules here.","Los canales que sigues aparecen más en “Para ti” y tienen su propio feed en “Siguiendo”.":"The channels you follow show up more in “For you” and have their own feed in “Following”.","DÍAS SEGUIDOS":"DAYS IN A ROW","Gracias por apoyar Verivo. En 30 segundos te enseño todo lo que acabas de desbloquear.":"Thanks for supporting Verivo. In 30 seconds I'll show you everything you just unlocked.","Toca para empezar →":"Tap to start →","Historia y Filosofía":"History and Philosophy","Tus cápsulas en voz alta":"Your capsules, out loud","Una tras otra, a la velocidad que quieras: 0.75x a 1.5x. Perfecto para el camino o el gimnasio.":"One after another, at the speed you want: 0.75x to 1.5x. Perfect for the commute or the gym.","🔊 Escuchar un ejemplo":"🔊 Listen to an example","Búscalo con los audífonos 🎧 en cada cápsula.":"Look for the 🎧 headphones on every capsule.","Elige tu color":"Pick your color","Toca uno y mira cómo cambia toda la app.":"Tap one and watch the whole app change.","Biblioteca y notas":"Library and notes","Encuentra cualquier tema, persona o palabra. Y escribe tus propias notas 📝 en cada cápsula.":"Find any topic, person or word. And write your own notes 📝 on every capsule.","Abrir Biblioteca":"Open Library","✨ Insignia y":"✨ Badge and","marco dorado":"golden frame","en tu perfil":"on your profile","❄️ Hasta":"❄️ Up to","de racha, uno cada 3 días":"— one every 3 days","Carpetas":"Folders","para organizar tus favoritos":"to organize your favorites","3 diseños extra":"3 extra designs","al compartir":"when sharing","Todo listo":"All set","Puedes volver a ver este recorrido cuando quieras desde Ajustes → Premium.":"You can watch this tour again anytime from Settings → Premium.","Empezar con Historia":"Start with History","Ver mi perfil dorado":"See my golden profile","Inicio":"Home","Buscar":"Search","Historias":"Stories","Perfil":"Profile","Desliza":"Swipe","Pero esto apenas empieza...":"But this is just the beginning...","Seguir descubriendo":"Keep discovering","Favoritos":"Favorites","Nuevo":"New","hoy":"today","Guardar":"Save","datos":"facts","frases":"quotes","juegos":"games","Todo":"All","Datos":"Facts","Juegos":"Games","Arma tu feed “Siguiendo”":"Build your “Following” feed","tu semana":"your week","Nombre de la nueva carpeta":"New folder name","Crear":"Create","¿Qué te recuerda esto? ¿Cómo lo usarías?":"What does this remind you of? How would you use it?","Raros":"Rare","Guardado":"Saved","Pausar o continuar":"Pause or resume","Velocidad":"Speed","Siguiente":"Next","Detener":"Stop","🔔 Recordatorios":"🔔 Reminders","Recordatorio diario":"Daily reminder","Un aviso al día con un dato nuevo. Si no entras en 3 días, dejamos de avisarte.":"One nudge a day with a new fact. If you don't open the app for 3 days, we stop.","Disponible en la app de Android.":"Available in the Android app.","Hora del aviso":"Reminder time","Los recordatorios funcionan en la app de Android":"Reminders work in the Android app","Activa las notificaciones de Verivo en los ajustes de tu teléfono":"Turn on Verivo notifications in your phone's settings","🔔 Listo: te aviso a las {t}":"🔔 Done: I'll remind you at {t}","🔥 Tu racha de {n} días sigue viva":"🔥 Your {n}-day streak is still alive","Tu dosis de curiosidad de hoy está lista.":"Today's dose of curiosity is ready.","Hoy en {topic}":"Today in {topic}","Nuevo en {topic}":"New in {topic}","Hay cápsulas nuevas esperándote.":"New capsules are waiting for you.","¡Meta cumplida! ¿Te aviso mañana?":"Goal done! Want a reminder tomorrow?","¿Te aviso para no perder tu racha?":"Want a reminder so you keep your streak?","Un solo aviso al día, con el dato que te espera. Lo apagas cuando quieras en Ajustes.":"Just one nudge a day, with the fact waiting for you. Turn it off anytime in Settings.","Sí, a las 20:00":"Yes, at 8:00 pm","Ahora no":"Not now","Descubriste {x} de {y}":"You've discovered {x} of {y}","La idea":"The idea","Clip":"Clip","Mantén presionado para pausar · toca para adelantar":"Hold to pause · tap to skip ahead","Leer":"Read","Ver como clip":"Watch as a clip","8 extras, desde MX$10/mes":"8 extras, from MX$10/month","Voz":"Voice","🔊 Voz de los clips activada":"🔊 Clip voice on","🔇 Clips en silencio":"🔇 Clips muted","Toca la pantalla para activar la voz":"Tap the screen to turn on the voice"};
 const _pl = (n, a, b) => (+n === 1 ? a : b);
 const _ds = (n, w) => (+n === 1 ? 'day' : 'days');
 const EN_RULES = [
@@ -7976,8 +8296,8 @@ const ICON_GLOW = {
 
 /* ============================================================
    Verivo Premium — purely additive: nothing in the free app is
-   gated. Premium adds the Historia topic, modo escuchar and the
-   temas visuales.
+   gated. Premium adds the exclusive topics, the library, notes and
+   the visual extras. Listen mode (and the clips' voice) is free.
    ============================================================ */
 // ⚠️ ANTES DE PUBLICAR EN PLAY STORE: poner PREMIUM_TEST_MODE en false.
 // En modo prueba, el botón de compra activa Premium sin cobrar (para
@@ -8187,7 +8507,6 @@ function renderPremiumSheet(){
     <div class="premium-perks">
       ${perk('topics', '🏛️', `${premiumTopicNames().length} temas exclusivos`, `${premiumTopicNames().join(' y ')}: ${premiumTopicCount()} cápsulas sobre imperios, mitos, grandes pensadores y las preguntas más profundas.`, sample ? `<span class="perk-sample">${quoteWrap(escapeHtml(sample.hook))}</span>` : '')}
       ${perk('library', '📚', 'Biblioteca con buscador', `Busca y explora las ${TOPICS.reduce((n,t)=>n+t.items.length,0).toLocaleString(langLocale())} cápsulas cuando quieras.`)}
-      ${perk('listen', '🎧', 'Modo escuchar', 'Tus cápsulas en voz alta, una tras otra, con velocidad de 0.75x a 1.5x.')}
       ${perk('notes', '📝', 'Notas personales', 'Escribe tus propias ideas en cualquier cápsula y encuéntralas en tu perfil.')}
       ${perk('freezes', '❄️', 'Comodines extra', 'Guarda hasta 5 (en vez de 2) y gana uno cada 3 días de racha (en vez de 7).')}
       ${perk('folders', '📁', 'Carpetas de favoritos', 'Organiza tus favoritos en colecciones con nombre, como “Para mi examen”.')}
@@ -8483,7 +8802,7 @@ function renderNotesSection(){
 }
 
 /* ============================================================
-   Premium: velocidad de voz (modo escuchar)
+   Velocidad de voz (modo escuchar y clips, gratis)
    ============================================================ */
 const LISTEN_RATES = [0.75, 1, 1.25, 1.5];
 function getListenRate(){
@@ -8499,7 +8818,8 @@ function cycleListenRate(){
   const b = document.getElementById('listen-rate');
   if(b) b.textContent = rateLabel(next);
   // restart the current sentence at the new speed
-  if(LISTEN.active && !LISTEN.paused) speakCurrentChunk();
+  if(LISTEN.active && !LISTEN.paused && !(LISTEN.clip && CLIPP.idx === LISTEN.idx)) speakCurrentChunk();
+  else clipVoiceRestart();
 }
 
 /* ============================================================
@@ -8882,7 +9202,7 @@ function openStory(topicId, fromChain){
 }
 function closeStory(){
   cancelAnimationFrame(STORY.raf);
-  if(STORY.mode === 'welcome' && speechSupported()) speechSynthesis.cancel();
+  if(STORY.mode === 'welcome') vozStop();
   const el = document.getElementById('story-overlay');
   if(el) el.classList.remove('open');
   document.body.style.overflow = '';
@@ -9515,12 +9835,6 @@ function welcomeSlides(){
        <p class="recap-sub">${premiumTopicCount()} cápsulas que solo tienes con Premium.</p>
        ${sample ? `<p class="w-sample">${quoteWrap(escapeHtml(sample.hook))}</p>` : ''}
        <div class="w-btns"><button class="story-cta" data-action="w-open-historia">Historia</button><button class="story-cta" data-action="w-open-filosofia">Filosofía</button></div>`, 11000),
-    S(`<div class="w-icon">🎧</div>
-       <p class="recap-kicker">Modo escuchar</p>
-       <h2 class="recap-title">Tus cápsulas en voz alta</h2>
-       <p class="recap-sub">Una tras otra, a la velocidad que quieras: 0.75x a 1.5x. Perfecto para el camino o el gimnasio.</p>
-       <div class="w-btns"><button class="story-cta" data-action="w-listen">🔊 Escuchar un ejemplo</button></div>
-       <p class="recap-hint">Búscalo con los audífonos 🎧 en cada cápsula.</p>`, 10000),
     S(`<div class="w-icon">🎨</div>
        <p class="recap-kicker">Temas visuales</p>
        <h2 class="recap-title">Elige tu color</h2>
@@ -9571,14 +9885,10 @@ function welcomeAction(btn){
     if(!speechSupported()){ showShareToast('Tu dispositivo no tiene voz disponible'); return; }
     const historia = TOPICS.find(t => t.premium);
     const it = historia && historia.items.find(i => i.type === 'fact' && i.hook);
-    const u = new SpeechSynthesisUtterance(it ? `${cleanForSpeech(it.hook)} ${cleanForSpeech(it.title)}.` : trs('Hola, este es el modo escuchar de Verivo.'));
-    if(listenVoice){ u.voice = listenVoice; u.lang = listenVoice.lang; } else u.lang = langLocale();
-    u.rate = getListenRate();
-    speechSynthesis.cancel();
-    setTimeout(() => speechSynthesis.speak(u), 60);
     btn.textContent = '🔊 Escuchando…';
     STORY.paused = true;              // hold the slide while it talks
-    u.onend = () => { STORY.paused = false; btn.textContent = '🔊 Escuchar otra vez'; };
+    const done = () => { STORY.paused = false; btn.textContent = '🔊 Escuchar otra vez'; };
+    vozSpeak(it ? `${cleanForSpeech(it.hook)} ${cleanForSpeech(it.title)}.` : trs('Hola, este es el modo escuchar de Verivo.'), { rate: getListenRate(), onEnd: done, onError: done });
     hapticPulse(10);
   }
 }
@@ -9637,7 +9947,7 @@ function renderPremiumProfileCard(){
     <span class="premium-card-crown">👑</span>
     <span class="premium-card-text">
       <b>${active ? 'Premium activo' : 'Verivo Premium'}</b>
-      <span>${active ? 'Historia, Filosofía, biblioteca y más' : '9 extras, desde MX$10/mes'}</span>
+      <span>${active ? 'Historia, Filosofía, biblioteca y más' : '8 extras, desde MX$10/mes'}</span>
     </span>
     <span class="premium-card-chev">›</span>`;
 }
@@ -9647,11 +9957,23 @@ function renderPremiumProfileCard(){
    device's own Spanish voice (Web Speech API, works offline),
    then glides to the next capsule and keeps going.
    ============================================================ */
-const LISTEN = { active:false, paused:false, idx:-1, chunks:[], chunkIdx:0, token:0 };
+const LISTEN = { active:false, paused:false, idx:-1, chunks:[], chunkIdx:0, token:0, clip:false };
 let listenVoice = null;
-function speechSupported(){ return 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window; }
+/* ---- one voice for everything (listen mode and clips). The Android app's WebView has no
+   window.speechSynthesis, so there it uses @capacitor-community/text-to-speech; a browser
+   uses the Web Speech API. Free for everyone. ---- */
+const VOZ = { token:0, cur:null, needGesture:false, rangeWired:false, okOnce:false };
+function vozNative(){
+  const P = window.Capacitor && window.Capacitor.Plugins;
+  return (P && P.TextToSpeech && typeof P.TextToSpeech.speak === 'function') ? P.TextToSpeech : null;
+}
+function webSpeech(){
+  try{ return !!(window.speechSynthesis && typeof window.speechSynthesis.speak === 'function' && typeof window.SpeechSynthesisUtterance === 'function'); }catch(e){ return false; }
+}
+function vozKind(){ return vozNative() ? 'native' : (webSpeech() ? 'web' : null); }
+function speechSupported(){ return !!vozKind(); }
 function pickSpanishVoice(){
-  if(!speechSupported()) return null;
+  if(!webSpeech()) return null;
   const voices = speechSynthesis.getVoices();
   const norm = v => (v.lang || '').replace('_','-').toLowerCase();
   for(const pref of (LANG === 'en' ? ['en-us','en-gb','en-au','en-ca'] : ['es-mx','es-us','es-419','es-es'])){
@@ -9660,10 +9982,92 @@ function pickSpanishVoice(){
   }
   return voices.find(v => norm(v).startsWith(LANG === 'en' ? 'en' : 'es')) || null;
 }
-if(speechSupported()){
+if(webSpeech()){
   listenVoice = pickSpanishVoice();
-  speechSynthesis.onvoiceschanged = () => { listenVoice = pickSpanishVoice(); };
+  try{ speechSynthesis.onvoiceschanged = () => { listenVoice = pickSpanishVoice(); }; }catch(e){}
 }
+function vozWireRange(){
+  if(VOZ.rangeWired) return;
+  const N = vozNative();
+  if(!N || typeof N.addListener !== 'function') return;
+  VOZ.rangeWired = true;
+  try{ N.addListener('onRangeStart', d => { const h = VOZ.cur; if(!h || h.done || !d) return; h.gotWord = true; if(h.onWord) h.onWord(d.start || 0); }); }catch(e){}
+}
+/* rough length of an utterance at a given rate (used for timing and as a safety cap) */
+function vozEstimate(text, rate){
+  const w = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.round((w * 345 + 300) / (rate || 1));
+}
+/* speak one utterance; callbacks: onStart, onWord(charIndex), onEnd, onError(reason) */
+function vozSpeak(text, o){
+  o = o || {};
+  vozStop(true);
+  const token = ++VOZ.token;
+  const rate = o.rate || getListenRate();
+  const est = vozEstimate(text, rate);
+  const h = { token, done:false, onWord:o.onWord };
+  VOZ.cur = h;
+  const fin = (ok, why) => {
+    if(h.done) return;
+    h.done = true;
+    clearTimeout(h.capT); clearTimeout(h.startT); clearTimeout(h.waitT);
+    if(VOZ.cur === h) VOZ.cur = null;
+    if(token !== VOZ.token) return;
+    if(ok){ if(o.onEnd) o.onEnd(why); }
+    else if(o.onError) o.onError(why);
+  };
+  h.capT = setTimeout(() => fin(true, 'cap'), est * 2.6 + 4000);   // a stuck engine never hangs the app
+  const kind = vozKind();
+  if(!kind){ setTimeout(() => fin(false, 'novoice'), 0); return h; }
+  if(!String(text || '').trim()){ setTimeout(() => fin(true, 'empty'), 0); return h; }
+  if(kind === 'native'){
+    vozWireRange();
+    const t0 = performance.now();
+    setTimeout(() => { if(!h.done && o.onStart) o.onStart(); }, 0);
+    Promise.resolve(vozNative().speak({ text, lang: langLocale(), rate, pitch: 1, volume: 1, queueStrategy: 0 }))
+      .then(() => {
+        const took = performance.now() - t0;
+        // some builds resolve when speech starts instead of when it ends: then wait out the estimate
+        if(!h.gotWord && took < est * 0.35) h.waitT = setTimeout(() => fin(true), est - took);
+        else fin(true);
+      })
+      .catch(e => fin(false, String((e && (e.message || e.code)) || 'error')));
+    return h;
+  }
+  const u = new SpeechSynthesisUtterance(text);
+  if(listenVoice){ u.voice = listenVoice; u.lang = listenVoice.lang; } else u.lang = langLocale();
+  u.rate = rate;
+  let started = false;
+  u.onstart = () => { started = true; VOZ.okOnce = true; if(!h.done && o.onStart) o.onStart(); };
+  u.onboundary = e => { if(h.done || (e.name && e.name !== 'word')) return; if(h.onWord) h.onWord(e.charIndex || 0); };
+  u.onend = () => fin(true);
+  u.onerror = e => {
+    const er = (e && e.error) || 'error';
+    if(er === 'interrupted' || er === 'canceled') return;
+    if(er === 'not-allowed') VOZ.needGesture = true;     // the browser wants a tap before it talks
+    fin(false, er);
+  };
+  h.startT = setTimeout(() => { if(!started) fin(false, 'nostart'); }, VOZ.okOnce ? 1800 : 3200);
+  // tiny delay after cancel(): some Android engines drop an utterance queued in the same tick
+  setTimeout(() => { if(h.done) return; try{ speechSynthesis.speak(u); }catch(e){ fin(false, 'throw'); } }, 60);
+  return h;
+}
+function vozStop(keepEngine){
+  VOZ.token++;
+  const h = VOZ.cur; VOZ.cur = null;
+  if(h){ h.done = true; clearTimeout(h.capT); clearTimeout(h.startT); clearTimeout(h.waitT); }
+  try{
+    const N = vozNative();
+    if(N){ if(!keepEngine) N.stop(); }       // native: a new speak() flushes the old one by itself
+    else if(webSpeech()) speechSynthesis.cancel();
+  }catch(e){}
+}
+document.addEventListener('pointerdown', () => {
+  if(!VOZ.needGesture) return;
+  VOZ.needGesture = false;
+  try{ clipVoiceRetry(); }catch(e){}
+}, { passive:true, capture:true });
+
 function cleanForSpeech(s){
   return String(s || '')
     .replace(/<[^>]+>/g, ' ')
@@ -9706,9 +10110,9 @@ function speechChunks(text){
 }
 function isListenable(item){ return item && (item.type === 'fact' || item.type === 'quote'); }
 function feedCards(){ return document.querySelectorAll('#content-feed .fact-card'); }
+function cardIsLiveClip(card){ return !!(card && card.classList.contains('has-clip') && !card.classList.contains('clip-done')); }
 
 function toggleListen(idx){
-  if(!isPremium()){ openPremium('listen'); return; }
   if(!speechSupported()){ showShareToast('Tu dispositivo no tiene voz disponible para leer en voz alta.'); return; }
   if(LISTEN.active && LISTEN.idx === idx && !LISTEN.paused){ stopListening(); return; }
   startListeningAt(idx);
@@ -9716,37 +10120,55 @@ function toggleListen(idx){
 function startListeningAt(idx){
   const item = currentFeedItems[idx];
   if(!isListenable(item)) return;
+  LISTEN.token++;
   LISTEN.active = true;
   LISTEN.paused = false;
   LISTEN.idx = idx;
+  const card = feedCards()[idx];
+  LISTEN.clip = cardIsLiveClip(card);
+  hapticPulse(10);
+  if(card) listenScrollTo(card, idx);
+  updateListenUi();
+  if(LISTEN.clip){
+    // a clip narrates itself: if it is already playing it just gets (or keeps) the voice;
+    // otherwise anything still talking stops and the clip speaks when it lands
+    if(CLIPP.idx === idx) clipEnableVoice();
+    else vozStop();
+    return;
+  }
   LISTEN.chunks = speechChunks(speechTextFor(item));
   LISTEN.chunkIdx = 0;
-  hapticPulse(10);
-  const card = feedCards()[idx];
-  if(card) card.scrollIntoView({ behavior:'smooth', block:'start' });
-  updateListenUi();
   speakCurrentChunk();
+}
+/* glide to the card being read; if live clips sit in between, jump instead: on a glide each clip
+   on the way would start playing and pull listen mode onto itself */
+function listenScrollTo(card, idx){
+  const cards = feedCards();
+  let cur = -1;
+  for(let i = 0; i < cards.length; i++){ if(cards[i].classList.contains('active')){ cur = i; break; } }
+  let jump = false;
+  if(cur !== -1){
+    for(let i = Math.min(cur, idx) + 1; i < Math.max(cur, idx); i++){ if(cardIsLiveClip(cards[i])){ jump = true; break; } }
+  }
+  try{ card.scrollIntoView({ behavior: jump ? 'instant' : 'smooth', block:'start' }); }
+  catch(e){ try{ card.scrollIntoView(true); }catch(e2){} }
 }
 function speakCurrentChunk(){
   const token = ++LISTEN.token;
-  speechSynthesis.cancel();
   if(LISTEN.chunkIdx >= LISTEN.chunks.length){ onListenCardDone(); return; }
-  const u = new SpeechSynthesisUtterance(LISTEN.chunks[LISTEN.chunkIdx]);
-  LISTEN.utter = u;
-  if(listenVoice){ u.voice = listenVoice; u.lang = listenVoice.lang; } else u.lang = langLocale();
-  u.rate = getListenRate();
-  u.onend = () => {
-    if(token !== LISTEN.token || !LISTEN.active || LISTEN.paused) return;
-    LISTEN.chunkIdx++;
-    speakCurrentChunk();
-  };
-  u.onerror = (e) => {
-    if(token !== LISTEN.token) return;
-    if(e.error === 'interrupted' || e.error === 'canceled') return;
-    stopListening();
-  };
-  // tiny delay after cancel(): some Android engines drop an utterance queued in the same tick
-  setTimeout(() => { if(token === LISTEN.token && LISTEN.active && !LISTEN.paused) speechSynthesis.speak(u); }, 60);
+  vozSpeak(LISTEN.chunks[LISTEN.chunkIdx], {
+    rate: getListenRate(),
+    onEnd: () => {
+      if(token !== LISTEN.token || !LISTEN.active || LISTEN.paused) return;
+      LISTEN.chunkIdx++;
+      speakCurrentChunk();
+    },
+    onError: why => {
+      if(token !== LISTEN.token) return;
+      stopListening();
+      showShareToast(why === 'not-allowed' ? 'Toca la pantalla para activar la voz' : 'Tu dispositivo no tiene voz disponible para leer en voz alta.');
+    }
+  });
 }
 function nextListenableIdx(from){
   for(let i = from + 1; i < currentFeedItems.length; i++){ if(isListenable(currentFeedItems[i])) return i; }
@@ -9769,31 +10191,45 @@ function onListenCardDone(){
 function pauseResumeListening(){
   if(!LISTEN.active) return;
   hapticPulse(8);
+  if(LISTEN.clip && CLIPP.idx === LISTEN.idx){
+    LISTEN.paused = !LISTEN.paused;
+    clipSetPaused(LISTEN.paused, true);
+    updateListenUi();
+    return;
+  }
   if(LISTEN.paused){
     LISTEN.paused = false;
     speakCurrentChunk();
   }else{
     LISTEN.paused = true;
     LISTEN.token++;
-    speechSynthesis.cancel();
+    vozStop();
   }
   updateListenUi();
 }
 function skipListening(){
   if(!LISTEN.active) return;
-  const next = nextListenableIdx(LISTEN.idx);
   LISTEN.paused = false;
+  if(LISTEN.clip && CLIPP.idx === LISTEN.idx){ clipFinish(LISTEN.idx, 'skip'); return; }
+  const next = nextListenableIdx(LISTEN.idx);
   if(next !== -1) startListeningAt(next);
   else { LISTEN.chunkIdx = LISTEN.chunks.length; speakCurrentChunk(); }
 }
 function stopListening(){
   if(!LISTEN.active && !document.querySelector('.listen-fab.playing')) return;
+  const clipIdx = (LISTEN.clip && CLIPP.idx === LISTEN.idx) ? LISTEN.idx : -1;
   LISTEN.active = false;
   LISTEN.paused = false;
+  LISTEN.clip = false;
   LISTEN.token++;
-  if(speechSupported()) speechSynthesis.cancel();
+  if(clipIdx >= 0){
+    // the clip keeps playing; it stays voiced only if clip voice is on
+    clipSetPaused(false, true);
+    if(!clipVoicePref()) clipDisableVoice();
+  }else vozStop();
   updateListenUi();
 }
+
 function ensureListenPlayer(){
   let el = document.getElementById('listen-player');
   if(el) return el;
@@ -11851,7 +12287,7 @@ function renderProfile(){
 
 /* ---- backup: everything lives in localStorage only, so this is the only
    way to move data to a new device or survive clearing browser storage ---- */
-const BACKUP_KEYS = ['achvseen','onboarded','readtoday','avatarcolor','avataremoji','bestcombo','daily','dailygoalhits','engagement','favorites','freezes','lastday','lastdayidx','points','raresfound','rarecollection','streak','topicsdone','totalcorrect','theme','favfolders','notes','sharestyle','listenrate','follows','storyseen','bio','week','lastweek','recapseen','seen'];
+const BACKUP_KEYS = ['achvseen','onboarded','readtoday','avatarcolor','avataremoji','bestcombo','daily','dailygoalhits','engagement','favorites','freezes','lastday','lastdayidx','points','raresfound','rarecollection','streak','topicsdone','totalcorrect','theme','favfolders','notes','sharestyle','listenrate','follows','storyseen','bio','week','lastweek','recapseen','seen','clipvoice'];
 
 function exportUserData(){
   const values = {};
@@ -12902,7 +13338,7 @@ function cardHtmlFor(idx){
     const isFav = isFavorited(key);
     return `<button class="fav-fab${isFav?' is-fav':''}" onclick="event.stopPropagation(); toggleFavorite('${key}', this)" aria-label="Favorito">${starIconSvg}</button>`;
   };
-  const listenBtnHtml = () => `<button class="listen-fab${LISTEN.active && LISTEN.idx === idx && !LISTEN.paused ? ' playing' : ''}" id="listen-btn-${idx}" onclick="event.stopPropagation(); toggleListen(${idx})" aria-label="Escuchar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg><span class="listen-eq"><i></i><i></i><i></i></span>${isPremium() ? '' : '<span class="listen-crown">👑</span>'}</button>`;
+  const listenBtnHtml = () => `<button class="listen-fab${LISTEN.active && LISTEN.idx === idx && !LISTEN.paused ? ' playing' : ''}" id="listen-btn-${idx}" onclick="event.stopPropagation(); toggleListen(${idx})" aria-label="Escuchar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg><span class="listen-eq"><i></i><i></i><i></i></span></button>`;
   const isGolden = idx === goldenCardIdx;
   const goldenClass = isGolden ? ' is-golden' : '';
   const goldenKeyAttr = isGolden ? ` data-rare-key="${favKeyFor(topic.id, item)}"` : '';
@@ -12948,7 +13384,7 @@ function cardHtmlFor(idx){
           </div>
           ${item.compare.verdict ? `<div class="compare-verdict">🎯 ${item.compare.verdict}</div>` : ''}
         </div>` : '';
-    const asClip = isClipItem(item) && !isGolden && !(LISTEN && LISTEN.active);
+    const asClip = isClipItem(item) && !isGolden;
     return `
     <div class="fact-card${goldenClass}${asClip ? ' has-clip' : ''}" ${dbltap} ${accentAttr}${goldenKeyAttr} data-topic="${topic.id}" data-type="fact">
       ${asClip ? clipHtml(idx, item, topic) : ''}
@@ -14120,10 +14556,11 @@ document.addEventListener('visibilitychange', () => { if(document.visibilityStat
 
 
 /* ============================================================
-   v6 — CLIPS: some fact capsules play like a short video
-   (animated scenes, karaoke captions, a big number that counts up,
-   a topic motif), then settle into the normal card underneath.
-   Hold to pause · tap to skip ahead · "▶ Ver como clip" replays.
+   v7 — CLIPS: fact capsules that play like short videos, narrated
+   by the listen voice. Each clip gets a look (template, motif,
+   colors, transitions, number and reveal styles) that is never the
+   same as the clip right before it in the feed.
+   Hold to pause · tap to skip ahead · 🔊 mutes · "Leer" jumps to the text.
    ============================================================ */
 const CLIP_SHARE = 100;           // hash cut-off (0-100): 100 = every eligible fact plays as a clip; 46 = 45%
 function clipReducedMotion(){ try{ return matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; } }
@@ -14134,20 +14571,117 @@ function isClipItem(item){
   return (h % 100) < CLIP_SHARE;
 }
 function _normKw(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
-function clipMotifName(topic, item){
+
+/* ---------- looks ---------- */
+const CLIP_MOTIF_POOLS = {
+  finanzas:     ['growth','bars','pie','candles','balance','hourglass'],
+  psicologia:   ['neurons','eye','thought','wave','spiral','balance'],
+  programacion: ['code','binary','gears','neurons','checklist','wave'],
+  productividad:['clock','checklist','hourglass','bars','gears','pie'],
+  ciencia:      ['atom','molecule','flask','stars','orbit','wave','helix'],
+  historia:     ['timeline','scroll','compass','hourglass','gears','stars'],
+  filosofia:    ['thought','spiral','balance','stars','eye','scroll']
+};
+const CLIP_MOTIF_KEYWORDS = [
+  [/agujero negro|horizonte de sucesos/, ['blackhole']],
+  [/\badn\b|genetic|genoma|cromosom|\bgenes?\b/, ['helix']],
+  [/corazon|latido|sangre/, ['pulse']],
+  [/planeta|sistema solar|\blunas?\b|venus|jupiter|\bmarte\b|mercurio|saturno|orbita/, ['orbit','stars']],
+  [/estrella|galaxia|universo|cosmos|telescop/, ['stars','orbit']],
+  [/sonido|\bondas?\b|doppler|frecuencia|arcoiris/, ['wave']],
+  [/molecul|quimic|reaccion|\batomos?\b/, ['molecule','flask','atom']],
+  [/interes compuesto|exponencial|inflacion|ahorr|invertir|inversion/, ['growth','bars']],
+  [/\bbolsa\b|acciones|mercado|burbuja|crisis|precio/, ['candles','bars']],
+  [/porcentaje|%/, ['pie','bars']],
+  [/cerebro|memoria|neuron/, ['neurons']],
+  [/\bojos?\b|vista|percep|ilusion|mirar/, ['eye']],
+  [/reloj|\bhoras?\b|minutos|pomodoro|plazo/, ['clock','hourglass']],
+  [/\blistas?\b|tareas?|pendiente|habito|rutina/, ['checklist']],
+  [/maquina|mecanismo|engran|motor|fabrica|industrial/, ['gears']],
+  [/codigo|program|software|\bbug|algoritmo/, ['code','binary']],
+  [/\bmapas?\b|viaj|naveg|explor|\bruta|barco|expedic/, ['compass']],
+  [/libro|escrit|biblioteca|manuscrit|tablilla|papiro/, ['scroll']],
+  [/justicia|equilibrio|balanza|\betica|\bmoral/, ['balance']]
+];
+function clipKeywordMotifs(item){
   const o = esItem(item);
   const s = _normKw([o.title, o.hook, o.body].join(' '));
-  if(/agujero negro|horizonte de sucesos/.test(s)) return 'blackhole';
-  if(/\badn\b|genetic|genoma|cromosom|\bgenes?\b/.test(s)) return 'helix';
-  if(/corazon|latido|sangre/.test(s)) return 'pulse';
-  if(/planeta|sistema solar|\bsol\b|\bluna\b|venus|jupiter|marte|mercurio|saturno|estrella|orbita|galaxia/.test(s)) return 'orbit';
-  if(/sonido|\bonda|doppler|frecuencia|\bluz\b|arcoiris/.test(s)) return 'wave';
-  if(/interes compuesto|exponencial|inflacion/.test(s)) return 'growth';
-  if(/cerebro|memoria|neuron/.test(s)) return 'neurons';
-  return ({ finanzas:'growth', psicologia:'neurons', programacion:'code', productividad:'clock', ciencia:'atom', historia:'timeline', filosofia:'thought' })[topic.id] || 'atom';
+  for(const [re, list] of CLIP_MOTIF_KEYWORDS){ if(re.test(s)) return list; }
+  return [];
 }
+// each topic leans toward a few looks, so topics feel different from each other, but every look appears everywhere
+const CLIP_TPL_WEIGHTS = {
+  finanzas:     { karaoke:2, titular:3, papel:2, poster:3, cine:1, neon:1, pizarra:1 },
+  psicologia:   { karaoke:3, titular:1, papel:1, poster:1, cine:3, neon:2, pizarra:1 },
+  programacion: { karaoke:2, titular:2, papel:1, poster:1, cine:1, neon:3, pizarra:1 },
+  productividad:{ karaoke:2, titular:3, papel:3, poster:2, cine:1, neon:1, pizarra:1 },
+  ciencia:      { karaoke:2, titular:1, papel:1, poster:1, cine:2, neon:2, pizarra:3 },
+  historia:     { karaoke:1, titular:1, papel:3, poster:1, cine:3, neon:1, pizarra:2 },
+  filosofia:    { karaoke:1, titular:1, papel:2, poster:1, cine:3, neon:1, pizarra:3 }
+};
+const CLIP_TPL_OPTS = {
+  karaoke: { trans:['up','zoom','blur','wipe'], num:['big','ring','bar'], rev:['kicker','underline','glitch','stamp'] },
+  titular: { trans:['zoom','up','wipe'],        num:['big','bar'],        rev:['stamp','glitch','kicker'] },
+  papel:   { trans:['wipe','up','blur'],        num:['big','bar','ring'], rev:['underline','stamp'] },
+  poster:  { trans:['up','wipe','zoom'],        num:['big','ring'],       rev:['stamp','kicker'] },
+  cine:    { trans:['blur'],                    num:['big'],              rev:['kicker','underline'] },
+  neon:    { trans:['zoom','blur'],             num:['big','ring'],       rev:['glitch','kicker'] },
+  pizarra: { trans:['wipe','blur'],             num:['big','bar'],        rev:['underline','kicker'] }
+};
+const CLIP_C2 = ['#8fd3ff','#ffcf5a','#ff7aa8','#7dffb2','#c9a0ff','#ff9d5c','#5ce1e6'];
+function clipPickWeighted(r, weights, exclude){
+  let keys = Object.keys(weights).filter(k => weights[k] > 0 && !exclude.includes(k));
+  if(!keys.length) keys = Object.keys(weights);
+  let total = 0; keys.forEach(k => { total += weights[k] || 1; });
+  let x = r() * total;
+  for(const k of keys){ x -= (weights[k] || 1); if(x < 0) return k; }
+  return keys[keys.length - 1];
+}
+function clipBaseLook(item, topic, p1, p2){
+  const r = v6Rand(v6Seed('look:' + itemStableId(item)));
+  const tpl = clipPickWeighted(r, CLIP_TPL_WEIGHTS[topic.id] || CLIP_TPL_WEIGHTS.ciencia, [p1 && p1.tpl, p2 && p2.tpl].filter(Boolean));
+  const pool = CLIP_MOTIF_POOLS[topic.id] || ['atom','thought','stars'];
+  const kw = clipKeywordMotifs(item);
+  const avoid = p1 ? p1.motif : null;
+  let motif = null;
+  if(kw.length && r() < .6) motif = kw.find(m => m !== avoid) || null;
+  if(!motif){ const cand = pool.filter(m => m !== avoid); motif = cand[Math.floor(r() * cand.length)] || pool[0]; }
+  const o = CLIP_TPL_OPTS[tpl];
+  const pick = a => a[Math.floor(r() * a.length)];
+  let c2 = pick(CLIP_C2);
+  if(p1 && p1.c2 === c2) c2 = CLIP_C2[(CLIP_C2.indexOf(c2) + 3) % CLIP_C2.length];
+  let rev = pick(o.rev);
+  if(p1 && p1.rev === rev && o.rev.length > 1) rev = o.rev[(o.rev.indexOf(rev) + 1) % o.rev.length];
+  return { tpl, motif, c2, trans: pick(o.trans), num: pick(o.num), rev };
+}
+/* looks are worked out in feed order, so each clip knows the two before it */
+let _clipLooks = [];
+function clipLookAt(idx){
+  let j = 0;
+  while(j <= idx){
+    const m = _clipLooks[j], item = currentFeedItems[j];
+    const isClip = !!(item && isClipItem(item) && j !== goldenCardIdx);
+    if(!m || m.item !== item || m.isClip !== isClip) break;
+    j++;
+  }
+  if(j <= idx) _clipLooks.length = j;
+  for(; j <= idx; j++){
+    const item = currentFeedItems[j], topic = currentFeedTopics[j];
+    const isClip = !!(item && topic && isClipItem(item) && j !== goldenCardIdx);
+    let look = null;
+    if(isClip){
+      let p1 = null, p2 = null;
+      for(let k = j - 1; k >= 0; k--){ const mm = _clipLooks[k]; if(mm && mm.look){ if(!p1) p1 = mm.look; else { p2 = mm.look; break; } } }
+      look = clipBaseLook(item, topic, p1, p2);
+    }
+    _clipLooks[j] = { item, isClip, look };
+  }
+  return _clipLooks[idx] ? _clipLooks[idx].look : null;
+}
+
+/* ---------- motifs (27) ---------- */
 function clipMotifHtml(name, idx, item){
-  const r = v6Rand(v6Seed('m' + idx + name));
+  const r = v6Rand(v6Seed('m' + idx + name + itemStableId(item)));
   if(name === 'growth'){
     const coins = Array.from({ length:6 }, (_, i) => `<i class="mo-coin" style="--x:${8 + Math.round(r() * 84)}%;--d:${(i * .55).toFixed(2)}s">$</i>`).join('');
     return `<svg class="mo mo-growth" viewBox="0 0 200 120" preserveAspectRatio="none"><defs><linearGradient id="mog${idx}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--accent);stop-opacity:.5"/><stop offset="1" style="stop-color:var(--accent);stop-opacity:0"/></linearGradient></defs>
@@ -14191,34 +14725,158 @@ function clipMotifHtml(name, idx, item){
       <g class="mo-spin" style="--s:6s"><circle class="mo-path" cx="60" cy="60" r="30"/><circle class="mo-planet" cx="90" cy="60" r="4"/></g>
       <g class="mo-spin" style="--s:11s"><circle class="mo-path" cx="60" cy="60" r="48"/><circle class="mo-planet b" cx="12" cy="60" r="6"/></g></svg>`;
   }
-  if(name === 'helix'){
-    return `<div class="mo mo-helix">${Array.from({ length:14 }, (_, i) => `<span style="--d:${(-i * .16).toFixed(2)}s"><i></i><b></b></span>`).join('')}</div>`;
-  }
-  if(name === 'pulse'){
-    return `<svg class="mo mo-pulse" viewBox="0 0 200 80" preserveAspectRatio="none"><path class="mo-ecg" pathLength="1" d="M0 44 H52 L60 40 L66 48 L74 8 L82 72 L90 40 L98 44 H130 L136 40 L142 46 L148 44 H200"/></svg>`;
-  }
-  if(name === 'blackhole'){
-    return `<div class="mo mo-bh"><span class="mo-disc"></span><span class="mo-core"></span></div>`;
-  }
+  if(name === 'helix') return `<div class="mo mo-helix">${Array.from({ length:14 }, (_, i) => `<span style="--d:${(-i * .16).toFixed(2)}s"><i></i><b></b></span>`).join('')}</div>`;
+  if(name === 'pulse') return `<svg class="mo mo-pulse" viewBox="0 0 200 80" preserveAspectRatio="none"><path class="mo-ecg" pathLength="1" d="M0 44 H52 L60 40 L66 48 L74 8 L82 72 L90 40 L98 44 H130 L136 40 L142 46 L148 44 H200"/></svg>`;
+  if(name === 'blackhole') return `<div class="mo mo-bh"><span class="mo-disc"></span><span class="mo-core"></span></div>`;
   if(name === 'wave'){
     const d = 'M0 40 Q 25 10 50 40 T 100 40 T 150 40 T 200 40 T 250 40 T 300 40 T 350 40 T 400 40';
     return `<svg class="mo mo-wave" viewBox="0 0 200 80" preserveAspectRatio="none"><path class="w1" d="${d}"/><path class="w2" d="${d}"/><path class="w3" d="${d}"/></svg>`;
   }
+  if(name === 'bars'){
+    const base = [30, 48, 40, 66, 92].map(h => Math.round(h * (.85 + r() * .25)));
+    return `<svg class="mo mo-bars" viewBox="0 0 200 120"><path class="mo-base" d="M8 114H192"/>${base.map((h, i) => `<rect class="mo-bar${i === 4 ? ' hot' : ''}" x="${16 + i * 36}" y="${114 - h}" width="24" height="${h}" rx="5" style="--d:${(i * .16).toFixed(2)}s"/>`).join('')}</svg>`;
+  }
+  if(name === 'pie'){
+    const segs = [[.42, 'var(--accent)'], [.27, 'var(--c2)'], [.18, 'rgba(255,255,255,.6)'], [.13, 'rgba(255,255,255,.25)']];
+    let off = 0;
+    const arcs = segs.map(([f, c], i) => { const el = `<circle class="mo-arc" cx="60" cy="60" r="38" pathLength="1" style="stroke:${c};stroke-dasharray:${(f - .012).toFixed(3)} 1;stroke-dashoffset:${(-off).toFixed(3)};--d:${(i * .3).toFixed(2)}s"/>`; off += f; return el; }).join('');
+    return `<svg class="mo mo-pie" viewBox="0 0 120 120">${arcs}</svg>`;
+  }
+  if(name === 'candles'){
+    let y = 84; const cs = [];
+    for(let i = 0; i < 8; i++){
+      const up = r() < .66, hgt = 10 + r() * 20, o = y, c = up ? y - hgt : y + hgt * .6;
+      cs.push({ x: 14 + i * 23, o, c, hi: Math.min(o, c) - 4 - r() * 8, lo: Math.max(o, c) + 4 + r() * 8, up });
+      y = Math.max(24, Math.min(100, c));
+    }
+    return `<svg class="mo mo-candles" viewBox="0 0 200 120">${cs.map((k, i) => `<g class="mo-candle ${k.up ? 'up' : 'dn'}" style="--d:${(i * .22).toFixed(2)}s"><line x1="${k.x + 6}" y1="${k.hi.toFixed(1)}" x2="${k.x + 6}" y2="${k.lo.toFixed(1)}"/><rect x="${k.x}" y="${Math.min(k.o, k.c).toFixed(1)}" width="12" height="${Math.max(3, Math.abs(k.o - k.c)).toFixed(1)}" rx="2"/></g>`).join('')}</svg>`;
+  }
+  if(name === 'eye'){
+    const shape = 'M20 60 Q100 -6 180 60 Q100 126 20 60Z';
+    return `<svg class="mo mo-eye" viewBox="0 0 200 120"><defs><clipPath id="moeye${idx}"><path d="${shape}"/></clipPath></defs>
+      <g clip-path="url(#moeye${idx})"><rect x="0" y="0" width="200" height="120" class="mo-sclera"/><g class="mo-iris"><circle cx="100" cy="60" r="27" class="mo-iris-c"/><circle cx="100" cy="60" r="11" class="mo-pupil"/><circle cx="91" cy="51" r="4" class="mo-glint"/></g><rect class="mo-lid" x="0" y="-80" width="200" height="80"/></g>
+      <path class="mo-eye-outline" d="${shape}"/></svg>`;
+  }
+  if(name === 'gears'){
+    const gear = (cx, cy, rad, teeth, cls, s) => `<g class="mo-gear ${cls}" style="--s:${s}s;transform-origin:${cx}px ${cy}px"><circle cx="${cx}" cy="${cy}" r="${rad}" class="mo-g-teeth" pathLength="${teeth * 2}"/><circle cx="${cx}" cy="${cy}" r="${rad - 5}" class="mo-g-body"/><circle cx="${cx}" cy="${cy}" r="${(rad * .3).toFixed(1)}" class="mo-g-hole"/></g>`;
+    return `<svg class="mo mo-gears" viewBox="0 0 200 120">${gear(80, 64, 36, 14, 'a', 8)}${gear(136, 40, 21, 9, 'b', 4.7)}${gear(146, 92, 16, 8, 'c', 3.6)}</svg>`;
+  }
+  if(name === 'checklist'){
+    const rows = [0, 1, 2, 3].map(i => `<g class="mo-row" style="--d:${(.3 + i * .7).toFixed(1)}s"><rect class="mo-box" x="20" y="${12 + i * 26}" width="18" height="18" rx="5"/><path class="mo-tick" pathLength="1" d="M24 ${21 + i * 26} l4 5 l8 -10"/><rect class="mo-line" x="50" y="${17 + i * 26}" width="${80 + ((i * 41) % 60)}" height="8" rx="4"/></g>`).join('');
+    return `<svg class="mo mo-check" viewBox="0 0 200 120">${rows}</svg>`;
+  }
+  if(name === 'hourglass'){
+    return `<svg class="mo mo-hour" viewBox="0 0 120 120"><defs><clipPath id="hgt${idx}"><path d="M40 13C40 40 58 48 60 60C62 48 80 40 80 13Z"/></clipPath><clipPath id="hgb${idx}"><path d="M40 107C40 80 58 72 60 60C62 72 80 80 80 107Z"/></clipPath></defs>
+      <rect class="mo-sand-t" clip-path="url(#hgt${idx})" x="36" y="13" width="48" height="47"/><rect class="mo-sand-b" clip-path="url(#hgb${idx})" x="36" y="60" width="48" height="47"/><line class="mo-stream" x1="60" y1="58" x2="60" y2="104"/>
+      <path class="mo-hg-frame" d="M32 10H88M32 110H88M38 12C38 40 56 48 56 60C56 72 38 80 38 108M82 12C82 40 64 48 64 60C64 72 82 80 82 108"/></svg>`;
+  }
+  if(name === 'binary'){
+    const cols = Array.from({ length:12 }, (_, i) => { const s = Array.from({ length:8 }, () => r() < .5 ? '0' : '1').join('<br>'); return `<span style="--x:${(3 + i * 8)}%;--d:${(-r() * 3).toFixed(2)}s;--s:${(2.4 + r() * 2).toFixed(2)}s">${s}</span>`; }).join('');
+    return `<div class="mo mo-binary">${cols}</div>`;
+  }
+  if(name === 'stars'){
+    const st = Array.from({ length:28 }, () => `<i style="--x:${(r() * 100).toFixed(1)}%;--y:${(r() * 100).toFixed(1)}%;--z:${(1 + r() * 2.4).toFixed(1)}px;--d:${(r() * 3).toFixed(2)}s"></i>`).join('');
+    return `<div class="mo mo-stars">${st}<b class="mo-shoot"></b><b class="mo-shoot" style="--d:2.6s;--t:58%"></b></div>`;
+  }
+  if(name === 'molecule'){
+    return `<svg class="mo mo-mol" viewBox="0 0 120 120"><g class="mo-mol-g"><g class="mo-mol-in"><line x1="60" y1="60" x2="28" y2="34"/><line x1="60" y1="60" x2="96" y2="38"/><line x1="60" y1="60" x2="62" y2="99"/><circle class="k0" cx="60" cy="60" r="14"/><circle class="k1" cx="28" cy="34" r="9"/><circle class="k1" cx="96" cy="38" r="9"/><circle class="k2" cx="62" cy="99" r="10"/></g></g></svg>`;
+  }
+  if(name === 'flask'){
+    const shape = 'M50 14V46L24 98Q22 106 30 106H90Q98 106 96 98L70 46V14Z';
+    return `<svg class="mo mo-flask" viewBox="0 0 120 120"><defs><clipPath id="fl${idx}"><path d="${shape}"/></clipPath></defs><g clip-path="url(#fl${idx})"><rect class="mo-liq" x="10" y="66" width="100" height="50"/>${[0, 1, 2, 3, 4].map(i => `<circle class="mo-bub" cx="${40 + i * 10}" cy="102" r="${3 + (i % 2) * 2}" style="--d:${(i * .5).toFixed(1)}s"/>`).join('')}</g><path class="mo-flask-o" d="${shape} M44 14H76"/></svg>`;
+  }
+  if(name === 'balance'){
+    return `<svg class="mo mo-bal" viewBox="0 0 200 120"><path class="mo-bal-post" d="M100 26V108M76 108H124"/><g class="mo-beam"><line x1="40" y1="30" x2="160" y2="30"/>
+      <g class="mo-pan l"><path d="M40 30L26 66M40 30L54 66"/><path class="mo-pan-b" d="M20 66H60Q56 80 40 80Q24 80 20 66Z"/></g>
+      <g class="mo-pan r"><path d="M160 30L146 66M160 30L174 66"/><path class="mo-pan-b" d="M140 66H180Q176 80 160 80Q144 80 140 66Z"/></g></g><circle cx="100" cy="28" r="6" class="mo-bal-hub"/></svg>`;
+  }
+  if(name === 'spiral'){
+    const phi = 1.6180339, b = Math.log(phi) / (Math.PI / 2), pts = [];
+    for(let t = 0; t <= 12.6; t += 0.08){ const rr = 1.3 * Math.exp(b * t); pts.push([100 + rr * Math.cos(t), 62 - rr * Math.sin(t)]); }
+    const d = 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
+    return `<svg class="mo mo-spiral" viewBox="0 0 200 124"><path class="mo-sp b" pathLength="1" d="${d}" transform="rotate(180 100 62)"/><path class="mo-sp" pathLength="1" d="${d}"/></svg>`;
+  }
+  if(name === 'scroll') return `<div class="mo mo-scroll"><div class="mo-sc-paper"><i></i><i></i><i></i><i></i><i></i></div><b class="mo-sc-rod l"></b><b class="mo-sc-rod r"></b></div>`;
+  if(name === 'compass'){
+    const route = 'M18 96 C 50 70, 70 102, 98 78 S 140 46, 176 28';
+    return `<svg class="mo mo-comp" viewBox="0 0 200 120"><path class="mo-route-bg" d="${route}"/><path class="mo-route" pathLength="1" d="${route}"/><circle class="mo-pin a" cx="18" cy="96" r="5"/><circle class="mo-pin b" cx="176" cy="28" r="6"/>
+      <circle class="mo-c-ring" cx="150" cy="86" r="22"/><g class="mo-needle" style="transform-origin:150px 86px"><path class="n" d="M150 69 L155 86 L145 86Z"/><path class="s" d="M150 103 L155 86 L145 86Z"/></g><circle cx="150" cy="86" r="2.6" class="mo-c-hub"/></svg>`;
+  }
   return '';
 }
+
+/* ---------- text and scenes ---------- */
 function clipPlain(s){
   return String(s || '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
 }
 function clipWords(text, startMs, perWordMs){
   const words = String(text).trim().split(/\s+/);
-  return words.map((w, i) => `<span class="cw${/\d/.test(w) ? ' num' : ''}" style="--d:${startMs + i * perWordMs}ms">${escapeHtml(w)}</span>`).join(' ');
+  return words.map((w, i) => `<span class="cw${/\d/.test(w) ? ' num' : ''}" style="--d:${startMs + i * perWordMs}ms;--i:${i}">${escapeHtml(w)}</span>`).join(' ');
 }
 function clipSentences(text){
   return clipPlain(text).match(/[^.!?…]+[.!?…]+["”»)]*|[^.!?…]+$/g) || [];
 }
-const CLIP_NUM_RE = /(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s?(%|°C|km\/s|km|años|years|veces|times|millones|million|billones|billion|mil)?(?![A-Za-zÁÉÍÓÚáéíóúñÑ])/;
-function clipNumberScene(sentences){
+const CLIP_NUM_RE = /(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s?(%|°C|km\/s|km|años|years|veces|times|millones|million|billones|billion|mil)?(?![A-Za-zÁÉÍÓÚáéíóúñÑ0-9])/;
+/* captions: a long sentence would spill out of the clip, so it is cut into balanced pieces
+   (at a ; : — or comma near the middle, else before a linking word); short sentences are
+   paired up; a clip shows up to 4 captions / ~72 words and never stops mid-sentence */
+const CLIP_CAP_MAX = 24, CLIP_NUM_CAP_MAX = 20;
+const CLIP_JOINERS = /^(y|e|o|u|ni|que|pero|porque|pues|mientras|cuando|aunque|sino|donde|como|and|but|or|because|while|when|which|so|though|whereas)$/i;
+function clipSplitLong(sentence, max){
+  const w = String(sentence).trim().split(/\s+/).filter(Boolean);
+  if(w.length <= max) return [w.join(' ')];
+  const parts = Math.ceil(w.length / max), size = w.length / parts;
+  const cuts = [];
+  let from = 0;
+  for(let p = 1; p < parts; p++){
+    const ideal = Math.round(size * p), reach = Math.floor(size * 0.45);
+    let best = -1, bestScore = 1e9;
+    for(let i = Math.max(from + 4, ideal - reach); i <= Math.min(w.length - 4, ideal + reach); i++){
+      const prev = w[i - 1], next = w[i];
+      let q = 0;
+      if(/[;:]$/.test(prev) || /^[—–]/.test(next) || /[—–]$/.test(prev)) q = 3;
+      else if(/,$/.test(prev)) q = 2;
+      else if(CLIP_JOINERS.test(next.replace(/[^\p{L}]/gu, ''))) q = 1;
+      if(!q) continue;
+      const score = Math.abs(i - ideal) - q * 2.2;
+      if(score < bestScore){ bestScore = score; best = i; }
+    }
+    if(best === -1) best = Math.min(w.length - 4, Math.max(from + 4, ideal));
+    if(best <= from) continue;
+    cuts.push(best); from = best;
+  }
+  const out = []; let s = 0;
+  cuts.forEach(c => { out.push(w.slice(s, c).join(' ')); s = c; });
+  out.push(w.slice(s).join(' '));
+  return out.filter(Boolean);
+}
+function clipCaptionChunks(sentences){
+  const chunks = [];
+  sentences.forEach(s => {
+    const pieces = clipSplitLong(s, CLIP_CAP_MAX);
+    pieces.forEach((p, k) => {
+      const last = chunks[chunks.length - 1], end = k === pieces.length - 1;
+      // short whole sentences share a caption; pieces of a cut sentence keep their own
+      if(last && last.end && pieces.length === 1 && (last.t + ' ' + p).split(/\s+/).length <= CLIP_CAP_MAX){ last.t += ' ' + p; return; }
+      chunks.push({ t: p, end });
+    });
+  });
+  const sel = []; let words = 0;
+  for(const c of chunks){
+    const n = c.t.split(/\s+/).length;
+    const midSentence = sel.length && !sel[sel.length - 1].end;
+    if(!midSentence && sel.length && (sel.length >= 4 || words + n > 72)) break;
+    if(sel.length >= 6) break;
+    sel.push(c); words += n;
+  }
+  while(sel.length > 1 && !sel[sel.length - 1].end) sel.pop();
+  return sel.map(c => c.t);
+}
+/* a caption that is still long gets a slightly smaller font */
+function clipCapSize(n){ return n > 26 ? ' cap-xl' : n > 19 ? ' cap-l' : ''; }
+function clipNumberScene(sentences, maxWords){
   for(let i = 0; i < sentences.length; i++){
+    if(maxWords && sentences[i].trim().split(/\s+/).length > maxWords) continue;
     const m = CLIP_NUM_RE.exec(sentences[i]);
     if(!m) continue;
     const raw = m[1];
@@ -14227,64 +14885,128 @@ function clipNumberScene(sentences){
   }
   return null;
 }
-function clipHtml(idx, item, topic){
+function clipNumPct(num){
+  const v = parseFloat(String(num.raw).replace(/[.,](?=\d{3}(?!\d))/g, '').replace(',', '.'));
+  return (num.unit === '%' && isFinite(v)) ? Math.max(4, Math.min(100, Math.round(v))) : 100;
+}
+function clipNumHtml(style, num){
+  const n = `<div class="clip-num" data-count="${escapeHtml(num.raw)}">${escapeHtml(num.raw)}</div>`;
+  const u = num.unit ? `<div class="clip-unit">${escapeHtml(num.unit)}</div>` : '';
+  const p = clipNumPct(num);
+  if(style === 'ring') return `<div class="clip-numwrap ring"><svg class="clip-ring" viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52" pathLength="100" style="--p:${p}"/></svg><div class="clip-ring-in">${n}${u}</div></div>`;
+  if(style === 'bar') return `<div class="clip-numwrap bar">${n}${u}<div class="clip-numbar"><i style="--p:${p}%"></i></div></div>`;
+  return `<div class="clip-numwrap big">${n}${u}</div>`;
+}
+function clipRevealHtml(style, ttl, hl){
+  const tl = String(ttl).replace(/&[^;]+;/g, '_').length;
+  const sz = tl > 38 ? ' ttl-xl' : tl > 26 ? ' ttl-l' : '';
+  const hlHtml = hl ? `<div class="clip-hl">“${escapeHtml(hl)}”</div>` : '';
+  const kicker = `<div class="clip-kicker">💡 ${escapeHtml(T('La idea'))}</div>`;
+  if(style === 'stamp') return `${kicker}<div class="clip-title stamp${sz}">${ttl}</div>${hlHtml}`;
+  if(style === 'underline') return `${kicker}<div class="clip-title ul${sz}">${ttl}<svg class="clip-ul" viewBox="0 0 300 16" preserveAspectRatio="none"><path pathLength="1" d="M4 10 C 70 3, 150 15, 296 6"/></svg></div>${hlHtml}`;
+  if(style === 'glitch') return `${kicker}<div class="clip-title glitch${sz}" data-t="${ttl}">${ttl}</div>${hlHtml}`;
+  return `${kicker}<div class="clip-title${sz}">${ttl}</div>${hlHtml}`;
+}
+function clipDecoHtml(tpl){
+  if(tpl === 'titular') return '<div class="clip-deco"><i class="stripes"></i></div>';
+  if(tpl === 'papel') return '<div class="clip-sheet paper"><i class="margin"></i></div>';
+  if(tpl === 'poster') return '<div class="clip-sheet poster"></div>';
+  if(tpl === 'cine') return '<div class="clip-deco"><i class="grain"></i><i class="vig"></i><i class="bar t"></i><i class="bar b"></i></div>';
+  if(tpl === 'neon') return '<div class="clip-deco"><i class="grid"></i><i class="horizon"></i></div>';
+  if(tpl === 'pizarra') return '<div class="clip-sheet board"><i class="smudge"></i></div>';
+  return '';
+}
+
+/* ---------- voice ---------- */
+function clipVoicePref(){ try{ return localStorage.getItem('verivo_clipvoice_' + currentUser) !== '0'; }catch(e){ return true; } }
+function clipVoiceWanted(idx){ return speechSupported() && (clipVoicePref() || (LISTEN.active && LISTEN.idx === idx)); }
+const CLIP_VOICE_ICON = '<svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
+  + '<svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="m16 9 6 6M22 9l-6 6"/></svg>';
+function clipToggleVoice(idx){
+  const on = !clipVoicePref();
+  try{ localStorage.setItem('verivo_clipvoice_' + currentUser, on ? '1' : '0'); }catch(e){}
+  document.querySelectorAll('.clip-voice').forEach(b => b.classList.toggle('off', !on));
+  try{ playTick(); }catch(e){}
+  showShareToast(on ? T('🔊 Voz de los clips activada') : T('🔇 Clips en silencio'));
+  if(CLIPP.idx !== idx) return;
+  if(on) clipEnableVoice();
+  else { if(LISTEN.active && LISTEN.idx === idx) stopListening(); clipDisableVoice(); }
+}
+
+function clipHtml(idx, item, topic, lookOverride){
+  const look = lookOverride || clipLookAt(idx) || { tpl:'karaoke', motif:'atom', c2:'#8fd3ff', trans:'up', num:'big', rev:'kicker' };
+  const voice = clipVoiceWanted(idx);
+  const rate = getListenRate();
   const sentences = clipSentences(item.body);
   const scenes = [];
   // 1 · the hook, word by word, with its emoji popping in
   const em = /^(\p{Extended_Pictographic}️?(?:‍\p{Extended_Pictographic}️?)*)\s*(.*)$/u.exec(clipPlain(item.hook));
   const hookText = em ? em[2] : clipPlain(item.hook);
   const hookWords = hookText.split(/\s+/).length;
-  scenes.push({ dur: Math.min(4600, Math.max(2600, 900 + hookWords * 210)), html: `${em ? `<div class="clip-emoji">${em[1]}</div>` : ''}<div class="clip-hook">${clipWords(hookText, 120, 120)}</div>` });
+  scenes.push({ dur: Math.min(4600, Math.max(2600, 900 + hookWords * 210)), say: cleanForSpeech(hookText), html: `${em ? `<div class="clip-emoji">${em[1]}</div>` : ''}<div class="clip-hook">${clipWords(hookText, 120, 120)}</div>` });
   // 2 · a big number that counts up (when the text has one)
-  const num = clipNumberScene(sentences);
+  const num = clipNumberScene(sentences, CLIP_NUM_CAP_MAX);
   if(num){
     const capWords = num.sentence.split(/\s+/).length;
-    scenes.push({ dur: Math.min(6200, 1700 + capWords * 190), html: `<div class="clip-num" data-count="${escapeHtml(num.raw)}">${escapeHtml(num.raw)}</div>${num.unit ? `<div class="clip-unit">${escapeHtml(num.unit)}</div>` : ''}<div class="clip-cap">${clipWords(num.sentence, 700, 150)}</div>` });
+    scenes.push({ dur: Math.min(6200, 1700 + capWords * 190), say: cleanForSpeech(num.sentence), html: `${clipNumHtml(look.num, num)}<div class="clip-cap${clipCapSize(capWords + 10)}">${clipWords(num.sentence, 700, 150)}</div>` });
   }
   // 3 · the rest of the body as captions, in bite-size chunks
-  const rest = sentences.filter((_, i) => !num || i !== num.i);
-  const chunks = [];
-  rest.forEach(s => { const last = chunks[chunks.length - 1]; if(last && (last + ' ' + s).split(/\s+/).length <= 24) chunks[chunks.length - 1] = last + ' ' + s; else chunks.push(s.trim()); });
-  chunks.slice(0, 3).forEach(c => {
+  clipCaptionChunks(sentences.filter((_, i) => !num || i !== num.i)).forEach(c => {
     const n = c.split(/\s+/).length;
-    scenes.push({ dur: Math.min(7600, 1300 + n * 230), html: `<div class="clip-cap">${clipWords(c, 150, 150)}</div>` });
+    scenes.push({ dur: Math.min(7600, 1300 + n * 230), say: cleanForSpeech(c), html: `<div class="clip-cap${clipCapSize(n)}">${clipWords(c, 150, 150)}</div>` });
   });
   // 4 · the reveal: the concept's real name (+ its highlight line)
-  scenes.push({ dur: 3000, html: `<div class="clip-kicker">💡 ${escapeHtml(T('La idea'))}</div><div class="clip-title">${escapeHtml(clipPlain(item.title))}</div>${item.highlight ? `<div class="clip-hl">“${escapeHtml(clipPlain(item.highlight))}”</div>` : ''}` });
-  const total = scenes.reduce((a, s) => a + s.dur, 0);
+  const hl = item.highlight ? clipPlain(item.highlight) : '';
+  scenes.push({ dur: 3000, say: cleanForSpeech(item.title) + '.' + (hl ? ' ' + cleanForSpeech(hl) : ''), html: clipRevealHtml(look.rev, escapeHtml(clipPlain(item.title)), hl) });
+  const total = scenes.reduce((a, s) => a + (voice ? Math.max(1400, vozEstimate(s.say, rate) + 260) : s.dur), 0);
   const secs = Math.round(total / 1000);
-  const motif = clipMotifName(topic, item);
+  // big uppercase looks fit fewer letters per line: they step down sooner, and so does a very long word
+  const upper = look.tpl === 'titular' || look.tpl === 'poster';
+  const longest = Math.max(0, ...hookText.split(/\s+/).map(w => w.length));
+  const hookLen = (hookWords > (upper ? 12 : 17) || longest > (upper ? 11 : 15)) ? ' hook-xl'
+    : (hookWords > (upper ? 8 : 12) || longest > (upper ? 9 : 12)) ? ' hook-l' : '';
   return `
-      <div class="clip" id="clip-${idx}" data-total="${total}" aria-label="${escapeHtml(clipPlain(item.hook))}">
+      <div class="clip tpl-${look.tpl} trans-${look.trans} num-${look.num} rev-${look.rev}${hookLen}" id="clip-${idx}" data-total="${total}" data-look="${look.tpl}/${look.motif}" style="--c2:${look.c2}" aria-label="${escapeHtml(clipPlain(item.hook))}">
         <div class="clip-bg"><span></span><span></span></div>
-        <div class="clip-motif mo-wrap-${motif}">${clipMotifHtml(motif, idx, item)}</div>
+        ${clipDecoHtml(look.tpl)}
+        <div class="clip-motif mo-wrap-${look.motif}">${clipMotifHtml(look.motif, idx, item)}</div>
         <div class="clip-shade"></div>
         <div class="clip-top">${scenes.map(() => '<span class="clip-seg"><i></i></span>').join('')}</div>
-        <div class="clip-badge"><span class="clip-live"></span>${escapeHtml(T('Clip'))} · 0:${String(secs).padStart(2, '0')}</div>
-        <div class="clip-stage">${scenes.map((s, i) => `<div class="clip-scene" data-dur="${s.dur}" data-i="${i}">${s.html}</div>`).join('')}</div>
+        <div class="clip-badge"><span class="clip-live"></span>${escapeHtml(T('Clip'))} · ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</div>
+        <div class="clip-stage">${scenes.map((s, i) => `<div class="clip-scene" data-dur="${s.dur}" data-say="${escapeHtml(s.say)}" data-i="${i}">${s.html}</div>`).join('')}</div>
         <div class="clip-paused" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></div>
         <div class="clip-hint">${escapeHtml(T('Mantén presionado para pausar · toca para adelantar'))}</div>
+        ${speechSupported() ? `<button class="clip-voice${clipVoicePref() ? '' : ' off'}" onclick="event.stopPropagation(); clipToggleVoice(${idx})" aria-label="${escapeHtml(T('Voz'))}">${CLIP_VOICE_ICON}</button>` : ''}
         <button class="clip-skip" onclick="event.stopPropagation(); clipFinish(${idx}, true)">${escapeHtml(T('Leer'))} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
       </div>`;
 }
 
-/* ---- player: one clip plays at a time (the active card) ---- */
-const CLIPP = { idx:-1, el:null, scenes:[], si:0, sceneStart:0, elapsed:0, paused:false, raf:0, holdT:0, held:false, tapT:0 };
+/* ---------- player: one clip plays at a time (the active card) ---------- */
+const CLIPP = { idx:-1, el:null, scenes:[], si:0, sceneStart:0, elapsed:0, paused:false, raf:0, holdT:0, held:false, tapT:0,
+  voice:false, mode:'timer', failed:false, words:[], cw:[], saidK:0, lastD:-1, spoken:false, spokenAt:0, vStart:0, vFrom:0, vEst:0, gotBoundary:false };
 function clipIdxOf(card){ const c = card && card.querySelector('.clip'); return c ? parseInt(c.id.slice(5), 10) : -1; }
 function clipOnActive(card, active){
   if(!card || !card.classList.contains('has-clip')) return;
   const idx = clipIdxOf(card);
   if(active){
     if(card.classList.contains('clip-done')) return;
+    // listening and the user swiped onto a clip: listen mode follows them here
+    if(LISTEN.active && LISTEN.idx !== idx){ LISTEN.token++; vozStop(); LISTEN.idx = idx; LISTEN.clip = true; LISTEN.paused = false; updateListenUi(); }
     clipPlay(idx, true);
   }else if(CLIPP.idx === idx){
     clipStop();
     // leaving mid-clip: next time it starts over
     const el = document.getElementById('clip-' + idx);
     if(el){ el.querySelectorAll('.clip-scene').forEach(s => s.classList.remove('on', 'past')); el.querySelectorAll('.clip-seg i').forEach(g => { g.style.width = '0%'; }); el.classList.remove('paused'); }
+    // swiped away from the clip being listened to, onto something that isn't a clip: listening ends
+    setTimeout(() => { if(LISTEN.active && LISTEN.clip && LISTEN.idx === idx && CLIPP.idx !== idx) stopListening(); }, 160);
   }
 }
-function clipStop(){ cancelAnimationFrame(CLIPP.raf); CLIPP.raf = 0; CLIPP.idx = -1; CLIPP.el = null; }
+function clipStop(){
+  cancelAnimationFrame(CLIPP.raf); CLIPP.raf = 0;
+  if(CLIPP.idx >= 0 && CLIPP.mode === 'voice') vozStop();
+  CLIPP.idx = -1; CLIPP.el = null;
+}
 function clipPlay(idx, fromStart){
   const el = document.getElementById('clip-' + idx);
   if(!el) return;
@@ -14292,6 +15014,9 @@ function clipPlay(idx, fromStart){
   CLIPP.idx = idx; CLIPP.el = el;
   CLIPP.scenes = Array.from(el.querySelectorAll('.clip-scene'));
   CLIPP.paused = false; el.classList.remove('paused');
+  CLIPP.voice = clipVoiceWanted(idx);
+  CLIPP.failed = false;
+  el.classList.toggle('voiced', CLIPP.voice);
   if(fromStart || !CLIPP.scenes.some(s => s.classList.contains('on'))){
     CLIPP.scenes.forEach(s => s.classList.remove('on', 'past'));
     el.querySelectorAll('.clip-seg i').forEach(i => { i.style.width = '0%'; });
@@ -14305,44 +15030,122 @@ function clipPlay(idx, fromStart){
 }
 function clipGo(i){
   const sc = CLIPP.scenes;
+  if(CLIPP.mode === 'voice') vozStop();
   if(i >= sc.length){ clipFinish(CLIPP.idx, false); return; }
   sc.forEach((s, j) => { s.classList.toggle('past', j < i); if(j !== i) s.classList.remove('on'); });
   // restart the CSS animations inside this scene
   sc[i].classList.remove('on'); void sc[i].offsetWidth; sc[i].classList.add('on');
   CLIPP.si = i; CLIPP.sceneStart = performance.now(); CLIPP.elapsed = 0;
+  CLIPP.saidK = 0; CLIPP.lastD = -1; CLIPP.spoken = false; CLIPP.gotBoundary = false;
+  CLIPP.words = (sc[i].dataset.say || '').split(/\s+/).filter(Boolean);
+  CLIPP.cw = Array.from(sc[i].querySelectorAll('.cw'));
+  CLIPP.cw.forEach(w => w.classList.remove('said', 'now'));
   const segs = CLIPP.el.querySelectorAll('.clip-seg i');
   segs.forEach((g, j) => { if(j < i) g.style.width = '100%'; else if(j > i) g.style.width = '0%'; });
   const n = sc[i].querySelector('.clip-num');
   if(n) clipCountUp(n);
-  if(i > 0) try{ playTick(); }catch(e){}
+  CLIPP.mode = (CLIPP.voice && !CLIPP.failed) ? 'voice' : 'timer';
+  if(CLIPP.mode === 'voice') clipSpeak(0);
+  else if(i > 0) try{ playTick(); }catch(e){}
+}
+function clipSpeak(from){
+  const idx = CLIPP.idx, si = CLIPP.si, words = CLIPP.words;
+  CLIPP.spoken = false;
+  if(from >= words.length){ CLIPP.spoken = true; CLIPP.spokenAt = performance.now(); return; }
+  const part = words.slice(from);
+  const starts = []; let p = 0;
+  part.forEach(w => { starts.push(p); p += w.length + 1; });
+  const rate = getListenRate();
+  CLIPP.vFrom = from; CLIPP.vStart = performance.now(); CLIPP.vEst = vozEstimate(part.join(' '), rate);
+  const live = () => CLIPP.idx === idx && CLIPP.si === si && CLIPP.mode === 'voice';
+  vozSpeak(part.join(' '), {
+    rate,
+    onStart: () => { if(live()) CLIPP.vStart = performance.now(); },
+    onWord: ci => {
+      if(!live()) return;
+      CLIPP.gotBoundary = true;
+      let k = 0;
+      while(k + 1 < starts.length && starts[k + 1] <= ci) k++;
+      clipMark(from + k);
+    },
+    onEnd: () => { if(!live()) return; clipMark(words.length); CLIPP.spoken = true; CLIPP.spokenAt = performance.now(); },
+    onError: () => {
+      if(!live()) return;
+      // no voice for this clip after all: finish it on the timer, keeping the karaoke look
+      CLIPP.failed = true; CLIPP.mode = 'timer';
+    }
+  });
+}
+/* highlight the words already said and the one being said */
+function clipMark(k){
+  CLIPP.saidK = Math.max(CLIPP.saidK, Math.min(k, CLIPP.words.length));
+  const cw = CLIPP.cw;
+  if(!cw || !cw.length) return;
+  const total = CLIPP.words.length || cw.length;
+  const d = Math.min(cw.length, Math.round(CLIPP.saidK * cw.length / total));
+  const live = CLIPP.mode === 'voice' && !CLIPP.spoken;
+  const key = d * 2 + (live ? 1 : 0);
+  if(key === CLIPP.lastD) return;
+  CLIPP.lastD = key;
+  for(let j = 0; j < cw.length; j++){
+    cw[j].classList.toggle('said', j < d);
+    cw[j].classList.toggle('now', live && j === d);
+  }
 }
 function clipTick(now){
   if(CLIPP.idx < 0 || !CLIPP.el) return;
   const sc = CLIPP.scenes[CLIPP.si];
   if(!CLIPP.paused && sc){
-    const dur = parseInt(sc.dataset.dur, 10) || 3000;
-    const t = CLIPP.elapsed + (now - CLIPP.sceneStart);
     const seg = CLIPP.el.querySelectorAll('.clip-seg i')[CLIPP.si];
-    if(seg) seg.style.width = Math.min(100, t / dur * 100).toFixed(1) + '%';
-    if(t >= dur){ clipGo(CLIPP.si + 1); if(CLIPP.idx < 0) return; }
+    if(CLIPP.mode === 'voice'){
+      const total = CLIPP.words.length || 1;
+      let prog;
+      if(CLIPP.spoken) prog = 1;
+      else if(CLIPP.gotBoundary) prog = CLIPP.saidK / total;
+      else {
+        // no word timings from this engine: follow the estimate
+        const f = Math.min(.97, (now - CLIPP.vStart) / Math.max(400, CLIPP.vEst));
+        const k = CLIPP.vFrom + f * (total - CLIPP.vFrom);
+        clipMark(Math.floor(k));
+        prog = k / total;
+      }
+      if(seg) seg.style.width = (Math.min(1, prog) * 100).toFixed(1) + '%';
+      if(CLIPP.spoken && now - CLIPP.spokenAt > 260){ clipGo(CLIPP.si + 1); if(CLIPP.idx < 0) return; }
+    }else{
+      const dur = parseInt(sc.dataset.dur, 10) || 3000;
+      const t = CLIPP.elapsed + (now - CLIPP.sceneStart);
+      if(seg) seg.style.width = Math.min(100, t / dur * 100).toFixed(1) + '%';
+      if(CLIPP.el.classList.contains('voiced')) clipMark(Math.floor(Math.min(1, t / (dur * .9)) * CLIPP.words.length));
+      if(t >= dur){ clipGo(CLIPP.si + 1); if(CLIPP.idx < 0) return; }
+    }
   }
   CLIPP.raf = requestAnimationFrame(clipTick);
 }
-function clipSetPaused(p){
+function clipSetPaused(p, fromListen){
   if(!CLIPP.el || CLIPP.paused === p) return;
   const now = performance.now();
-  if(p){ CLIPP.elapsed += now - CLIPP.sceneStart; }
-  else { CLIPP.sceneStart = now; }
+  if(p){
+    CLIPP.elapsed += now - CLIPP.sceneStart;
+    if(CLIPP.mode === 'voice') vozStop();
+  }else{
+    CLIPP.sceneStart = now;
+    if(CLIPP.mode === 'voice'){ if(CLIPP.spoken) CLIPP.spokenAt = now; else clipSpeak(CLIPP.saidK); }
+  }
   CLIPP.paused = p;
   CLIPP.el.classList.toggle('paused', p);
+  if(!fromListen && LISTEN.active && LISTEN.clip && LISTEN.idx === CLIPP.idx && LISTEN.paused !== p){ LISTEN.paused = p; updateListenUi(); }
 }
 function clipFinish(idx, byUser){
   const el = document.getElementById('clip-' + idx);
   if(!el) return;
   const card = el.closest('.fact-card');
   if(CLIPP.idx === idx) clipStop();
-  if(card){ card.classList.add('clip-done'); }
+  if(card) card.classList.add('clip-done');
   if(!byUser) try{ hapticPulse(10); }catch(e){}
+  if(LISTEN.active && LISTEN.clip && LISTEN.idx === idx){
+    if(byUser === true) stopListening();          // "Leer": they want to read it themselves
+    else { LISTEN.clip = false; onListenCardDone(); }
+  }
 }
 function clipReplay(idx){
   const el = document.getElementById('clip-' + idx);
@@ -14352,30 +15155,51 @@ function clipReplay(idx){
   try{ playTick(); }catch(e){}
   clipPlay(idx, true);
 }
+/* switch the playing clip to the voice (listen mode, unmute, or the browser finally allowing it) */
+function clipEnableVoice(){
+  if(!CLIPP.el || !speechSupported()) return;
+  CLIPP.voice = true; CLIPP.failed = false;
+  CLIPP.el.classList.add('voiced');
+  if(CLIPP.mode === 'voice') return;
+  CLIPP.mode = 'voice';
+  const sc = CLIPP.scenes[CLIPP.si];
+  const dur = parseInt(sc && sc.dataset.dur, 10) || 3000;
+  const t = CLIPP.elapsed + (CLIPP.paused ? 0 : performance.now() - CLIPP.sceneStart);
+  const from = Math.floor(Math.min(.9, t / dur) * CLIPP.words.length);
+  CLIPP.saidK = from;
+  if(!CLIPP.paused) clipSpeak(from);
+}
+function clipDisableVoice(){
+  if(!CLIPP.el) return;
+  CLIPP.voice = false;
+  if(CLIPP.mode !== 'voice') return;
+  vozStop();
+  // keep the scene's place on the silent timer
+  const sc = CLIPP.scenes[CLIPP.si];
+  const dur = parseInt(sc && sc.dataset.dur, 10) || 3000;
+  CLIPP.elapsed = (CLIPP.words.length ? CLIPP.saidK / CLIPP.words.length : 0) * dur;
+  CLIPP.sceneStart = performance.now();
+  CLIPP.mode = 'timer';
+}
+function clipVoiceRetry(){ if(CLIPP.el && CLIPP.failed && clipVoiceWanted(CLIPP.idx)) clipEnableVoice(); }
+function clipVoiceRestart(){ if(CLIPP.el && CLIPP.mode === 'voice' && !CLIPP.paused && !CLIPP.spoken) clipSpeak(CLIPP.saidK); }
 function clipCountUp(el){
   const raw = el.dataset.count || '';
   const m = /^(\d{1,3}(?:([.,])\d{3})*)(?:([.,])(\d+))?$/.exec(raw);
   if(!m){ el.textContent = raw; return; }
   const thouSep = m[2] || '';
   const intPart = parseInt(m[1].replace(/[.,]/g, ''), 10);
-  const dec = m[4] || '';
-  const decSep = m[3] || '';
-  // a year (e.g. 1927) or a plain small integer reads better as-is, counting from a nearby value
-  const isYear = !thouSep && !dec && intPart >= 1000 && intPart <= 2100;
+  // a year (e.g. 1927) reads better counting from a nearby value
+  const isYear = !thouSep && !m[4] && intPart >= 1000 && intPart <= 2100;
   const from = isYear ? intPart - 60 : 0;
   const start = performance.now(), D = 1100;
-  function fmt(v){
-    let s = String(Math.floor(v));
-    if(thouSep) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, thouSep);
-    return s;
-  }
+  function fmt(v){ let s = String(Math.floor(v)); if(thouSep) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, thouSep); return s; }
   (function step(t){
     if(!el.isConnected) return;
     const k = Math.min(1, (t - start) / D), e = 1 - Math.pow(1 - k, 3);
     el.textContent = k < 1 ? fmt(from + (intPart - from) * e) : raw;
     if(k < 1) requestAnimationFrame(step);
   })(start);
-  if(dec) void decSep;
 }
 /* gestures on a playing clip: hold = pause, tap = next scene (waits a beat so a
    double-tap still means "like"), swipes are left to the feed */
@@ -14395,14 +15219,17 @@ function clipCountUp(el){
     const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14;
     const quick = performance.now() - down.t < 230;
     down = null;
-    if(CLIPP.held){ CLIPP.held = false; clipSetPaused(false); return; }
+    if(CLIPP.held){ CLIPP.held = false; if(!(LISTEN.active && LISTEN.paused)) clipSetPaused(false); return; }
     if(moved || !quick || !CLIPP.el || e.type === 'pointercancel') return;
     if(CLIPP.tapT){ clearTimeout(CLIPP.tapT); CLIPP.tapT = 0; return; }   // second tap of a double-tap
     CLIPP.tapT = setTimeout(() => { CLIPP.tapT = 0; if(CLIPP.el && !CLIPP.paused) clipGo(CLIPP.si + 1); }, 300);
   };
   document.addEventListener('pointerup', end, { passive:true });
   document.addEventListener('pointercancel', end, { passive:true });
-  document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') clipSetPaused(true); else if(CLIPP.el && !CLIPP.held) clipSetPaused(false); });
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'hidden') clipSetPaused(true);
+    else if(CLIPP.el && !CLIPP.held && !(LISTEN.active && LISTEN.paused)) clipSetPaused(false);
+  });
 })();
 
 </script>
